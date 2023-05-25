@@ -1,0 +1,230 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+* {
+  --white: #ececec;
+  --dark1: rgb(40, 40, 40);
+  --dark2: rgb(50, 50, 50);
+  --dark3: rgb(60, 60, 60);
+  font-family: "Roboto", sans-serif;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+.App {
+  width: 100%;
+  height: 100%;
+}
+.App .adminmenu {
+  width: 160vh;
+  height: 85vh;
+  background-color: var(--dark1);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 1vh;
+}
+.App .adminmenu .navigation {
+  position: absolute;
+  left: 1.5vh;
+  top: 1.5vh;
+  width: 30vh;
+  height: 82vh;
+  overflow: auto;
+}
+.App .adminmenu .navigation .navbutton {
+  width: 100%;
+  height: 7vh;
+  border-radius: 0.5vh;
+  margin-top: 0.5vh;
+  margin-bottom: 0.25vh;
+  display: inline-block;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--dark2);
+}
+.App .adminmenu .navigation .navbutton:hover {
+  background-color: var(--dark3);
+  cursor: pointer;
+}
+.App .adminmenu .navigation .navbutton .navbutton-text {
+  height: -moz-fit-content;
+  height: fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  position: relative;
+  margin-top: 0vh;
+  left: 50%;
+  top: -0.3vh;
+  transform: translateX(-50%);
+  color: var(--white);
+  font-size: 2.4vh;
+}
+.App .adminmenu .navigation .navbutton .navbutton-text i {
+  margin-right: 1vh;
+}
+.App .adminmenu .navigation .navbutton .navbutton-text p {
+  position: relative;
+}
+.App .adminmenu .content {
+  position: absolute;
+  width: 126vh;
+  height: 82vh;
+  right: 1.5vh;
+  top: 1.5vh;
+}
+.App .adminmenu .content .border {
+  position: absolute;
+  height: 100%;
+  width: 0.5vh;
+  background-color: var(--dark2);
+}
+.App .adminmenu .content .collections {
+  position: absolute;
+  right: 0vh;
+  top: 0vh;
+  width: 124.5vh;
+  height: 100%;
+  overflow: auto;
+}
+.App .adminmenu .content .collections .collectionItem {
+  position: relative;
+  width: 14.5vh;
+  height: 12vh;
+  margin-right: 1vh;
+  margin-bottom: 0.5vh;
+  border-radius: 1vh;
+  display: inline-block;
+}
+.App .adminmenu .content .collections .collectionItem .icon {
+  color: var(--white);
+  font-size: 8vh;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.App .adminmenu .content .collections .collectionItem .title {
+  position: absolute;
+  bottom: -1.6vh;
+  color: var(--white);
+  width: 100%;
+  height: 2vh;
+  font-size: 1.8vh;
+  text-align: center;
+}
+.App .adminmenu .content .collections .collectionItem:hover {
+  cursor: pointer;
+  background-color: var(--dark3);
+}
+.App .adminmenu .content .collections .addNewCollection {
+  position: absolute;
+  width: 40vh;
+  height: 70vh;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.App .adminmenu .content .collections .addNewCollection .newCollectionInput {
+  position: relative;
+  margin-bottom: 1vh;
+  height: 7vh;
+  width: 100%;
+}
+.App .adminmenu .content .collections .addNewCollection .newCollectionInput .title {
+  position: absolute;
+  top: -1.5vh;
+  left: 0vh;
+  width: 40vh;
+  color: var(--white);
+  font-size: 2vh;
+}
+.App .adminmenu .content .collections .addNewCollection .newCollectionInput input {
+  position: absolute;
+  border: none;
+  background-color: var(--dark2);
+  color: var(--white);
+  border-radius: 0.5vh;
+  outline: none;
+  padding-left: 1vh;
+  padding-right: 1vh;
+  bottom: 0vh;
+  width: 38vh;
+  height: 3.5vh;
+}
+.App .adminmenu .content .collections .addNewCollection .newCollectionInput .error {
+  position: absolute;
+  color: red;
+  width: 100%;
+  text-align: center;
+  font-size: 1.6vh;
+  font-weight: bold;
+  top: 6.2vh;
+}
+.App .adminmenu .content .collections .addNewCollection .newCollectionInput .response {
+  position: absolute;
+  color: green;
+  width: 100%;
+  text-align: center;
+  font-size: 1.6vh;
+  font-weight: bold;
+  top: 6.2vh;
+}
+.App .adminmenu .content .collections .addNewCollection .newCollectionInput i {
+  padding-right: 0.2vh;
+}
+.App .adminmenu .content .collections .addNewCollection .newCollectionAccept {
+  position: relative;
+  background-color: var(--dark2);
+  width: 14vh;
+  margin-top: 3.5vh;
+  height: 5vh;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 0.5vh;
+}
+.App .adminmenu .content .collections .addNewCollection .newCollectionAccept .title {
+  position: absolute;
+  top: -0.6vh;
+  width: 100%;
+  text-align: center;
+  color: var(--white);
+}
+.App .adminmenu .content .collections .addNewCollection .newCollectionAccept:hover {
+  cursor: pointer;
+  background-color: var(--dark3);
+}
+.App .adminmenu .content .collections .returnBtn {
+  position: absolute;
+  width: 14vh;
+  height: 5vh;
+  background-color: var(--dark2);
+  color: var(--white);
+  border-radius: 0.5vh;
+}
+.App .adminmenu .content .collections .returnBtn:hover {
+  cursor: pointer;
+  background-color: var(--dark3);
+}
+.App .adminmenu .content .collections .returnBtn .title {
+  position: absolute;
+  width: 100%;
+  top: -0.6vh;
+  text-align: center;
+}
+.App .adminmenu .content .collections .returnBtn .icon {
+  padding-right: 0.5vh;
+}

@@ -48,17 +48,18 @@ const App: React.FC = () => {
 }
 
 function AdminMenu() {
+    const [currentPage, setCurrentPage] = useState<string>("collections")
 
     function Navigation() {
         return (
             <div className="navigation">
-                <div className="navbutton">
+                <div className="navbutton" onClick={() => {setCurrentPage("collections")}}>
                     <div className="navbutton-text">
                         <p><i className="fa-solid fa-bars"></i>Collections</p>
                     </div>
                 </div>
 
-                <div className="navbutton">
+                <div className="navbutton" onClick={() => {setCurrentPage("ting")}}>
                     <div className="navbutton-text">
                         <p>Ting her</p>
                     </div>
@@ -66,19 +67,16 @@ function AdminMenu() {
             </div>
         );
     }
-    //Newdwddwwdw
+    
     function Content() {
-
+        
         function Collections() {
             interface Collection {
                 name: string;
                 id: number;
             }
 
-            const [allCollections, setAllCollections] = useState<Collection[]>(()=> {
-                LoadCollections();
-                return []
-            })
+            const [allCollections, setAllCollections] = useState<Collection[]>([])
             const [addingNewCollection, setAddingNewCollection] = useState<boolean>(false)
 
             function LoadCollections() {
@@ -86,6 +84,8 @@ function AdminMenu() {
                     setAllCollections(response);
                 })
             }
+
+            LoadCollections();
 
             function NewCollection() {
                 return (
@@ -200,12 +200,14 @@ function AdminMenu() {
             );
         }
 
-        return (
+        if (currentPage === "collections") return (
             <div className="content">
                 <div className='border'></div>
                 <Collections />
             </div>
         )
+
+        return null;
     }
 
     return (

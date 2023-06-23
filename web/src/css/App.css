@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cabin:wght@500&display=swap");
 * {
   --white: #ececec;
   --dark1: rgb(40, 40, 40);
@@ -231,3 +232,97 @@ input[type=number]::-webkit-outer-spin-button {
 .App .adminmenu .content .collections .returnBtn .icon {
   padding-right: 0.5vh;
 }
+.App .adminmenu .content .manageCollection {
+  position: absolute;
+  right: 0vh;
+  top: 0vh;
+  width: 124.5vh;
+  height: 100%;
+  overflow: auto;
+}
+.App .adminmenu .content .manageCollection .allCards {
+  position: absolute;
+  width: 100%;
+  height: 75vh;
+  bottom: 0.5vh;
+  overflow: auto;
+}
+.App .adminmenu .content .manageCollection .allCards .card {
+  font-family: "Cabin", sans-serif !important;
+  position: relative;
+  margin-left: 0.5vh;
+  margin-right: 0.5vh;
+  display: inline-block;
+}
+.App .adminmenu .content .manageCollection .allCards .card .frame {
+  width: 100%;
+  height: 100%;
+}
+.App .adminmenu .content .manageCollection .allCards .card .frame img {
+  width: 100%;
+  height: 100%;
+}
+.App .adminmenu .content .manageCollection .allCards .card .element {
+  position: absolute;
+  top: 3.8%;
+  left: 4.6%;
+  width: 90.5%;
+  height: 92.5%;
+}
+.App .adminmenu .content .manageCollection .allCards .card .element img {
+  width: 100%;
+  height: 100%;
+}
+.App .adminmenu .content .manageCollection .allCards .card .name {
+  position: absolute;
+  top: 3.8%;
+  left: 10%;
+  width: 55%;
+  height: 4%;
+  line-height: 0;
+  color: black;
+  font-weight: bold;
+  text-align: left;
+}
+.App .adminmenu .content .manageCollection .allCards .card .health {
+  position: absolute;
+  top: 3.8%;
+  right: 9.8%;
+  width: 25%;
+  height: 4%;
+  line-height: 0;
+  color: rgb(255, 0, 0);
+  font-weight: bold;
+  text-align: right;
+}
+.App .adminmenu .content .manageCollection .allCards .card .info {
+  position: absolute;
+  top: 68.95%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: black;
+  width: 60%;
+  text-align: center;
+}
+.App .adminmenu .content .manageCollection .returnBtn {
+  position: absolute;
+  width: 14vh;
+  height: 5vh;
+  background-color: var(--dark2);
+  color: var(--white);
+  border-radius: 0.5vh;
+}
+.App .adminmenu .content .manageCollection .returnBtn:hover {
+  cursor: pointer;
+  background-color: var(--dark3);
+}
+.App .adminmenu .content .manageCollection .returnBtn .title {
+  position: absolute;
+  width: 100%;
+  top: -0.6vh;
+  text-align: center;
+  font-size: 2vh;
+}
+.App .adminmenu .content .manageCollection .returnBtn .icon {
+  padding-right: 0.5vh;
+}/*# sourceMappingURL=App.css.map */

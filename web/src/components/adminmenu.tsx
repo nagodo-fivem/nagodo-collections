@@ -3,6 +3,7 @@ import '../css/App.css';
 import { fetchNui } from "../utils/fetchNui";
 import { useNuiEvent } from "../hooks/useNuiEvent";
 import { _T, SetTranslations } from "../utils/translation";
+import { Card } from "./card";
 
 export function AdminMenu() {
     const [currentPage, setCurrentPage] = useState<string>("collections1")
@@ -12,10 +13,11 @@ export function AdminMenu() {
         
         function Collections() {
 
-            const [adminCollections, setAdminCollections] = useState<Collection[]>([])
-            const [allCollectionNames, setAllCollectionNames] = useState<string[]>([])
+            const [adminCollections, setAdminCollections] = useState<Collection[]>([{name: "Test", id: 1}])
+            const [allCollectionNames, setAllCollectionNames] = useState<string[]>(["din mor"])
             
             const [addingNewCollection, setAddingNewCollection] = useState<boolean>(false)
+            const [manageCollection, setManageCollection] = useState<boolean>(true)
 
             interface Collection {
                 name: string;
@@ -31,7 +33,7 @@ export function AdminMenu() {
                 )
             }
 
-            function CollectionItem(props: any) {
+            function CollectionItem(props: {name: string, pressable?: boolean}) {
                 var name: string = props.name;
 
                 if (name === undefined) name = "Name is undefined";
@@ -42,7 +44,7 @@ export function AdminMenu() {
 
                 if (props.pressable) {
                     return (
-                        <div className='collectionItem'>
+                        <div className='collectionItem' onClick={() => {setManageCollection(true)}}>
                             <i className="fa-solid fa-folder icon"></i>
                             <p className='title'>{name}</p>
                         </div>
@@ -57,81 +59,26 @@ export function AdminMenu() {
                 )
             }
 
-            function AddNewCollection() {
-                let newCollectionName: string = "";
-                const [currentResponse, setCurrentResponse] = useState<string>("")
-                
-                function NewCollectionInput(props: any) {
-                    const [value, setValue] = useState<string>("")
-                    const [currentError, setCurrentError] = useState<string>("")
-
-                    function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-                        setValue(e.target.value)
-                        newCollectionName = e.target.value;
-
-                        if (allCollectionNames.includes(e.target.value)) {
-                            setCurrentError("Collection name already exists")
-                        } else {
-                            setCurrentError("")
-                        }
-
-                    }
-
-                    return (
-                        <div className='newCollectionInput'>
-                            <p className='title'><i className={props.icon}></i>{props.title}</p>
-                            <input type="text" value={value} onChange={handleChange} />
-                            <p className='error'>{currentError}</p>
-                            <p className='response'>{currentResponse}</p>
-                        </div>
-                    )
-                }
-
-                function acceptNewCollection() {
-                    if (allCollectionNames.includes(newCollectionName)) return;
-
-                    fetchNui<string>('createNewCollection', {
-                        name: newCollectionName
-                    }).then((response) => {
-                        setCurrentResponse(response);
-                        
-                    })
-                }
-
-                function NewCollectionAccept() {
-
-                    return (
-                        <div className='newCollectionAccept' onClick={acceptNewCollection}>
-                            <p className='title'>Accept</p>
-                        </div>
-                    )
-                }
-
-                return (
-                    <div className='addNewCollection'>
-                        <NewCollectionInput title = "Collection name" icon = "fa-solid fa-hashtag"/>
-                        <NewCollectionAccept />
-                    </div>
-                );
-            }
-
-            function ReturnBtn() {
-                return (
-                    <div className='returnBtn' onClick={() => {setAddingNewCollection(false)}}>
-                        
-                        <p className='title'><i className="fa-solid fa-arrow-left icon"></i>Back</p>
-                    </div>
-                )
-            }
+            
 
             if (addingNewCollection) {
                 return (
                     <div className='collections'>
-                        <ReturnBtn />
-                        <AddNewCollection />
+                        <ReturnBtn type = {"collections"} setAddingNewCollection={setAddingNewCollection}/>
+                        <AddNewCollection allCollectionNames={allCollectionNames} />
                     </div>
                 )
             } 
+
+            if (manageCollection) {
+                return (
+                    <div className='manageCollection'>
+                        <ReturnBtn type = {"manageCollection"} setManageCollection={setManageCollection}/>
+                        <ManageCollection />  
+
+                    </div>
+                );
+            }
 
             async function getAdminCollections() {
                 fetchNui<any>('getAdminCollections', {}).then(
@@ -162,7 +109,7 @@ export function AdminMenu() {
                 <div className="collections">
                     <NewCollection />
                     {adminCollections.map((collection) => (
-                        <CollectionItem name={collection.name} key={collection.id} />
+                        <CollectionItem name={collection.name} key={collection.id} pressable = {true}/>
                     ))}
                 </div>
             );
@@ -186,6 +133,81 @@ export function AdminMenu() {
     );
 }
 
+function ManageCollection() {
+    return (
+        <div className='allCards'>
+            <Card size = {2}/>
+            <Card size = {1}/>
+            <Card size = {1}/>
+        </div>
+    );
+}
+
+
+function AddNewCollection(mainProps: {allCollectionNames: string[]}) {
+    let newCollectionName: string = "";
+    const [currentResponse, setCurrentResponse] = useState<string>("")
+    
+    function NewCollectionInput(props: any) {
+        const [value, setValue] = useState<string>("")
+        const [currentError, setCurrentError] = useState<string>("")
+
+        function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+            setValue(e.target.value)
+            newCollectionName = e.target.value;
+
+            if (mainProps.allCollectionNames === undefined) return;
+
+            if (mainProps.allCollectionNames.includes(e.target.value)) {
+                setCurrentError("Collection name already exists")
+            } else {
+                setCurrentError("")
+            }
+
+        }
+
+        return (
+            <div className='newCollectionInput'>
+                <p className='title'><i className={props.icon}></i>{props.title}</p>
+                <input type="text" value={value} onChange={handleChange} />
+                <p className='error'>{currentError}</p>
+                <p className='response'>{currentResponse}</p>
+            </div>
+        )
+    }
+
+    function acceptNewCollection() {
+        if (mainProps.allCollectionNames != undefined) {
+            if (mainProps.allCollectionNames.includes(newCollectionName)) return;
+        };
+
+        fetchNui<string>('createNewCollection', {
+            name: newCollectionName
+        }).then((response) => {
+            setCurrentResponse(response);
+            
+        })
+    }
+
+    function NewCollectionAccept() {
+
+        return (
+            <div className='newCollectionAccept' onClick={acceptNewCollection}>
+                <p className='title'>Accept</p>
+            </div>
+        )
+    }
+
+    return (
+        <div className='addNewCollection'>
+            <NewCollectionInput title = "Collection name" icon = "fa-solid fa-hashtag"/>
+            <NewCollectionAccept />
+        </div>
+    );
+}
+
+
+
 function Navigation(props: any) {
     return (
         <div className="navigation">
@@ -202,4 +224,26 @@ function Navigation(props: any) {
             </div>
         </div>
     );
+}
+
+function ReturnBtn(props: {type: string, setAddingNewCollection?: any, setManageCollection?: any}) {
+    if (props.type === "collections") {
+        return (
+            <div className='returnBtn' onClick={() => {props.setAddingNewCollection(false)}}>
+                
+                <p className='title'><i className="fa-solid fa-arrow-left icon"></i>Back</p>
+            </div>
+        )
+    }
+    else if (props.type === "manageCollection") {
+        return (
+            <div className='returnBtn' onClick={() => {props.setManageCollection(false)}}>
+                
+                <p className='title'><i className="fa-solid fa-arrow-left icon"></i>Back</p>
+            </div>
+        )
+    }
+
+
+    return null;
 }

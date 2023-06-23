@@ -7,7 +7,7 @@ import { AdminMenu } from "./adminmenu";
 
 
 const App: React.FC = () => {
-    const [showType, setShowType] = useState<string>("")
+    const [showType, setShowType] = useState<string>("admin")
 
     //NUI Hooks
     useNuiEvent<any>('setTranslations', (data) => { 

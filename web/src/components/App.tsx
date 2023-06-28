@@ -3,7 +3,7 @@ import '../css/App.css';
 import { fetchNui } from "../utils/fetchNui";
 import { useNuiEvent } from "../hooks/useNuiEvent";
 import { _T, SetTranslations } from "../utils/translation";
-import { AdminMenu } from "./adminmenu";
+import { ManagementMenu } from "./management/m-menu";
 
 
 const App: React.FC = () => {
@@ -40,7 +40,7 @@ const App: React.FC = () => {
     if (showType === "admin") {
         return (
             <div className="App">
-                <AdminMenu />
+                <ManagementMenu />
             </div>
         )
     } else if (showType === "showcase") {
@@ -54,31 +54,5 @@ const App: React.FC = () => {
 }
 
 
-
-// This is the entry point for the NUI
-// function NuiHooks(): React.FC {
-//     useNuiEvent<string>('opencontract', (data) => {
-//         Data.menuType = "contract"
-//         console.log("here1")
-//         Refresh()
-//     })
-//     useNuiEvent<string>('closecontract', (data) => {
-//         Data.menuType = ""
-//         Refresh()
-//     })
-// }
-
 export default App;
 
-
-//Post 
-// fetchNui<ReturnData>('getClientData').then(retData => {
-//     console.log('Got return data from client scripts:')
-//     console.dir(retData)
-//     setClientData(retData)
-//   }).catch(e => {
-//     console.error('Setting mock data due to error', e)
-//     setClientData({ x: 500, y: 300, z: 200})
-//   })
-
-//Receive Nui Message

@@ -5,12 +5,9 @@ import { createRoot } from 'react-dom/client';
 
 const root = createRoot(document.getElementById('root')!);
 
-Refresh();
 
-export function Refresh() {
-    root.render(
-        <React.StrictMode>
-            <App />
-        </React.StrictMode>
-    );
-}
+root.render(
+    <React.StrictMode>
+        <App />
+    </React.StrictMode>
+);

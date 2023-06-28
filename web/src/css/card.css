@@ -1,0 +1,71 @@
+.card {
+  font-family: "Cabin", sans-serif !important;
+  position: relative;
+  margin-left: 0.5vh;
+  margin-right: 0.5vh;
+  display: inline-block;
+}
+.card .frame {
+  width: 100%;
+  height: 100%;
+}
+.card .frame img {
+  width: 100%;
+  height: 100%;
+}
+.card .element {
+  position: absolute;
+  top: 3.8%;
+  left: 4.6%;
+  width: 90.5%;
+  height: 92.5%;
+}
+.card .element img {
+  width: 100%;
+  height: 100%;
+}
+.card .card-image {
+  position: absolute;
+  width: 76.2%;
+  height: 53.5%;
+  top: 14.8%;
+  left: 11.8%;
+}
+.card .card-image img {
+  width: 100%;
+  height: 100%;
+}
+.card .name {
+  position: absolute;
+  top: 3.8%;
+  left: 10%;
+  width: 55%;
+  height: 4%;
+  line-height: 0;
+  color: black;
+  font-weight: bold;
+  text-align: left;
+}
+.card .health {
+  position: absolute;
+  top: 3.8%;
+  right: 9.8%;
+  width: 25%;
+  height: 4%;
+  line-height: 0;
+  color: rgb(255, 0, 0);
+  font-weight: bold;
+  text-align: right;
+}
+.card .info {
+  position: absolute;
+  top: 69%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: black;
+  width: 60%;
+  text-align: center;
+}
+.card:hover {
+  cursor: pointer;
+}/*# sourceMappingURL=card.css.map */

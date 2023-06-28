@@ -4,6 +4,7 @@ import { fetchNui } from "../utils/fetchNui";
 import { useNuiEvent } from "../hooks/useNuiEvent";
 import { _T, SetTranslations } from "../utils/translation";
 import { ManagementMenu } from "./management/m-menu";
+import { OpenPackMenu } from "./openpack/op-menu";
 
 
 const App: React.FC = () => {
@@ -36,21 +37,25 @@ const App: React.FC = () => {
 
     window.addEventListener("keydown", keyHandler)
 
-
+    let content;
     if (showType === "admin") {
-        return (
-            <div className="App">
-                <ManagementMenu />
-            </div>
-        )
+      
+        content = <ManagementMenu />
+        
     } else if (showType === "showcase") {
 
     } else if (showType === "openpack") {
+        
+        content = <OpenPackMenu amount={8} />
 
     } else if (showType === "folder") {
 
     }
-    return null;
+    return (
+        <div className="App">
+            {content}
+        </div>
+    );
 }
 
 

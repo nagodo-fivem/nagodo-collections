@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { fetchNui } from "../../utils/fetchNui";
 import { ManageCollection } from './m-manage-collection';
 import { AddNewCollection } from './m-add-new-collection';
 
@@ -16,7 +17,7 @@ function NewCollection(props: {setAddingNewCollection: Function}) {
     )
 }
 
-function CollectionItem(props: {name: string, pressable?: boolean, setManageCollection: Function}) {
+function CollectionItem(props: {name: string, pressable?: boolean, setManageCollection?: Function}) {
     var name: string = props.name;
 
     if (name === undefined) name = "Name is undefined";
@@ -26,8 +27,12 @@ function CollectionItem(props: {name: string, pressable?: boolean, setManageColl
 
 
     if (props.pressable) {
+        
         return (
-            <div className='collectionItem' onClick={() => {props.setManageCollection(true)}}>
+            <div className='collectionItem' onClick={() => {
+                if (props.setManageCollection === undefined) return;
+                props.setManageCollection(true)
+                }}>
                 <i className="fa-solid fa-folder icon"></i>
                 <p className='title'>{name}</p>
             </div>
@@ -48,10 +53,41 @@ export function AllCollections() {
     const [addingNewCollection, setAddingNewCollection] = useState<boolean>     (false)
     const [manageCollection, setManageCollection]       = useState<boolean>     (false)
 
+    let collections_loaded: boolean = true;
+    
+    async function getAllCollections() {
+        fetchNui<any>('getAllCollections', {}).then(
+            (response) => {
+
+                setAllCollections(response);
+
+                var names = allCollections.map((collection) => {
+                    return collection.name;
+                })
+    
+                setAllCollectionNames(names);
+            }
+        );
+    }
+        
+    if (!collections_loaded) {
+        getAllCollections();
+        collections_loaded = true;
+        return (
+            <div className="collections">
+                <CollectionItem name= "Loading..." pressable = {false}/>
+            </div>
+        )
+    }
+
+
     if (addingNewCollection) {
         return (
             <div className='collections'>
-                <ReturnBtn type = {"collections"} setAddingNewCollection={setAddingNewCollection}/>
+                <Actions children = {
+                    <ReturnBtn event={setAddingNewCollection}/>
+                }/>
+                
                 <AddNewCollection allCollectionsNames={allCollectionsNames} />
             </div>
         )
@@ -60,7 +96,14 @@ export function AllCollections() {
     if (manageCollection) {
         return (
             <div className='manageCollection'>
-                <ReturnBtn type = {"manageCollection"} setManageCollection={setManageCollection}/>
+                <Actions children = {
+                    <span>
+                        <ReturnBtn event={setManageCollection}/> 
+                        <ReturnBtn event={setManageCollection}/>
+
+                    </span>
+                    
+                }/>
                 <ManageCollection />  
 
             </div>
@@ -78,23 +121,22 @@ export function AllCollections() {
     );
 }
 
-function ReturnBtn(props: {type: string, setAddingNewCollection?: any, setManageCollection?: any}) {
-    if (props.type === "collections") {
-        return (
-            <div className='returnBtn' onClick={() => {props.setAddingNewCollection(false)}}>
-                
-                <p className='title'><i className="fa-solid fa-arrow-left icon"></i>Back</p>
-            </div>
-        )
-    }
-    else if (props.type === "manageCollection") {
-        return (
-            <div className='returnBtn' onClick={() => {props.setManageCollection(false)}}>
-                
-                <p className='title'><i className="fa-solid fa-arrow-left icon"></i>Back</p>
-            </div>
-        )
-    }
+function Actions(props: {children: React.ReactNode}) {
+    return (
+        <div className='actions'>
+            {props.children}
+        </div>
+    )
+}
 
-    return null;
+
+function ReturnBtn(props: {event: Function}) {
+    return (
+        <div className='action' onClick={() => {props.event(false)}}>
+            
+            <p className='title'><i className="fa-solid fa-arrow-left icon"></i>Back</p>
+        </div>
+    )
+
+   
 }

@@ -1,3 +1,70 @@
+.adminmenu {
+  width: 160vh;
+  height: 85vh;
+  background-color: var(--dark1);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 1vh;
+}
+.adminmenu .navigation {
+  position: absolute;
+  left: 1.5vh;
+  top: 1.5vh;
+  width: 30vh;
+  height: 82vh;
+  overflow: auto;
+}
+.adminmenu .navigation .navbutton {
+  width: 100%;
+  height: 7vh;
+  border-radius: 0.5vh;
+  margin-top: 0.5vh;
+  margin-bottom: 0.25vh;
+  display: inline-block;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--dark2);
+}
+.adminmenu .navigation .navbutton:hover {
+  background-color: var(--dark3);
+  cursor: pointer;
+}
+.adminmenu .navigation .navbutton .navbutton-text {
+  height: -moz-fit-content;
+  height: fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  position: relative;
+  margin-top: 0vh;
+  left: 50%;
+  top: -0.3vh;
+  transform: translateX(-50%);
+  color: var(--white);
+  font-size: 2.4vh;
+}
+.adminmenu .navigation .navbutton .navbutton-text i {
+  margin-right: 1vh;
+}
+.adminmenu .navigation .navbutton .navbutton-text p {
+  position: relative;
+}
+.adminmenu .content {
+  position: absolute;
+  width: 126vh;
+  height: 82vh;
+  right: 1.5vh;
+  top: 1.5vh;
+}
+.adminmenu .content .border {
+  position: absolute;
+  height: 100%;
+  width: 0.5vh;
+  background-color: var(--dark2);
+}
+
 .collections {
   position: absolute;
   right: 0vh;
@@ -193,28 +260,151 @@
 }
 .card-editor .input {
   position: absolute;
-  background-color: red;
   width: 30vh;
-  height: 60vh;
+  height: 80vh;
   top: 0;
   left: 0;
 }
 .card-editor .input .card-text-input {
+  display: flex;
   position: relative;
-  background-color: green;
-  width: 100%;
-  height: 8vh;
+  margin: 0;
+  background-color: var(--dark2);
+  width: 30vh;
+  height: 100%;
+  max-height: 7vh;
+  border-radius: 0.5vh;
+  margin-bottom: 1vh;
 }
-.card-editor .preview {
+.card-editor .input .card-text-input.expanded {
+  max-height: 20vh;
+}
+.card-editor .input .card-text-input .title {
   position: absolute;
-  right: 2vh;
-  bottom: 2vh;
+  top: -1.2vh;
+  left: 1vh;
+  width: 28vh;
+  color: var(--white);
+  font-size: 1.8vh;
+}
+.card-editor .input .card-text-input input {
+  position: absolute;
+  left: 1vh;
+  top: 3.8vh;
+  color: var(--white);
+  background-color: var(--dark3);
+  outline: none;
+  border: none;
+  width: 27.5vh;
+  height: 2vh;
+}
+.card-editor .input .card-text-input .expand {
+  position: absolute;
+  right: 1vh;
+  top: 1vh;
+  width: 2vh;
+  height: 2vh;
+  color: var(--white);
+  font-size: 2vh;
+}
+.card-editor .input .card-text-input .expand:hover {
+  cursor: pointer;
+}
+.card-editor .input .card-text-input .additional {
+  display: none;
+  bottom: 0vh;
+  position: absolute;
+  height: 12vh;
+  width: 100%;
+}
+.card-editor .input .card-text-input .additional .color {
+  position: absolute;
+  margin-left: 1vh;
+  margin-top: 0vh;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 5vh;
+  color: var(--white);
+  font-size: 1.8vh;
+  display: inline-block;
+}
+.card-editor .input .card-text-input .additional .current-color-preview {
+  position: absolute;
+  width: 28vh;
+  height: 2vh;
+  bottom: 1vh;
+  left: 1vh;
+  display: inline-block;
+  background-color: red;
+}
+.card-editor .input .card-text-input .additional .use-default {
+  position: absolute;
+  left: 1vh;
+  top: 1.2vh;
+  width: 25vh;
+  height: 2vh;
+  color: var(--white);
+  font-size: 1.3vh;
+}
+.card-editor .input .card-text-input .additional .use-default-checkbox {
+  position: absolute;
+  left: 0.5vh;
+  top: 1.2vh;
+  width: 1.5vh;
+  height: 1.5vh;
+  background-color: var(--dark2);
+  border-radius: 0.3vh;
+  border: 0.1vh solid var(--white);
+  cursor: pointer;
+}
+.card-editor .input .card-text-input .additional.expanded {
+  display: block;
+}
+.card-editor .preview-section {
+  position: absolute;
+  right: 1vh;
+  top: 0vh;
+  width: 60vh;
+  height: 82vh;
+}
+.card-editor .preview-section .scale {
+  position: absolute;
+  width: 40vh;
+  top: 2vh;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.card-editor .preview-section .scale input[type=range] {
+  -webkit-appearance: none;
+  margin: 0;
+  width: 100%;
+  height: 4vh;
+  background-color: var(--dark2);
+}
+.card-editor .preview-section .scale input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 2vh;
+  height: 4vh;
+  background-color: var(--dark3);
+  cursor: pointer;
+}
+.card-editor .preview-section .container {
+  position: absolute;
+  width: 100%;
+  height: 70vh;
+  bottom: 0;
+}
+.card-editor .preview-section .container .preview {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   width: -moz-fit-content;
   width: fit-content;
   height: -moz-fit-content;
   height: fit-content;
 }
-.card-editor .preview .card {
+.card-editor .preview-section .container .preview .card {
   margin: 0 !important;
   display: block !important;
 }/*# sourceMappingURL=management.css.map */

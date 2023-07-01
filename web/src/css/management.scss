@@ -234,3 +234,52 @@
 
    
 }
+
+
+.card-editor {
+    position: absolute;
+
+    top: 0vh;
+    left: 1.5vh;
+
+    width: 125vh;
+    height: 82vh;
+
+    .input {
+        position: absolute;
+
+        background-color: red;
+        width: 30vh;
+        height: 60vh;
+        
+        top: 0;
+        left: 0;
+
+        .card-text-input {
+            position: relative;
+
+            background-color: green;
+
+            width: 100%;
+            height: 8vh;
+        }
+    }
+
+    .preview {
+        position: absolute;
+
+        right: 2vh;
+        bottom: 2vh;
+
+        width: fit-content;
+        height: fit-content;
+
+        
+        //Overwrite the default card style
+        .card {
+            margin: 0 !important;
+            display: block !important;
+        }
+    }
+
+}

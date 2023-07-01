@@ -182,4 +182,39 @@
 }
 .actions .action .icon {
   padding-right: 0.5vh;
+}
+
+.card-editor {
+  position: absolute;
+  top: 0vh;
+  left: 1.5vh;
+  width: 125vh;
+  height: 82vh;
+}
+.card-editor .input {
+  position: absolute;
+  background-color: red;
+  width: 30vh;
+  height: 60vh;
+  top: 0;
+  left: 0;
+}
+.card-editor .input .card-text-input {
+  position: relative;
+  background-color: green;
+  width: 100%;
+  height: 8vh;
+}
+.card-editor .preview {
+  position: absolute;
+  right: 2vh;
+  bottom: 2vh;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.card-editor .preview .card {
+  margin: 0 !important;
+  display: block !important;
 }/*# sourceMappingURL=management.css.map */

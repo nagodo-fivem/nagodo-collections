@@ -1,8 +1,16 @@
+interface NavigationProps {
+    setCurrentPage: Function;
+}
 
+interface NavButtonProps {
+    onclick: Function;
+    onclickInput: string;
+    label: string;
+}
 
-export function Navigation(props: any) {
+export function Navigation(props: NavigationProps) {
 
-    function NavButton(props: {onclick: Function, onclickInput: string, label: string}) {
+    function NavButton(props: NavButtonProps) {
         return (
             <div className="navbutton" onClick={() => {props.onclick( props.onclickInput )}}>
                 <div className="navbutton-text">
@@ -15,7 +23,7 @@ export function Navigation(props: any) {
     return (
         <div className="navigation">
             <NavButton onclick={props.setCurrentPage} onclickInput="collections" label={"Collections"} />
-            <NavButton onclick={props.setCurrentPage} onclickInput="ting" label={"Ting her"} />
+            <NavButton onclick={props.setCurrentPage} onclickInput="editor" label={"Editor"} />
         </div>
     );
 }

@@ -55,20 +55,21 @@
         color: black;
         font-weight: bold;
         text-align: left;
-      
+       
     }
 
     .health {
         position: absolute;
         top: 3.8%;
         right: 9.8%;
-        width: 25%;
+        width: 24%;
         height: 4%;
 
         line-height: 0;
         color: rgb(255, 0, 0);
         font-weight: bold;
         text-align: right;
+     
     }
 
     .info {
@@ -81,6 +82,41 @@
         width: 60%;
  
         text-align: center;
+    }
+
+    .attack {
+        color: black;
+        font-weight: bold;
+        position: absolute;
+        bottom: 8.5%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 53%;
+        
+        text-align: center;
+        
+    }
+
+    .damage {
+        color: black;
+        font-weight: bold;
+        position: absolute;
+        bottom: 8.5%;
+        right: 8%;
+        width: 14.5%;
+
+        text-align: right;
+    }
+
+    .num {
+        color: black;
+        font-weight: bold;
+        position: absolute;
+        bottom: 1.2%;
+        left: 6%;
+        text-align: left;
+        width: 20%;
+
     }
 
     &:hover {

@@ -349,7 +349,7 @@
 .card-editor .input .card-text-input .additional .use-default-checkbox {
   position: absolute;
   left: 0.5vh;
-  top: 1.2vh;
+  top: 4.2vh;
   width: 1.5vh;
   height: 1.5vh;
   background-color: var(--dark2);
@@ -407,4 +407,4 @@
 .card-editor .preview-section .container .preview .card {
   margin: 0 !important;
   display: block !important;
-}/*# sourceMappingURL=management.css.map */
+}

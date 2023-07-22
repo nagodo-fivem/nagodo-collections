@@ -18,7 +18,7 @@
 }
 .adminmenu .navigation .navbutton {
   width: 100%;
-  height: 7vh;
+  height: 6vh;
   border-radius: 0.5vh;
   margin-top: 0.5vh;
   margin-bottom: 0.25vh;
@@ -26,10 +26,8 @@
   position: relative;
   left: 50%;
   transform: translateX(-50%);
-  background-color: var(--dark2);
 }
 .adminmenu .navigation .navbutton:hover {
-  background-color: var(--dark3);
   cursor: pointer;
 }
 .adminmenu .navigation .navbutton .navbutton-text {
@@ -39,9 +37,8 @@
   width: fit-content;
   position: relative;
   margin-top: 0vh;
-  left: 50%;
+  left: 2vh;
   top: -0.3vh;
-  transform: translateX(-50%);
   color: var(--white);
   font-size: 2.4vh;
 }

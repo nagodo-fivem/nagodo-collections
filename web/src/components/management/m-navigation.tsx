@@ -8,17 +8,18 @@ interface NavButtonProps {
     label: string;
 }
 
+function NavButton(props: NavButtonProps) {
+    return (
+        <div className="navbutton" onClick={() => {props.onclick( props.onclickInput )}}>
+            <div className="navbutton-text">
+                <p><i className="fa-solid fa-bars"></i>{ props.label }</p>
+            </div>
+        </div>
+    )
+}
+
 export function Navigation(props: NavigationProps) {
 
-    function NavButton(props: NavButtonProps) {
-        return (
-            <div className="navbutton" onClick={() => {props.onclick( props.onclickInput )}}>
-                <div className="navbutton-text">
-                    <p><i className="fa-solid fa-bars"></i>{ props.label }</p>
-                </div>
-            </div>
-        )
-    }
 
     return (
         <div className="navigation">

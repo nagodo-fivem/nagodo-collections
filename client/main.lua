@@ -10,6 +10,13 @@ function OpenCollectionsAdminMenu()
 
 end
 
+Citizen.CreateThread(function()
+    Citizen.Wait(1000)
+
+    local result = TriggerCallbackSync('dinmor')
+   
+end)
+
 function ShowAdminMenu()
     SetNuiFocus(true, true)
     SendNUIMessage({

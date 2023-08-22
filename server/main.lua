@@ -5,6 +5,14 @@ local DATABASE = Database()
 Citizen.CreateThread(function()
     DATABASE.Init()
 
+
+
+end)
+
+
+CreateCallback('dinmor', function(source, cb)
+    Citizen.Wait(1000)
+    cb("sut den din mor")
 end)
 
 --Commands--

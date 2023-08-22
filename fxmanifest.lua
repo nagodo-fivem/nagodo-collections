@@ -2,16 +2,23 @@ fx_version 'cerulean'
 game 'gta5'
 
 shared_scripts {
-	'shared/*',
-}
-client_scripts {
-	'client/*'
+	'shared/config.lua',
+	'shared/utils.lua',
+
 }
 
 server_scripts {
-	"server/*"
-
+	'server/callback.lua',
+	'server/database.lua',
+	'server/main.lua',
 }
+
+client_scripts {
+	'client/callback.lua',
+	'client/main.lua',
+}
+
+
 
 ui_page 'web/build/index.html'
 

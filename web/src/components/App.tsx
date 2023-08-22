@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import '../css/App.css';
+import '../css/pages/App.css';
 import { fetchNui } from "../utils/fetchNui";
 import { useNuiEvent } from "../hooks/useNuiEvent";
-import { _T, SetTranslations } from "../utils/translation";
-import { ManagementMenu } from "./management/m-menu";
-import { OpenPackMenu } from "./openpack/op-menu";
+import { _T, setTranslations } from "../utils/translation";
+import { AdminMenu } from "./adminmenu/admin-menu";
+import { OpenPackMenu } from "./packageopener/op-menu";
 
 
 const App: React.FC = () => {
@@ -12,7 +12,7 @@ const App: React.FC = () => {
 
     //NUI Hooks
     useNuiEvent<any>('setTranslations', (data) => { 
-        SetTranslations(JSON.parse(data));
+        setTranslations(JSON.parse(data));
     })
 
     useNuiEvent<any>('setShowType', (type) => {
@@ -40,7 +40,7 @@ const App: React.FC = () => {
     let content;
     if (showType === "admin") {
       
-        content = <ManagementMenu />
+        content = <AdminMenu />
         
     } else if (showType === "showcase") {
 

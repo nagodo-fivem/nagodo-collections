@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import '../css/card.css';
+import '../css/components/card.css';
 import img from '../imgs/Frames/normal.png'
 import img1 from '../imgs/Elements/FireElement.png'
 import img2 from '../imgs/Cards/FirstEdition Collection/CardPictures/g_holo_john_olsen_01.jpg'

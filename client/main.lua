@@ -1,7 +1,5 @@
-local QBCore = exports['qb-core']:GetCoreObject()
-
 --Events--
-RegisterNetEvent("nagodo_collections:client:openAdminMenu", function()
+RegisterNetEvent("nagodo-collections:openAdminMenu", function()
     OpenCollectionsAdminMenu()
 end)
 
@@ -9,13 +7,6 @@ function OpenCollectionsAdminMenu()
     ShowAdminMenu()
 
 end
-
-Citizen.CreateThread(function()
-    Citizen.Wait(1000)
-
-    local result = TriggerCallbackSync('dinmor')
-   
-end)
 
 function ShowAdminMenu()
     SetNuiFocus(true, true)
@@ -29,21 +20,15 @@ end
 RegisterNUICallback('createNewCollection', function(data, cb)
     local name = data.name
 
-    local promise = promise.new()
-    QBCore.Functions.TriggerCallback('nagodo_collections:server:createNewCollection', function(result)
-        promise:resolve(result)
-    end, name)
-    local result = Citizen.Await(promise)
+    local result = TriggerCallbackSync('nagodo-collections:server:createNewCollection', name)
 
     cb(result)
 end)
 
 RegisterNUICallback('getAdminCollections', function(data, cb)
-    local promise = promise.new()
-    QBCore.Functions.TriggerCallback('nagodo_collections:server:getCollections', function(result)
-        promise:resolve(result)
-    end)
-    local collections = Citizen.Await(promise)
+    local name = data.name
+
+    local collections = TriggerCallbackSync('nagodo-collections:fetchCollections', name)
 
     cb(collections)
 end)

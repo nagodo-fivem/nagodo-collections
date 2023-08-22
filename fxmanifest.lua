@@ -3,6 +3,7 @@ game 'gta5'
 
 shared_scripts {
 	'shared/config.lua',
+	'shared/locale.lua',
 	'shared/utils.lua',
 
 }
@@ -23,8 +24,9 @@ client_scripts {
 ui_page 'web/build/index.html'
 
 files {
-  'web/build/index.html',
-  'web/build/**/*'
+	'web/images/*',
+	'web/build/index.html',
+	'web/build/**/*'
 }
 
 lua54 'yes'

@@ -1,16 +1,14 @@
-interface ITranslations {
+interface Translation {
     [key: string]: string;
 }
 
-var translations: ITranslations = {};
+let translations: Translation = {};
 
-export function SetTranslations(newTranslations: ITranslations) {
+export function setTranslations(newTranslations: Translation) {
     translations = newTranslations;
 }
+    
 
-export function _T(key: string) {
-    if (translations[key]) {
-        return translations[key]
-    }
-    return "missing translation: " + key;
+export function _T(str: string) {
+    return translations[str] || str;
 }

@@ -1,0 +1,267 @@
+.adminmenu {
+    width: 160vh;
+    height: 85vh;
+    background-color: var(--dark1);
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    border-radius: 1vh;
+
+    .content {
+        position: absolute;
+        width: 126vh;
+        height: 82vh;
+
+        right: 1.5vh;
+        top: 1.5vh;
+
+        .border {
+            position: absolute;
+            height: 100%;
+            width: 0.5vh;
+            background-color: var(--dark2);
+        }
+
+    }
+}
+
+.collections {
+    position: absolute;
+    right: 0vh;
+    top: 0vh;
+
+    width: 124.5vh;
+    height: 100%;
+
+    overflow: auto;
+
+    .collectionItem {
+        position: relative;
+        width: 14.5vh;
+        height: 12vh;
+
+        margin-right: 1vh;
+        margin-bottom: 0.5vh;
+
+        border-radius: 1vh;
+
+        display: inline-block;
+
+  
+        .icon {
+            color: var(--white);
+            font-size: 8vh;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .title {
+            position: absolute;
+            bottom: -1.6vh;
+            color: var(--white);
+            width: 100%;
+            height: 2vh;
+            font-size: 1.8vh;
+            text-align: center;
+        }
+
+        &:hover {
+            cursor: pointer;
+            background-color: var(--dark3);
+        }
+    }
+
+    .addNewCollection {
+        position: absolute;
+        width: 40vh;
+        height: 70vh;
+
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+
+
+
+        .newCollectionInput {
+            position: relative;
+            margin-bottom: 1vh;
+            height: 7vh;
+            width: 100%;
+
+            .title {
+                position: absolute;
+                top: -1.5vh;
+                left: 0vh;
+                width: 40vh;
+
+                color: var(--white);
+                font-size: 2vh;
+            }
+
+            input {
+                position: absolute;
+                border: none;
+                background-color: var(--dark2);
+                color: var(--white);
+                border-radius: 0.5vh;
+                outline: none;
+                padding-left: 1vh;
+                padding-right: 1vh;
+                bottom: 0vh;
+                width: 38vh;
+                height: 3.5vh;
+                font-size: 1.6vh;
+            }
+
+            .error {
+                position: absolute;
+                color: red;
+                width: 100%;
+                text-align: center;
+                font-size: 1.6vh;
+                font-weight: bold;
+                top: 6.2vh;
+            }
+
+            .response {
+                position: absolute;
+                color: green;
+                width: 100%;
+                text-align: center;
+                font-size: 1.6vh;
+                font-weight: bold;
+                top: 6.2vh;
+            }
+
+            i {
+                padding-right: 0.2vh;
+            }
+        }
+
+        .newCollectionAccept {
+            position: relative;
+            background-color: var(--dark2);
+            width: 14vh;
+            margin-top: 3.5vh;
+            height: 5vh;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 0.5vh;
+
+            .title {
+                position: absolute;
+                top: -0.6vh;
+                width: 100%;
+                text-align: center;
+                color: var(--white);
+                font-size: 2vh;
+            }
+
+            &:hover {
+                cursor: pointer;
+                background-color: var(--dark3);
+            }
+        }
+    }
+
+    
+    .returnBtn {
+        position: absolute;
+        width: 14vh;
+        height: 5vh;
+
+        background-color: var(--dark2);
+        
+        color: var(--white);
+
+        border-radius: 0.5vh;
+
+        &:hover {
+            cursor: pointer;
+            background-color: var(--dark3);
+        }
+
+        .title {
+            position: absolute;
+            width: 100%;
+            top: -0.6vh;
+            text-align: center;
+            font-size: 2vh;
+        }
+
+        .icon {
+            padding-right: 0.5vh;
+        }
+    }
+}
+
+.manageCollection {
+
+    position: absolute;
+    right: 0vh;
+    top: 0vh;
+
+    width: 124.5vh;
+    height: 100%;
+
+    overflow: auto;
+
+    .allCards {
+        position: absolute;
+        width: 100%;
+        height: 75vh;
+
+        bottom: 0.5vh;
+
+        overflow: auto;
+
+        
+
+    }
+
+    
+}
+
+.actions {
+    position: absolute;
+    width: 60vh;
+    height: 5vh;
+
+    .action {
+        position: relative;
+        float: left;
+        width: 14vh;
+        height: 5vh;
+        margin-right: 0.5vh;
+        background-color: var(--dark2);
+        
+        color: var(--white);
+
+        border-radius: 0.5vh;
+
+        &:hover {
+            cursor: pointer;
+            background-color: var(--dark3);
+        }
+
+        .title {
+            position: absolute;
+            width: 100%;
+            top: -0.6vh;
+            text-align: center;
+            font-size: 2vh;
+        }
+
+        .icon {
+            padding-right: 0.5vh;
+        }
+    }
+
+   
+}
+

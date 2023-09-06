@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import '../css/components/card.css';
-import img from '../imgs/Frames/normal.png'
 import img1 from '../imgs/Elements/FireElement.png'
 import img2 from '../imgs/Cards/FirstEdition Collection/CardPictures/g_holo_john_olsen_01.jpg'
 
@@ -12,6 +11,7 @@ interface CardProps {
     damage: number;
     cardNum: number;
     size: number;
+    isFlipped?: boolean;
 }
 
 
@@ -24,15 +24,15 @@ export function Card(props: CardProps) {
         <div className='card' style={{"height": height + "vh", "width": width + "vh"} }>
 
             <div className='frame'>
-                <img src={img} alt="frame" />
+                <img src={"https://i.imgur.com/4ONxA9H.png"} alt="frame" />
             </div>
 
             <div className='element'>
-                <img src={img1}/>
+                <img src={"https://i.imgur.com/kHEpSnJ.png"}/>
             </div>
 
             <div className='card-image'>
-                <img src={img2} />
+                <img src={"https://i.imgur.com/4paHYB2.jpg"} />
             </div>
 
             <p className='name' style={{"fontSize": GetNameFontSize(scale)}}>{props.name}</p>

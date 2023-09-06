@@ -7,7 +7,7 @@ import { PropertyEditor } from './properties/property-editor';
 
 
 export function AdminMenu() {
-    const [currentPage, setCurrentPage] = useState<string>("properties")
+    const [currentPage, setCurrentPage] = useState<string>("editor")
 
     function Content() {
         

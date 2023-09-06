@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import '../../../css/pages/adminmenu/card-editor.css'
 import { Card } from "../../card";
+import { CardProperty } from './card-property';
 
 interface EditorCardData {
     name: string;
@@ -12,62 +13,11 @@ interface EditorCardData {
     size?: number;
 }
 
-interface CardTextInputProps {
-    title: string;
-    type?: string;
-    value: string | number;
-    onChange: Function;
-}
-
 interface CardScaleData {
     cardSize: number;
     sliderSize: number;
 }
 
-
-function CardProperty(props: CardTextInputProps) {  
-    const [expanded, setExpanded] = useState<boolean>(false);
-
-    
-    function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-        props.onChange(e.target.value);
-    }
-
-    function handleColorChange(e: React.ChangeEvent<HTMLInputElement>) {
-
-    }
-    
-    function handleExpand() {
-        setExpanded(!expanded);
-    }
-    
-    let className = "card-text-input";
-    let iconClassName = "fa-solid fa-chevron-down expand";
-    let additionalClassName = "additional";
-    if (expanded) {
-        className += " expanded"; 
-        iconClassName = "fa-solid fa-chevron-up expand";
-        additionalClassName += " expanded";
-    }
-    
-
-    return (
-        <div className = {className}>
-            <p className='title'>{props.title}</p>
-
-            <i className = {iconClassName} onClick={handleExpand}></i>
-
-            <input type = {props.type} value={props.value} onChange={handleChange} autoComplete='none'/>
-
-            <div className = {additionalClassName}>
-                <p className='color'>Color</p>
-                <div className='current-color-preview'></div>
-                <p className='use-default'>Use default collection color</p>
-                <input className='use-default-checkbox' type = "checkbox" />
-            </div>
-        </div>
-    );
-}
 
 function Preview(props: EditorCardData) {
     const [size, setSize] = useState<CardScaleData>({cardSize: 1.5, sliderSize: 15});

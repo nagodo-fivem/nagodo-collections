@@ -11,7 +11,7 @@ export function OpenPackMenu(props: OpenPackMenuProps) {
     let cardsOpened = 0;
     
     function getHeight() {
-        if (props.cardAmount > 5) {
+        if (props.cardAmount > 4) {
             return "75vh";
         } else {
             return "38vh";
@@ -20,7 +20,9 @@ export function OpenPackMenu(props: OpenPackMenuProps) {
 
     return (
         <div className="cards-container" style={{"height": getHeight()}}>
-            <Card name = "John Olsen" health = {310} info = "Førtidspension. Højde: 150cm. Vægt: 170kg" attack = "Hvad glor du på?" damage = {120} cardNum = {13} size={1} />
+            <Card name = "John Olsen" health = {310} info = "Førtidspension. Højde: 150cm. Vægt: 170kg" attack = "Hvad glor du på?" damage = {120} cardNum = {13} size={1} isOpeningCard = {true} />
+            <Card name = "John Olsen" health = {310} info = "Førtidspension. Højde: 150cm. Vægt: 170kg" attack = "Hvad glor du på?" damage = {120} cardNum = {13} size={1} isOpeningCard = {true}/>
+            <Card name = "John Olsen" health = {310} info = "Førtidspension. Højde: 150cm. Vægt: 170kg" attack = "Hvad glor du på?" damage = {120} cardNum = {13} size={1} isOpeningCard = {true}/>
             <Card name = "John Olsen" health = {310} info = "Førtidspension. Højde: 150cm. Vægt: 170kg" attack = "Hvad glor du på?" damage = {120} cardNum = {13} size={1} />
             <Card name = "John Olsen" health = {310} info = "Førtidspension. Højde: 150cm. Vægt: 170kg" attack = "Hvad glor du på?" damage = {120} cardNum = {13} size={1} />
             <Card name = "John Olsen" health = {310} info = "Førtidspension. Højde: 150cm. Vægt: 170kg" attack = "Hvad glor du på?" damage = {120} cardNum = {13} size={1} />

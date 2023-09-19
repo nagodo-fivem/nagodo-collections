@@ -9,23 +9,36 @@ interface CardProps {
     damage: number;
     cardNum: number;
     size: number;
-    isFlipped?: boolean;
+    isOpeningCard?: boolean;
 }
 
+
+interface OpenCardData {
+    isFlipped: boolean;
+    isSpecial?: boolean;
+}
 
 export function Card(props: CardProps) {
     let scale = 0.025 * props.size;
     let width = 1024 * scale
     let height = 1420 * scale
 
-    let [isFlipped, setIsFlipped] = useState(false);
+    let [openCardData, setOpenCardData] = useState<OpenCardData>({"isFlipped": false, "isSpecial": false});
 
     function handleClick() {
-        setIsFlipped(!isFlipped);
+        if (!props.isOpeningCard) return;
+
+        if (openCardData.isFlipped) return;
+        
+        let _openCardData = {...openCardData};
+        _openCardData.isFlipped = !_openCardData.isFlipped;
+        setOpenCardData(_openCardData);
     }
 
     function getFlipFrontTransform() {
-        if (!isFlipped) {
+        if (!props.isOpeningCard) return;
+
+        if (!openCardData.isFlipped) {
             return {"transform": "rotateY(180deg)"}
         }
 
@@ -33,7 +46,9 @@ export function Card(props: CardProps) {
     }
 
     function getFlipBackSideTransform() {
-        if (!isFlipped) {
+        if (!props.isOpeningCard) return;
+
+        if (!openCardData.isFlipped) {
             return {"transform": "rotateY(0deg)"}
         }
 
@@ -69,6 +84,7 @@ export function Card(props: CardProps) {
 
                 <p className='num' style = {{"fontSize": GetCardNumFontSize(scale)}}>{props.cardNum} / 143</p>
             </div>
+
             <div className='card-back' style={getFlipBackSideTransform()}>
                 <img src={"https://i.imgur.com/o2Ss6uk.png"} alt="frame" />
             </div>

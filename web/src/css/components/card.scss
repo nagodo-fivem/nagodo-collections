@@ -7,121 +7,153 @@
     margin-right: 0.5vh;
     display: inline-block;
 
-    .frame {
+    transform-style: preserve-3d;
+
+	transition: all 1s ease;
+	transform: none;
+
+    .card-front {
         width: 100%;
         height: 100%;
+        position: absolute;
 
-        img {
+        transition: all 1s ease;
+        backface-visibility: hidden;
+	    transform: rotateY(180deg);
+
+        .frame {
             width: 100%;
             height: 100%;
+    
+            img {
+                width: 100%;
+                height: 100%;
+            }
         }
-    }
-
-    .element {
-        position: absolute;
-        top: 3.8%;
-        left: 4.5%;
-
-        width: 90.6%;
-        height: 92.5%;
-
-        img {
-            width: 100%;
-            height: 100%;
+    
+        .element {
+            position: absolute;
+            top: 3.8%;
+            left: 4.5%;
+    
+            width: 90.6%;
+            height: 92.5%;
+    
+            img {
+                width: 100%;
+                height: 100%;
+            }
         }
-    }
-
-    .card-image {
-        position: absolute;
-        width: 76.2%;
-        height: 53.5%;
-
-        top: 14.8%;
-        left: 11.8%;
-
-        img {
-            width: 100%;
-            height: 100%;
+    
+        .card-image {
+            position: absolute;
+            width: 76.2%;
+            height: 53.5%;
+    
+            top: 14.8%;
+            left: 11.8%;
+    
+            img {
+                width: 100%;
+                height: 100%;
+            }
         }
-    }
-
-    .name {
-        position: absolute;
-        top: 3.8%;
-        left: 10%;
-        width: 55%;
-        height: 4%;
-        
-        line-height: 0;
-        color: black;
-        font-weight: bold;
-        text-align: left;
-       
-    }
-
-    .health {
-        position: absolute;
-        top: 3.8%;
-        right: 9.8%;
-        width: 24%;
-        height: 4%;
-
-        line-height: 0;
-        color: rgb(255, 0, 0);
-        font-weight: bold;
-        text-align: right;
+    
+        .name {
+            position: absolute;
+            top: 3.8%;
+            left: 10%;
+            width: 55%;
+            height: 4%;
+            
+            line-height: 0;
+            color: black;
+            font-weight: bold;
+            text-align: left;
+           
+        }
+    
+        .health {
+            position: absolute;
+            top: 3.8%;
+            right: 9.8%;
+            width: 24%;
+            height: 4%;
+    
+            line-height: 0;
+            color: rgb(255, 0, 0);
+            font-weight: bold;
+            text-align: right;
+         
+        }
+    
+        .info {
+            position: absolute;
+            top: 69%;
+            left: 50%;
+            transform: translateX(-50%);
+    
+            color: black;
+            width: 60%;
      
+            text-align: center;
+        }
+    
+        .attack {
+            color: black;
+            font-weight: bold;
+            position: absolute;
+            bottom: 8.5%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 53%;
+            
+            text-align: center;
+            
+        }
+    
+        .damage {
+            color: black;
+            font-weight: bold;
+            position: absolute;
+            bottom: 8.5%;
+            right: 8%;
+            width: 14.5%;
+    
+            text-align: right;
+        }
+    
+        .num {
+            color: black;
+            font-weight: bold;
+            position: absolute;
+            bottom: 1.2%;
+            left: 6%;
+            text-align: left;
+            width: 20%;
+    
+        }
+    
+        &:hover {
+            cursor: pointer;
+        }
     }
 
-    .info {
+    .card-back {
         position: absolute;
-        top: 69%;
-        left: 50%;
-        transform: translateX(-50%);
+        height: 100%;
+        width: 100%;
+        transition: all 1s ease;
 
-        color: black;
-        width: 60%;
- 
-        text-align: center;
+        backface-visibility: hidden;
+	    transform: rotateY(0deg);
+
+        img {
+            height: 100%;
+            width: 100%;
+        }
     }
 
-    .attack {
-        color: black;
-        font-weight: bold;
-        position: absolute;
-        bottom: 8.5%;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 53%;
-        
-        text-align: center;
-        
-    }
-
-    .damage {
-        color: black;
-        font-weight: bold;
-        position: absolute;
-        bottom: 8.5%;
-        right: 8%;
-        width: 14.5%;
-
-        text-align: right;
-    }
-
-    .num {
-        color: black;
-        font-weight: bold;
-        position: absolute;
-        bottom: 1.2%;
-        left: 6%;
-        text-align: left;
-        width: 20%;
-
-    }
-
-    &:hover {
-        cursor: pointer;
-    }
+    
 }
 

@@ -1,10 +1,12 @@
 .cards-container {
-  background-color: red;
   position: absolute;
-  width: 135vh;
-  height: 80vh;
+  width: 140vh;
+  height: 75vh;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
+}
+.cards-container .card {
+  margin: 1vh;
 }

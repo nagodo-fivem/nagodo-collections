@@ -4,38 +4,49 @@
   margin-left: 0.5vh;
   margin-right: 0.5vh;
   display: inline-block;
+  transform-style: preserve-3d;
+  transition: all 1s ease;
+  transform: none;
 }
-.card .frame {
+.card .card-front {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transition: all 1s ease;
+  backface-visibility: hidden;
+  transform: rotateY(180deg);
+}
+.card .card-front .frame {
   width: 100%;
   height: 100%;
 }
-.card .frame img {
+.card .card-front .frame img {
   width: 100%;
   height: 100%;
 }
-.card .element {
+.card .card-front .element {
   position: absolute;
   top: 3.8%;
   left: 4.5%;
   width: 90.6%;
   height: 92.5%;
 }
-.card .element img {
+.card .card-front .element img {
   width: 100%;
   height: 100%;
 }
-.card .card-image {
+.card .card-front .card-image {
   position: absolute;
   width: 76.2%;
   height: 53.5%;
   top: 14.8%;
   left: 11.8%;
 }
-.card .card-image img {
+.card .card-front .card-image img {
   width: 100%;
   height: 100%;
 }
-.card .name {
+.card .card-front .name {
   position: absolute;
   top: 3.8%;
   left: 10%;
@@ -46,7 +57,7 @@
   font-weight: bold;
   text-align: left;
 }
-.card .health {
+.card .card-front .health {
   position: absolute;
   top: 3.8%;
   right: 9.8%;
@@ -57,7 +68,7 @@
   font-weight: bold;
   text-align: right;
 }
-.card .info {
+.card .card-front .info {
   position: absolute;
   top: 69%;
   left: 50%;
@@ -66,7 +77,7 @@
   width: 60%;
   text-align: center;
 }
-.card .attack {
+.card .card-front .attack {
   color: black;
   font-weight: bold;
   position: absolute;
@@ -76,7 +87,7 @@
   width: 53%;
   text-align: center;
 }
-.card .damage {
+.card .card-front .damage {
   color: black;
   font-weight: bold;
   position: absolute;
@@ -85,7 +96,7 @@
   width: 14.5%;
   text-align: right;
 }
-.card .num {
+.card .card-front .num {
   color: black;
   font-weight: bold;
   position: absolute;
@@ -94,6 +105,18 @@
   text-align: left;
   width: 20%;
 }
-.card:hover {
+.card .card-front:hover {
   cursor: pointer;
+}
+.card .card-back {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  transition: all 1s ease;
+  backface-visibility: hidden;
+  transform: rotateY(0deg);
+}
+.card .card-back img {
+  height: 100%;
+  width: 100%;
 }

@@ -46,7 +46,7 @@ const App: React.FC = () => {
 
     } else if (showType === "openpack") {
         
-        content = <OpenPackMenu amount={8} />
+        content = <OpenPackMenu cardAmount={5} />
 
     } else if (showType === "folder") {
 

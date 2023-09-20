@@ -15,6 +15,7 @@ interface CardProps {
 
 interface OpenCardData {
     isFlipped: boolean;
+    shake?: boolean;
     isSpecial?: boolean;
 }
 
@@ -29,35 +30,72 @@ export function Card(props: CardProps) {
         if (!props.isOpeningCard) return;
 
         if (openCardData.isFlipped) return;
+
+        if (openCardData.isSpecial) {
+            let _openCardData = {...openCardData};
+            _openCardData.shake = true;
+            setOpenCardData(_openCardData);
+
+            setTimeout(() => {
+                let _openCardData = {...openCardData};
+                _openCardData.shake = false;
+                setOpenCardData(_openCardData);
+
+                setTimeout(() => {
+                    let _openCardData = {...openCardData};
+                    _openCardData.isFlipped = true;
+                    setOpenCardData(_openCardData);
+                }, 100);
+
+            }, 1000);
+
+        } else {
+
+            let _openCardData = {...openCardData};
+            _openCardData.isFlipped = true;
+            setOpenCardData(_openCardData);
+        }
         
-        let _openCardData = {...openCardData};
-        _openCardData.isFlipped = !_openCardData.isFlipped;
-        setOpenCardData(_openCardData);
     }
 
     function getFlipFrontTransform() {
-        if (!props.isOpeningCard) return;
+        if (!props.isOpeningCard) {
+            return {"transform": "rotateY(0deg)", "animation": "none", "transition": "none"}
+        };
 
         if (!openCardData.isFlipped) {
-            return {"transform": "rotateY(180deg)"}
+            return {"transform": "rotateY(180deg)", "transition": "all 1s ease"}
         }
 
-        return {"transform": "rotateY(0deg)"}
+        return {"transform": "rotateY(0deg)", "transition": "all 1s ease"}
     }
 
     function getFlipBackSideTransform() {
-        if (!props.isOpeningCard) return;
+        if (!props.isOpeningCard) {
+            return {"transform": "rotateY(180deg)", "animation": "none", "transition": "none"}
+        };
 
-        if (!openCardData.isFlipped) {
-            return {"transform": "rotateY(0deg)"}
+        if (openCardData.shake) {
+            return {"animation": "shake 1s"}
         }
 
-        return {"transform": "rotateY(180deg)"}
+        if (!openCardData.isFlipped) {
+            return {"transform": "rotateY(0deg)", "animation": "none"}
+        }
+
+        return {"transform": "rotateY(180deg)", "animation": "none"}
+    }
+
+    function getCardStyle() {
+        if (!props.isOpeningCard) {
+            return {"transform": "rotateY(0deg)", "animation": "none", "transition": "none", "height": height + "vh", "width": width + "vh"}
+        }
+        return {"transition": "all 1s ease;", "height": height + "vh", "width": width + "vh"}
     }
 
 
     return (
-        <div className='card' style={{"height": height + "vh", "width": width + "vh"}  } onClick={handleClick}>
+        <div className='card' style={getCardStyle() } onClick={handleClick}>
 
             <div className = "card-front" style={getFlipFrontTransform()}>
                 <div className='frame'>

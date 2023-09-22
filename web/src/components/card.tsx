@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import '../css/components/card.css';
+import flipsound from '../sounds/flipsound.mp3';
 
 interface CardProps {
     name: string;
@@ -20,6 +21,8 @@ interface OpenCardData {
 }
 
 export function Card(props: CardProps) {
+    const audioRef = useRef(null);
+
     let scale = 0.025 * props.size;
     let width = 1024 * scale
     let height = 1420 * scale
@@ -44,6 +47,7 @@ export function Card(props: CardProps) {
                 setTimeout(() => {
                     let _openCardData = {...openCardData};
                     _openCardData.isFlipped = true;
+                    playFlipSound();
                     setOpenCardData(_openCardData);
                 }, 100);
 
@@ -53,9 +57,18 @@ export function Card(props: CardProps) {
 
             let _openCardData = {...openCardData};
             _openCardData.isFlipped = true;
+            playFlipSound();
             setOpenCardData(_openCardData);
         }
         
+    }
+
+    function playFlipSound() {
+        if (audioRef.current) {
+            let audioElement = audioRef.current as HTMLAudioElement;
+            audioElement.volume = 0.2;
+            audioElement.play();
+        }
     }
 
     function getFlipFrontTransform() {
@@ -90,12 +103,15 @@ export function Card(props: CardProps) {
         if (!props.isOpeningCard) {
             return {"transform": "rotateY(0deg)", "animation": "none", "transition": "none", "height": height + "vh", "width": width + "vh"}
         }
-        return {"transition": "all 1s ease;", "height": height + "vh", "width": width + "vh"}
+        return {"transition": "all 1s ease", "height": height + "vh", "width": width + "vh"}
     }
 
 
     return (
         <div className='card' style={getCardStyle() } onClick={handleClick}>
+            <audio ref={audioRef}>
+                <source src={flipsound} type="audio/mpeg" />
+            </audio>
 
             <div className = "card-front" style={getFlipFrontTransform()}>
                 <div className='frame'>

@@ -8,7 +8,7 @@ interface CardProps {
     info: string;
     attack: string;
     damage: number;
-    cardNum: number;
+    cardNum: number | string;
     size: number;
     isOpeningCard?: boolean;
 }
@@ -106,6 +106,11 @@ export function Card(props: CardProps) {
         return {"transition": "all 1s ease", "height": height + "vh", "width": width + "vh"}
     }
 
+    function GetCardNum(cardNum: number | string) {
+        if (typeof cardNum === "string") return cardNum + " / XXX";
+
+        return cardNum + " / 100";
+    }
 
     return (
         <div className='card' style={getCardStyle() } onClick={handleClick}>
@@ -136,7 +141,7 @@ export function Card(props: CardProps) {
 
                 <p className='damage' style = {{"fontSize": GetDamageFontSize(scale)}}>{props.damage}</p>
 
-                <p className='num' style = {{"fontSize": GetCardNumFontSize(scale)}}>{props.cardNum} / 143</p>
+                <p className='num' style = {{"fontSize": GetCardNumFontSize(scale)}}>{GetCardNum(props.cardNum)}</p>
             </div>
 
             <div className='card-back' style={getFlipBackSideTransform()}>

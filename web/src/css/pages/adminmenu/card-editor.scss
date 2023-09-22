@@ -9,9 +9,9 @@
 
     .input {
         position: absolute;
-
+        background-color: red;
     
-        width: 30vh;
+        width: 70vh;
         height: 80vh;
         
         top: 0;
@@ -146,12 +146,11 @@
 
         position: absolute;
         right: 1vh;
-        top: 0vh;
+        top: 50%;
+        transform: translateY(-50%);
 
-        
-
-        width: 60vh;
-        height: 82vh;
+        width: 50vh;
+        height: 70vh;
 
         .scale {
             position: absolute;

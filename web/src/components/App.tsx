@@ -8,7 +8,7 @@ import { OpenPackMenu } from "./packageopener/op-menu";
 
 
 const App: React.FC = () => {
-    const [showType, setShowType] = useState<string>("openpack")
+    const [showType, setShowType] = useState<string>("admin")
 
     //NUI Hooks
     useNuiEvent<any>('setTranslations', (data) => { 

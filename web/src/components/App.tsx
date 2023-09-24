@@ -5,6 +5,7 @@ import { useNuiEvent } from "../hooks/useNuiEvent";
 import { _T, setTranslations } from "../utils/translation";
 import { AdminMenu } from "./adminmenu/admin-menu";
 import { OpenPackMenu } from "./packageopener/op-menu";
+import { Folder } from './folder/folder-menu';
 
 
 const App: React.FC = () => {
@@ -49,7 +50,7 @@ const App: React.FC = () => {
         content = <OpenPackMenu cardAmount={5} />
 
     } else if (showType === "folder") {
-
+        content = <Folder />
     }
     return (
         <div className="App">

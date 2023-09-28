@@ -1,3 +1,4 @@
+local CLIENT_UTILS, SHARED_UTILS = exports['nagodo-utils']:GetUtils('client')
 --Events--
 RegisterNetEvent("nagodo-collections:openAdminMenu", function()
     OpenCollectionsAdminMenu()
@@ -19,16 +20,18 @@ end
 --NUI Callbacks--
 RegisterNUICallback('createNewCollection', function(data, cb)
     local name = data.name
+    
+    print(name)
 
-    local result = TriggerCallbackSync('nagodo-collections:server:createNewCollection', name)
+    local result = CLIENT_UTILS.TriggerCallbackSync('nagodo-collections:server:createNewCollection', name)
 
     cb(result)
 end)
 
-RegisterNUICallback('getAdminCollections', function(data, cb)
+RegisterNUICallback('fetchAllCollections', function(data, cb)
     local name = data.name
 
-    local collections = TriggerCallbackSync('nagodo-collections:fetchCollections', name)
+    local collections = CLIENT_UTILS.TriggerCallbackSync('nagodo-collections:fetchCollections', name)
 
     cb(collections)
 end)

@@ -3,19 +3,16 @@ game 'gta5'
 
 shared_scripts {
 	'shared/config.lua',
-	'shared/locale.lua',
-	'shared/utils.lua',
+	'shared/locale.lua'
 
 }
 
 server_scripts {
-	'server/callback.lua',
 	'server/database.lua',
 	'server/main.lua',
 }
 
 client_scripts {
-	'client/callback.lua',
 	'client/main.lua',
 }
 
@@ -27,6 +24,10 @@ files {
 	'web/images/*',
 	'web/build/index.html',
 	'web/build/**/*'
+}
+
+dependencies {
+	'nagodo-utils',
 }
 
 lua54 'yes'

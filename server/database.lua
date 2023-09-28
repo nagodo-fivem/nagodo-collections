@@ -1,3 +1,5 @@
+local _, SHARED_UTILS = exports['nagodo-utils']:GetUtils('server')
+
 function Database()
     local self = {}
     self.isReady = false
@@ -30,7 +32,7 @@ function Database()
         self.isReady = true
     end
 
-    self.GetCollections = function()
+    self.FetchCollections = function()
         if not self.isReady then
             return
         end
@@ -51,7 +53,7 @@ function Database()
         return collections
     end
 
-    self.DoesCollectionExist = function(name)
+    self.DoesCollectionWithNameExist = function(name)
         if not self.isReady then
             return
         end
@@ -66,8 +68,28 @@ function Database()
             return
         end
 
-        exports.oxmysql:executeSync('INSERT INTO nagodo_collections (label) VALUES (?)', {name})
+        local uid = self.GenerateCollectionUID()
+        print(uid)
+
+        exports.oxmysql:executeSync('INSERT INTO nagodo_collections (uid, label) VALUES (?, ?)', {uid, name})
+    end
+
+    self.GenerateCollectionUID = function()
+        local randInt = SHARED_UTILS.RandomInt(4)
+        local randStr = SHARED_UTILS.RandomStr(4)
+
+        local uid = randInt .. randStr
+
+        local result = exports.oxmysql:executeSync('SELECT * FROM nagodo_collections WHERE uid = ?', {uid})
+
+        if next(result) then
+            return self.GenerateCollectionUID()
+        end
+
+        return uid
     end
 
     return self
 end
+
+

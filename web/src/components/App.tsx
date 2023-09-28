@@ -9,7 +9,7 @@ import { Folder } from './folder/folder-menu';
 
 
 const App: React.FC = () => {
-    const [showType, setShowType] = useState<string>("admin")
+    const [showType, setShowType] = useState<string>("")
 
     //NUI Hooks
     useNuiEvent<any>('setTranslations', (data) => { 
@@ -34,6 +34,8 @@ const App: React.FC = () => {
         );
 
     }
+
+    if (showType === "") return null;
     
 
     window.addEventListener("keydown", keyHandler)

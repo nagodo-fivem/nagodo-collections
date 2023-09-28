@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { fetchNui } from "../../../utils/fetchNui";
 import { ManageCollection } from './manage-collection';
 import { AddNewCollection } from './add-new-collection';
@@ -48,38 +48,44 @@ function CollectionItem(props: {name: string, pressable?: boolean, setManageColl
 }
 
 export function AllCollections() {
-    const [allCollections, setAllCollections]          = useState<Collection[]> ([{name: "Test", id: 1}])
-    const [allCollectionsNames, setAllCollectionNames] = useState<string[]>     (["din mor"])
-    const [addingNewCollection, setAddingNewCollection] = useState<boolean>     (false)
-    const [manageCollection, setManageCollection]       = useState<boolean>     (false)
-
-    let collections_loaded: boolean = true;
+    const [allCollections, setAllCollections]          = useState<Collection[]>([])
+    const [allCollectionsNames, setAllCollectionNames] = useState<string[]>([])
+    const [addingNewCollection, setAddingNewCollection] = useState<boolean>(false)
+    const [manageCollection, setManageCollection]       = useState<boolean>(false)
+    const [collections_loaded, setCollectionsLoaded]   = useState<boolean>(false)
     
-    async function getAllCollections() {
-        fetchNui<any>('getAllCollections', {}).then(
-            (response) => {
+    async function fetchAllCollections() {
+        fetchNui<any>('fetchAllCollections', {}).then(
+            (response: Collection[]) => {
+                
+                if (response !== null) {
+                    let names = [];
+                    for (let i = 0; i < response.length; i++) {
+                        const element = response[i];
+                        names.push(element.name);
+                    }
+
+                    setAllCollectionNames(names);
+                }
 
                 setAllCollections(response);
+                setCollectionsLoaded(true);
 
-                var names = allCollections.map((collection) => {
-                    return collection.name;
-                })
-    
-                setAllCollectionNames(names);
             }
         );
     }
-        
+
+    useEffect(() => {
+        fetchAllCollections();
+    }, [])
+
     if (!collections_loaded) {
-        getAllCollections();
-        collections_loaded = true;
         return (
             <div className="collections">
                 <CollectionItem name= "Loading..." pressable = {false}/>
             </div>
         )
     }
-
 
     if (addingNewCollection) {
         return (
@@ -106,6 +112,14 @@ export function AllCollections() {
                 }/>
                 <ManageCollection />  
 
+            </div>
+        );
+    }
+
+    if (allCollections === null || allCollections.length === 0) {
+        return (
+            <div className="collections">
+                <NewCollection setAddingNewCollection={setAddingNewCollection}/>
             </div>
         );
     }

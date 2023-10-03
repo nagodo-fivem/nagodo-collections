@@ -21,17 +21,14 @@ end
 RegisterNUICallback('createNewCollection', function(data, cb)
     local name = data.name
     
-    print(name)
-
     local result = CLIENT_UTILS.TriggerCallbackSync('nagodo-collections:server:createNewCollection', name)
 
     cb(result)
 end)
 
 RegisterNUICallback('fetchAllCollections', function(data, cb)
-    local name = data.name
 
-    local collections = CLIENT_UTILS.TriggerCallbackSync('nagodo-collections:fetchCollections', name)
+    local collections = CLIENT_UTILS.TriggerCallbackSync('nagodo-collections:fetchCollections')
 
     cb(collections)
 end)

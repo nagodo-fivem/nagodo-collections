@@ -15,15 +15,11 @@ end, true)
 --Callbacks--
 SERVER_UTILS.CreateCallback('nagodo-collections:fetchCollections', function(source, cb)
     local collections = DATABASE.FetchCollections()
-
     cb(collections)
 end)
 
 SERVER_UTILS.CreateCallback('nagodo-collections:server:createNewCollection', function(source, cb, name)
-    print(name)
     local alreadyExists = DATABASE.DoesCollectionWithNameExist(name)
-
-    print(alreadyExists)
 
     if alreadyExists then
         cb("alreadyExists")

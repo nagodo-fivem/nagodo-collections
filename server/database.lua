@@ -44,12 +44,14 @@ function Database()
             for _, collection in pairs(result) do
                 local collection = {
                     id = collection.id,
+                    uid = collection.uid,
                     name = collection.label
                 }
+                
                 table.insert(collections, collection)
             end
         end
-
+        
         return collections
     end
 

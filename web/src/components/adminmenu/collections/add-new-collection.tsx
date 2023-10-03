@@ -31,8 +31,22 @@ function NewCollectionInput(props: {setNewCollectionName: Function, currentRespo
     )
 }
 
+function ColorInput() {
+    return (
+        <div className='newCollectionInput'>
+            <p className='title'><i className="fa-solid fa-hashtag"></i>Default health color</p>
+        </div>
+    )
+}
 
-export function AddNewCollection(props: {allCollectionsNames: string[]}) {
+
+interface AddNewCollectionProps {
+    allCollectionsNames: string[];
+    setAddingNewCollection: Function;
+    fetchAllCollections: Function;
+}
+
+export function AddNewCollection(props: AddNewCollectionProps) {
     const [currentResponse, setCurrentResponse] = useState<string>("")
 
     let newCollectionName: string = "";
@@ -45,38 +59,43 @@ export function AddNewCollection(props: {allCollectionsNames: string[]}) {
         return newCollectionName;
     }
 
+    function handleAccept() {
+        if (newCollectionName === "") return;
+
+        if (props.allCollectionsNames.includes(newCollectionName)) return;
+
+        fetchNui<any>('createNewCollection', {name: newCollectionName}).then(
+            (response: string) => {
+                props.setAddingNewCollection(false);
+                props.fetchAllCollections();
+            }
+        );
+    }
+
     return (
         <div className='addNewCollection'>
             <NewCollectionInput setNewCollectionName = {setNewCollectionName} currentResponse = {currentResponse} allCollectionNames = {props.allCollectionsNames}/>
-            <NewCollectionAcceptBtn setCurrentResponse={setCurrentResponse} getNewCollectionName={getNewCollectionName} allCollectionNames = {props.allCollectionsNames}/>
+            <ColorInput />
+            <NewCollectionAcceptBtn getNewCollectionName={getNewCollectionName} allCollectionNames = {props.allCollectionsNames} callback = {handleAccept}/>
         </div>
     );
 }
 
 
+interface NewCollectionAcceptBtnProps {
+    getNewCollectionName: Function;
+    allCollectionNames: string[];
+    callback: Function;
+}
 
+function NewCollectionAcceptBtn(props: NewCollectionAcceptBtnProps) {
 
-function NewCollectionAcceptBtn(props: {setCurrentResponse: Function, getNewCollectionName: Function, allCollectionNames: string[]}) {
-
-    function acceptNewCollection() {
-        let newCollectionName: string = props.getNewCollectionName();
-
-        if (props.allCollectionNames != undefined) {
-
-            if (props.allCollectionNames.includes(newCollectionName)) return;
-            
-        };
-
-        fetchNui<string>('createNewCollection', {
-            name: newCollectionName
-        }).then((response) => {
-            props.setCurrentResponse(response);
-            
-        })
+    function handleClick() {
+        props.callback();
     }
 
     return (
-        <div className='newCollectionAccept' onClick={acceptNewCollection}>
+        <div className='newCollectionAccept' onClick={handleClick}>
             <p className='title'>Accept</p>
         </div>
     )

@@ -52,8 +52,8 @@ export function AllCollections() {
     const [allCollectionsNames, setAllCollectionNames] = useState<string[]>([])
     const [addingNewCollection, setAddingNewCollection] = useState<boolean>(false)
     const [manageCollection, setManageCollection]       = useState<boolean>(false)
-    const [collections_loaded, setCollectionsLoaded]   = useState<boolean>(false)
-    
+    const [collections_loaded, setCollectionsLoaded]   = useState<boolean>(true)
+
     async function fetchAllCollections() {
         fetchNui<any>('fetchAllCollections', {}).then(
             (response: Collection[]) => {
@@ -94,7 +94,7 @@ export function AllCollections() {
                     <ReturnBtn event={setAddingNewCollection}/>
                 }/>
                 
-                <AddNewCollection allCollectionsNames={allCollectionsNames} />
+                <AddNewCollection allCollectionsNames={allCollectionsNames} setAddingNewCollection = {setAddingNewCollection} fetchAllCollections = {fetchAllCollections}/>
             </div>
         )
     } 

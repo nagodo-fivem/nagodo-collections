@@ -21,6 +21,18 @@ function Database()
 
         exports.oxmysql:executeSync(
             [[
+                CREATE TABLE IF NOT EXISTS nagodo_collections_properties (
+                    id INT(11) NOT NULL AUTO_INCREMENT,
+                    label VARCHAR(255) NOT NULL,
+                    type TEXT NOT NULL,
+                    data TEXT NOT NULL,
+                    PRIMARY KEY (id)
+                );
+            ]]
+        )
+
+        exports.oxmysql:executeSync(
+            [[
                 CREATE TABLE IF NOT EXISTS nagodo_collections (
                     id INT(11) NOT NULL AUTO_INCREMENT,
                     label VARCHAR(255) NOT NULL,

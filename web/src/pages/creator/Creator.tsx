@@ -3,8 +3,9 @@ import NavBar from '../../components/Navigation/NavBar';
 import './creator.scss';
 import { fetchNui } from '../../utils/fetchNui';
 import CollectionsOverview from './CollectionsOverview';
-import PropertiesOverview from './PropertiesOverview';
-import IProperty from './IProperty';
+import PropertiesOverview from './Properties/PropertiesOverview';
+import IProperty from './Properties/IProperty';
+import { ContextMenu } from './Context/contextMenu';
 
 const Creator = () => {
     const [selectedPage, setSelectedPage] = useState<string>("collections");
@@ -23,20 +24,23 @@ const Creator = () => {
     }
 
     return (
-        <div className='creator'>
-            <NavBar selectedPage = {selectedPage} navigationCallback = {handleNavItemPressed} />
+        <ContextMenu>
+            <div className='creator'>
+                <NavBar selectedPage = {selectedPage} navigationCallback = {handleNavItemPressed} />
 
-            {/* Collections */}
-            {selectedPage === "collections" && (
-                <CollectionsOverview/>
-            )}
+                {/* Collections */}
+                {selectedPage === "collections" && (
+                    <CollectionsOverview/>
+                )}
 
-            {/* Properties */}
-            {selectedPage === "properties" && (
-                <PropertiesOverview properties = {testProperty}/>
-            )}
+                {/* Properties */}
+                {selectedPage === "properties" && (
+                    <PropertiesOverview properties = {testProperty}/>
+                )}
 
-        </div>
+            </div>
+        </ContextMenu>
+        
     )
 }
 
@@ -59,60 +63,60 @@ let testProperty: IProperty[] = [
         identifier: 1,
         type: "frame",
         label: "Normal",
-        image: "Frames/normal"
+        image: "Frames/normal.png"
     },
     {
         identifier: 2,
         type: "frame",
         label: "Gold",
-        image: "Frames/gold"
+        image: "Frames/gold.png"
     },
     {
         identifier: 3,
         type: "frame",
         label: "Shiny",
-        image: "Frames/shiny"
+        image: "Frames/shiny.png"
     },
     {
         identifier: 4,
         type: "frame",
         label: "Black",
-        image: "Frames/black"
+        image: "Frames/black.png"
     },
     {
         identifier: 5,
         type: "element",
         label: "Fire",
-        image: "Elements/FireElement"
+        image: "Elements/FireElement.png"
     },
     {
         identifier: 6,
         type: "element",
         label: "Water",
-        image: "Elements/WaterElement"
+        image: "Elements/WaterElement.png"
     },
     {
         identifier: 7,
         type: "element",
         label: "Ground",
-        image: "Elements/GroundElement"
+        image: "Elements/GroundElement.png"
     },
     {
         identifier: 8,
         type: "element",
         label: "Grass",
-        image: "Elements/GrassElement"
+        image: "Elements/GrassElement.png"
     },
     {
         identifier: 9,
         type: "back",
         label: "Normal",
-        image: "Backs/backOfCard01"
+        image: "Backs/backOfCard01.png"
     },
     {
         identifier: 10,
         type: "image-overlay",
         label: "Holo",
-        image: "Overlays/Holo"
+        image: "Overlays/Holo.png"
     }
 ]

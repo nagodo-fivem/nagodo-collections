@@ -3,22 +3,30 @@ import "./dropdown.scss";
 
 interface DropDownProps {
     title: string;
-    options: string[];
+    options: IOption[];
     onChange: (option: string) => void;
+    currentValue?: string;
 }
 
-const DropDown = ({title, options, onChange}: DropDownProps) => {
-    const [selected, setSelected] = useState<string>("");
+export interface IOption {
+    identifier: string;
+    label: string;
+}
+
+const DropDown = ({title, options, onChange, currentValue}: DropDownProps) => {
+    const [selected, setSelected] = useState<IOption>({identifier: "", label: ""});
     const [open, setOpen] = useState<boolean>(false);
+    const [init, setInit] = useState<boolean>(false);
+    const [lastCurrentValue, setLastCurrentValue] = useState<string>("");
 
     function handleClick() {
         setOpen(!open);
     }
 
-    function handleOptionClick(option: string) {
+    function handleOptionClick(option: IOption) {
         setSelected(option);
         setOpen(false);
-        onChange(option);
+        onChange(option.identifier);
     }
 
     function Content({show}: {show: boolean}) {
@@ -36,9 +44,20 @@ const DropDown = ({title, options, onChange}: DropDownProps) => {
 
     function CurrentSelection() {
 
+        if (currentValue && currentValue !== lastCurrentValue) {
+            setInit(false);
+        }
+
+        if (currentValue && !init) {
+            setLastCurrentValue(currentValue);
+            let selected = options.find(option => option.identifier.toLowerCase() === currentValue.toLowerCase());
+            setSelected(selected ? selected : {identifier: "", label: ""});
+            setInit(true);
+        }
+
         return (
             <div className="currentselection" >
-                {selected ? selected : "Select"}
+                {selected.identifier !== "" ? selected.label : "Select"}
             </div>
         )
     }
@@ -60,16 +79,16 @@ const DropDown = ({title, options, onChange}: DropDownProps) => {
 }
 
 interface OptionProps {
-    option: string;
-    currentSelection: string; 
-    callback: (option: string) => void;
+    option: IOption;
+    currentSelection: IOption; 
+    callback: (option: IOption) => void;
 }
 
 function Option({option, currentSelection, callback}: OptionProps) {
     return (
         <div className="option" onClick={() => {callback(option)}}>
-            <div className={"label" + (currentSelection.toLowerCase() === option.toLowerCase() ? " selected" : "")}>
-                {option}
+            <div className={"label" + (currentSelection.identifier.toLowerCase() === option.identifier.toLowerCase() ? " selected" : "")}>
+                {option.label}
             </div>
         </div>
     )

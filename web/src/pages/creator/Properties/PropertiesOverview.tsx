@@ -1,14 +1,18 @@
 import { useState } from "react";
-import { getImagePath } from "../../helpers/ItemImagePath";
-import DropDown from "../../components/Dropdown/Dropdown";
-import Input from "../../components/Input/Input";
+import { getImagePath } from "../../../helpers/ItemImagePath";
+import DropDown, { IOption } from "../../../components/Dropdown/Dropdown";
+import Input from "../../../components/Input/Input";
 import  IProperty from "./IProperty";
+import NewProperty from "./NewProperty";
+import SelectedProperty from "./SelectedProperty";
 
 interface PropertiesOverviewProps {
     properties: IProperty[];
 }
 
 let emptyProperty: IProperty = {identifier: 0, type: "", label: "", image: ""};
+let currentSelectedProperty: IProperty = {identifier: 0, type: "", label: "", image: ""};
+export const TypeDropdownOptions: IOption[] = [{identifier: "frame", label: "Frame"}, {identifier: "element", label: "Element"}, {identifier: "image-overlay", label: "Overlay"}, {identifier: "back", label: "Back"}];
 
 const PropertiesOverview = ({properties}: PropertiesOverviewProps) => {
     const [addingProperty, setAddingProperty] = useState(false);
@@ -31,6 +35,11 @@ const PropertiesOverview = ({properties}: PropertiesOverviewProps) => {
         setEditingProperty(true);
         console.log(property);
         setSelectedProperty(property);
+        currentSelectedProperty = property;
+    }
+
+    function handlePropertyChange(property: IProperty) {
+        currentSelectedProperty = property;
     }
 
     function getFrameProperties() {
@@ -63,7 +72,7 @@ const PropertiesOverview = ({properties}: PropertiesOverviewProps) => {
             <div className="actions">
 
                 <NewProperty show = {addingProperty} cancelBtnCallback = {handleCancelClick}/>
-                <SelectedProperty show = {editingProperty} cancelBtnCallback = {handleCancelClick} selectedProperty={selectedProperty}/>
+                <SelectedProperty show = {editingProperty} cancelBtnCallback = {handleCancelClick} selectedProperty={currentSelectedProperty} changeCallback = {handlePropertyChange}/>
 
                 <Action type = {"button"} label = "New property" onClick = {handleNewPropertyBtn}/>
                 
@@ -155,89 +164,5 @@ const Action = ({type, label, onClick}: ActionProps) => {
     )
 }
 
-interface SelectedPropertyProps{
-    show: boolean;
-    cancelBtnCallback: () => void;
-    selectedProperty: IProperty;
-}
-
-const SelectedProperty = ({show, cancelBtnCallback, selectedProperty}: SelectedPropertyProps) => {
-    
-    if (!show) return null;
-    return (
-        null
-    )
-}
-
-interface NewPropertyProps {
-    show: boolean;
-    cancelBtnCallback: () => void;
-}
-
-const NewProperty = ({show, cancelBtnCallback} : NewPropertyProps) => {
-    const [type, setType] = useState("frame");
-    const [identifier, setIdentifier] = useState("");
-    const [label, setLabel] = useState("");
-    const [image, setImage] = useState(getImagePath(""));
-
-    function handleImageChange(path: string) {
-        if (path.match('http')) {
-            setImage(path);
-        } else {
-            setImage(getImagePath(path));
-        }
-    }
-
-    function handleCancelClick() {
-        setType("frame");
-        setLabel("");
-        setImage(getImagePath(""));
-        cancelBtnCallback();
-    }
-
-    if (!show) return null;
-
-    return (
-        <div className="newproperty">
-            <div className="element">
-                <DropDown title = "Type" options = {["Frame", "Element" ,"Overlay","Back" ]} onChange={setType}/>
-            </div>
-            <div className="element">
-                <Input title = "Label" onChange={setLabel} />
-            </div>
-            <div className="element">
-                <Input title = "Image" placeholder="Link or path" onChange={handleImageChange} />
-            </div>
-            <div className="element">
-                <div className="preview">
-
-                    {image === "" && (
-                        <div className="noimage">
-                            No image found
-                        </div>
-                    
-                    )}
-                    {image != "" && (
-
-                        <img src={image} alt=""></img>
-                    )}
-                </div>
-            </div>
-
-            <div className="buttons">
-                <div className="btn cancel" onClick={handleCancelClick}>
-                    <div className="text">
-                        Cancel
-                    </div>
-                </div>
-                <div className="btn save">
-                    <div className="text">
-                        Save
-                    </div>
-                </div>
-            </div>
-        </div>
-    )
-}
 
 export default PropertiesOverview;

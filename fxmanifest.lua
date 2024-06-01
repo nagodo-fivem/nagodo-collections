@@ -9,10 +9,12 @@ shared_scripts {
 
 server_scripts {
 	'server/database.lua',
+	'server/editable_server.lua',
 	'server/main.lua',
 }
 
 client_scripts {
+	'client/editable_client.lua',
 	'client/main.lua',
 }
 
@@ -21,7 +23,7 @@ client_scripts {
 ui_page 'web/build/index.html'
 
 files {
-	'web/images/*',
+	'web/public/images/**/*',
 	'web/build/index.html',
 	'web/build/**/*'
 }

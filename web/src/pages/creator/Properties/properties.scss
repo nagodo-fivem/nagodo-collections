@@ -143,6 +143,8 @@
                  
                     line-height: 3vh;
 
+                    font-size: 1.6vh;
+
                     top: 50%;
                     left: 1vh;
 
@@ -266,18 +268,24 @@
                     }
 
                     &.save {
-                        background-color: var(--ring);
-                       
+                        background-color: #218838;
+                        &:hover {
+                            background-color: #28a745;
+                        }
                     }
 
                     &.cancel {
-                        background-color: var(--destructive);
-                        
+                        background-color: #5a6268;
+                        &:hover {
+                            background-color: #6c757d;
+                        }
                     }
 
                     &.delete {
-                        background-color: rgb(179, 0, 0);
-                        
+                        background-color: #c82333;
+                        &:hover {
+                            background-color: #dc3545;
+                        }
                     }
 
                     &.small {

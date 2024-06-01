@@ -8,5 +8,5 @@ export function getImagePath(name: string) {
         return '/images/' + name;
     }
 
-    return 'nui://xx-inventory/web/public/images/' + name;
+    return 'nui://nagodo-collections/web/public/images/' + name;
 }

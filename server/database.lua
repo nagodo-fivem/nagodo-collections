@@ -1,5 +1,3 @@
-local _, SHARED_UTILS = exports['nagodo-utils']:GetUtils('server')
-
 function Database()
     local self = {}
     self.isReady = false
@@ -44,66 +42,62 @@ function Database()
         self.isReady = true
     end
 
-    self.FetchCollections = function()
-        if not self.isReady then
-            return
-        end
+    self.CreateCollection = function(collection)
+        local result = exports.oxmysql:executeSync('INSERT INTO nagodo_collections (label) VALUES (?) ', {collection.label})   
 
+        return result
+    end
+
+    self.GetAllCollections = function()
         local result = exports.oxmysql:executeSync('SELECT * FROM nagodo_collections')
 
         local collections = {}
+
         if next(result) then
-            for _, collection in pairs(result) do
-                local collection = {
-                    id = collection.id,
-                    uid = collection.uid,
-                    name = collection.label
-                }
-                
-                table.insert(collections, collection)
+            for k, v in pairs(result) do
+                table.insert(collections, {
+                    identifier = v.id,
+                    label = v.label
+                })
             end
         end
-        
+
         return collections
     end
 
-    self.DoesCollectionWithNameExist = function(name)
-        if not self.isReady then
-            return
-        end
+    self.CreateProperty = function(property)
+       
+        local data = {
+            image = property.image
+        }
 
-        local result = exports.oxmysql:executeSync('SELECT * FROM nagodo_collections WHERE label = ?', {name})
-
-        return result[1] ~= nil
+        local result = exports.oxmysql:executeSync('INSERT INTO nagodo_collections_properties (label, type, data) VALUES (?, ?, ?) ', {property.label, property.type, json.encode(data)})   
+    
+        return result
     end
 
-    self.CreateCollection = function(name)
-        if not self.isReady then
-            return
-        end
+    self.GetAllProperties = function()
+        local result = exports.oxmysql:executeSync('SELECT * FROM nagodo_collections_properties')
 
-        local uid = self.GenerateCollectionUID()
-        print(uid)
-
-        exports.oxmysql:executeSync('INSERT INTO nagodo_collections (uid, label) VALUES (?, ?)', {uid, name})
-    end
-
-    self.GenerateCollectionUID = function()
-        local randInt = SHARED_UTILS.RandomInt(4)
-        local randStr = SHARED_UTILS.RandomStr(4)
-
-        local uid = randInt .. randStr
-
-        local result = exports.oxmysql:executeSync('SELECT * FROM nagodo_collections WHERE uid = ?', {uid})
+        local properties = {}
 
         if next(result) then
-            return self.GenerateCollectionUID()
+            for k, v in pairs(result) do
+                local data = json.decode(v.data)
+                table.insert(properties, {
+                    identifier = v.id,
+                    label = v.label,
+                    type = v.type,
+                    image = data.image
+                })
+            end
         end
 
-        return uid
+        return properties
     end
 
     return self
 end
+
 
 

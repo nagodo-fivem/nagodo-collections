@@ -1,0 +1,641 @@
+.collections {
+    position: absolute;
+
+    width: 98%;
+    height: 70vh;
+
+    bottom: 2vh;
+    left: 50%;
+    transform: translateX(-50%);
+
+    .overview {
+        position: absolute;
+        width: 86vh;
+        height: 100%;
+      
+
+        padding-top: 1vh;
+        padding-left: 0.5vh;
+
+        border: 0.3vh solid var(--border);
+        border-radius: var(--radius);
+
+        .scroll {
+            position: absolute;
+
+            width: 98.8%;
+            height: 97%;
+
+            overflow: auto;
+            
+            .element {
+                position: relative;
+                border-radius: var(--radius);
+                border: 0.2vh solid var(--border);
+
+                margin-left: 0.5vh;
+                margin-right: 0.5vh;
+                margin-bottom: 1.2vh;
+
+                width: 19.9vh;
+                height: 20vh;
+                
+                float: left; 
+
+                .label {
+                    position: absolute;
+
+                    top: 1vh;
+
+                    font-size: 1.7vh;
+
+                    text-align: center;
+                    width: 100%;
+
+                    color: var(--foreground);
+                }
+
+                &:hover {
+                    cursor: pointer;
+                    background-color: var(--hover);
+                }
+        
+            }
+        }
+        
+        
+        
+    }
+
+    .actions {
+        position: absolute;
+
+        width: 30vh;
+        height: 70vh;
+
+        right: 0vh;
+        top: 0vh;
+
+        .newcollection {
+            position: relative;
+            border-radius: var(--radius);
+            border: 0.3vh solid var(--border);
+
+            margin-bottom: 1vh;
+
+            width: 100%;
+            height: 18vh;
+
+            .element {
+                position: relative;
+
+                margin-top: 1vh;
+                margin-left: 1vh;
+
+                height: 7.5vh;
+                width: 28vh;
+
+                .preview {
+                    position: absolute;
+                    
+                    width: 100%;
+                    height: 25vh;  
+                    
+                    border-radius: var(--radius);
+                    border: 0.2vh solid var(--border);
+
+                    img {
+                        position: absolute;
+                        max-width: 20vh;
+                        max-height: 20vh;
+
+                        top: 50%;
+                        left: 50%;
+
+                        transform: translate(-50%, -50%);
+                    }       
+                    
+                    .noimage {
+                        position: absolute;
+                    
+                        font-size: 2.5vh;
+
+                        width: 100%;
+                        text-align: center;
+
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+
+                        line-height: 3vh;
+
+                        color: var(--foreground);
+                    
+                    }
+                }
+            }
+
+            .buttons {
+                position: absolute;
+                
+                bottom: 1vh;
+               
+                width: auto;
+                height: 4vh;
+                left: 50%;
+                transform: translateX(-50%);
+
+                display: flex;
+
+                .btn {
+
+                    position: relative;
+
+                    height: 100%;
+                    width: 10vh;
+
+                    float: left;
+
+                    margin-left: 0.5vh;
+                    margin-right: 0.5vh;
+
+                    border-radius: var(--radius);
+                    font-weight: 400;
+                    
+                    .text {
+                        position: absolute;
+                    
+                        font-size: 1.7vh;
+                        line-height: 1.7vh;
+                        
+                        text-align: center;
+                        
+                        height: 2vh;
+                        width: 100%;   
+                        
+                        top: 50%;
+                        transform: translateY(-50%);
+
+                        color: var(--foreground);
+                    
+                    }
+
+                    &.save {
+                        background-color: var(--ring);
+                       
+                    }
+
+                    &.cancel {
+                        background-color: var(--destructive);
+                        
+                    }
+
+                    &.delete {
+                        background-color: rgb(179, 0, 0);
+                        
+                    }
+
+                    &.small {
+                        width: 8.5vh;
+                    }
+
+                    &:hover {
+                        cursor: pointer;
+                    }
+
+                }
+            }
+        }
+
+        .editingcollection {
+            position: relative;
+            border-radius: var(--radius);
+            border: 0.3vh solid var(--border);
+
+            margin-bottom: 1vh;
+
+            width: 100%;
+            height: 40vh;
+
+            .element {
+                position: relative;
+
+                margin-top: 1vh;
+                margin-left: 1vh;
+
+                height: 7.5vh;
+                width: 28vh;
+
+                .title {
+                    position: relative;
+                    margin-left: 0.4vh;
+                    font-size: 1.7vh;
+                    color: var(--foreground);
+                }
+
+                .button {
+                    width: 100%;
+                    height: 4.5vh;
+
+                    position: relative;
+
+                    margin-top: 0.8vh;
+
+                    background-color: black;
+
+                    height: 4.5vh;
+                    width: 100%;
+
+                    border-radius: var(--radius);
+                    border: 0.2vh solid var(--border);
+
+                    .label {
+                        position: absolute;
+                    
+                        font-size: 1.7vh;
+                        line-height: 1.7vh;
+
+                        padding-left: 1vh;
+                        
+                        text-align: left;
+                        
+                        height: 2vh;
+                        width: 100%;   
+                        
+                        top: 50%;
+                        transform: translateY(-50%);
+
+                        color: var(--foreground);
+
+                        i {
+                            padding-right: 0.5vh;
+                        }
+                    }
+
+                    &:hover {
+                        cursor: pointer;
+                        background-color: var(--hover);
+                    }
+                }
+
+            }
+
+            .buttons {
+                position: absolute;
+                
+                bottom: 1vh;
+               
+                width: auto;
+                height: 4vh;
+                left: 50%;
+                transform: translateX(-50%);
+
+                display: flex;
+
+                .btn {
+
+                    position: relative;
+
+                    height: 100%;
+                    width: 10vh;
+
+                    float: left;
+
+                    margin-left: 0.5vh;
+                    margin-right: 0.5vh;
+
+                    border-radius: var(--radius);
+                    font-weight: 400;
+                    
+                    .text {
+                        position: absolute;
+                    
+                        font-size: 1.7vh;
+                        line-height: 1.7vh;
+                        
+                        text-align: center;
+                        
+                        height: 2vh;
+                        width: 100%;   
+                        
+                        top: 50%;
+                        transform: translateY(-50%);
+
+                        color: var(--foreground);
+                    
+                    }
+
+                    &.save {
+                        background-color: #218838;
+                        &:hover {
+                            background-color: #28a745;
+                        }
+                    }
+
+                    &.cancel {
+                        background-color: #5a6268;
+                        &:hover {
+                            background-color: #6c757d;
+                        }
+                    }
+
+                    &.delete {
+                        background-color: #c82333;
+                        &:hover {
+                            background-color: #dc3545;
+                        }
+                    }
+
+                    &.small {
+                        width: 8.5vh;
+                    }
+
+                    &:hover {
+                        cursor: pointer;
+                    }
+
+                }
+            }
+        }
+    }
+
+    .collectioncardeditor {
+
+        .overview {
+            position: absolute;
+            width: 85vh;
+            height: 100%;
+
+            padding-top: 1vh;
+            padding-left: 0.5vh;
+
+            border: 0.3vh solid var(--border);
+            border-radius: var(--radius);
+
+            .cards {
+
+                width: 99%;
+                height: 100%;
+
+                overflow: auto;
+
+                .card-wrapper {
+                    position: relative;
+                    display: inline-block;
+                    width: auto;
+                    height: auto;
+                }
+            }
+
+            .selectingProperty {
+                position: absolute;
+                top: 1vh;
+                right: 1vh;
+
+                width: 40vh;
+
+                height: 69vh;
+
+                overflow: auto;
+
+                .property {
+                    color: var(--foreground);
+
+                    position: relative;
+
+                    border: 0.3vh solid var(--border);
+                    border-radius: var(--radius);
+
+                    margin: 0.5vh;
+
+                    width: 18vh;
+                    height: 23vh;
+
+                    float: left;
+
+                    &:hover {
+                        cursor: pointer;
+                        background-color: var(--hover);
+                    }
+
+                    .image {
+                       
+                        width: 18vh;
+                        height: 18vh;
+                        
+
+                        img {
+                            position: absolute;
+    
+                            top: 1vh;
+                            left: 50%;
+    
+                            transform: translateX(-50%);
+    
+                            width: auto;
+                            height: auto;
+                            max-width: 18vh;
+                            max-height: 18vh;
+                        }
+                    }
+
+                    .label {
+                        position: absolute;
+                        bottom: 1vh;
+                        width: 100%;
+                        text-align: center;
+                        font-size: 1.7vh;
+                    }
+
+                    
+                }
+            }
+
+            .editor {
+                width: 100%;
+                height: 100%;
+
+                .preview {
+                    position: absolute;
+
+                    left: 0.5vh;
+                    top: 50%;
+
+                    transform: translate(0%, -50%);
+    
+                    width: 42vh;
+                    height: auto;
+
+                }
+            }
+        }
+
+        
+
+        .actions {
+            position: absolute;
+
+            width: 31vh;
+            height: 64vh;
+
+
+            overflow-y: auto;
+            overflow-x: hidden;
+
+            right: 0vh;
+            top: 0vh;
+
+            .selectedcardproperty {
+                position: relative;
+                border-radius: var(--radius);
+                border: 0.3vh solid var(--border);
+
+                margin-bottom: 1vh;
+
+                width: 100%;
+                height: 81vh;
+
+                .element {
+                    position: relative;
+
+                    margin-top: 1vh;
+                    margin-left: 1vh;
+
+                    height: 7.5vh;
+                    width: 28vh;
+
+                    .title {
+                        position: relative;
+                        margin-left: 0.4vh;
+                        font-size: 1.7vh;
+                        color: var(--foreground);
+                    }
+    
+                    .button {
+                        width: 100%;
+                        height: 4.5vh;
+    
+                        position: relative;
+    
+                        margin-top: 0.8vh;
+    
+                        background-color: black;
+    
+                        height: 4.5vh;
+                        width: 100%;
+    
+                        border-radius: var(--radius);
+                        border: 0.2vh solid var(--border);
+    
+                        .label {
+                            position: absolute;
+                        
+                            font-size: 1.7vh;
+                            line-height: 1.7vh;
+    
+                            padding-left: 1vh;
+                            
+                            text-align: left;
+                            
+                            height: 2vh;
+                            width: 100%;   
+                            
+                            top: 50%;
+                            transform: translateY(-50%);
+    
+                            color: var(--foreground);
+    
+                            i {
+                                padding-right: 0.5vh;
+                            }
+                        }
+    
+                        &:hover {
+                            cursor: pointer;
+                            background-color: var(--hover);
+                        }
+                    }
+                }
+            }
+
+
+            
+        }
+
+        .btns {
+            position: absolute;
+
+            width: 30vh;
+            height: 4vh;
+
+            right: 0vh;
+            bottom: 0vh;
+
+            .btn {
+
+                position: relative;
+
+                height: 100%;
+                width: 10vh;
+
+                float: left;
+
+                margin-left: 0.5vh;
+                margin-right: 0.5vh;
+
+                border-radius: var(--radius);
+                font-weight: 400;
+                
+                .text {
+                    position: absolute;
+                
+                    font-size: 1.7vh;
+                    line-height: 1.7vh;
+                    
+                    text-align: center;
+                    
+                    height: 2vh;
+                    width: 100%;   
+                    
+                    top: 50%;
+                    transform: translateY(-50%);
+
+                    color: var(--foreground);
+                
+                }
+
+                &.save {
+                    background-color: #218838;
+                    &:hover {
+                        background-color: #28a745;
+                    }
+                }
+
+                &.cancel {
+                    background-color: #5a6268;
+                    &:hover {
+                        background-color: #6c757d;
+                    }
+                }
+
+                &.delete {
+                    background-color: #c82333;
+                    &:hover {
+                        background-color: #dc3545;
+                    }
+                }
+
+                &.small {
+                    width: 8.5vh;
+                }
+
+                &:hover {
+                    cursor: pointer;
+                }
+
+            }
+        }
+
+        
+    }
+}

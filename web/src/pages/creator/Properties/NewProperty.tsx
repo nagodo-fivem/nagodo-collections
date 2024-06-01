@@ -3,31 +3,39 @@ import { getImagePath } from "../../../helpers/ItemImagePath";
 import DropDown from "../../../components/Dropdown/Dropdown";
 import Input from "../../../components/Input/Input";
 import { TypeDropdownOptions } from "./PropertiesOverview";
+import { fetchNui } from "../../../utils/fetchNui";
 
 interface NewPropertyProps {
     show: boolean;
     cancelBtnCallback: () => void;
+    handleNewPropertyCreated: () => void;
 }
 
-const NewProperty = ({show, cancelBtnCallback} : NewPropertyProps) => {
+const NewProperty = ({show, cancelBtnCallback, handleNewPropertyCreated} : NewPropertyProps) => {
     const [type, setType] = useState("frame");
     const [identifier, setIdentifier] = useState("");
     const [label, setLabel] = useState("");
-    const [image, setImage] = useState(getImagePath(""));
+    const [image, setImage] = useState("");
 
     function handleImageChange(path: string) {
-        if (path.match('http')) {
-            setImage(path);
-        } else {
-            setImage(getImagePath(path));
-        }
+        setImage(path);
     }
 
     function handleCancelClick() {
         setType("frame");
         setLabel("");
-        setImage(getImagePath(""));
+        setImage("");
         cancelBtnCallback();
+    }
+
+    function handleCreatePropertyClick() {
+        fetchNui<any>("createProperty", {
+            type: type,
+            label: label,
+            image: image
+        }).then((response) => {
+            handleNewPropertyCreated();
+        });
     }
 
     if (!show) return null;
@@ -54,7 +62,7 @@ const NewProperty = ({show, cancelBtnCallback} : NewPropertyProps) => {
                     )}
                     {image != "" && (
 
-                        <img src={image} alt=""></img>
+                        <img src={getImagePath(image)} alt=""></img>
                     )}
                 </div>
             </div>
@@ -65,7 +73,7 @@ const NewProperty = ({show, cancelBtnCallback} : NewPropertyProps) => {
                         Cancel
                     </div>
                 </div>
-                <div className="btn save">
+                <div className="btn save" onClick={handleCreatePropertyClick}>
                     <div className="text">
                         Create
                     </div>

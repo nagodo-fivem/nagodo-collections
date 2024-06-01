@@ -6,9 +6,10 @@ interface InputProps {
     placeholder?: string;
     onChange: (value: string) => void;
     startValue?: string;
+    onlyNumbers?: boolean;
 }
 
-const Input = ({title, placeholder, onChange, startValue}: InputProps) => {
+const Input = ({title, placeholder, onChange, startValue, onlyNumbers = false}: InputProps) => {
     const [currentValue, setCurrentValue] = useState<string>("");
     const [init, setInit] = useState<boolean>(false);
     const [lastCurrentValue, setLastCurrentValue] = useState<string>("");
@@ -38,7 +39,7 @@ const Input = ({title, placeholder, onChange, startValue}: InputProps) => {
                 {title}
             </div>
             <div className="wrapper">
-                <input className="input" value={getValue()} onChange={handleChange} type="text" placeholder={placeholder ? placeholder : "Enter..."}/>
+                <input className="input" type={onlyNumbers ?  "number" : "text"} value={getValue()} onChange={handleChange} placeholder={placeholder ? placeholder : "Enter..."}/>
             </div>
             
             

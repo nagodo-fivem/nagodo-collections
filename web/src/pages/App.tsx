@@ -14,8 +14,8 @@ const App: React.FC = () => {
         setTranslations(JSON.parse(data));
     })
 
-    useNuiEvent<any>('setShowType', (type) => {
-        setShowType(type);
+    useNuiEvent<any>('setShowType', (data) => {
+        setShowType(data.type);
     })
 
     const keyHandler = (e: KeyboardEvent) => {

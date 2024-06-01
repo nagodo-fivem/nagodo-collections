@@ -12,10 +12,10 @@ interface ContextMenuProps {
 }
 
 export const ContextMenu = (props: ContextMenuProps) => {
-    const [visible, setVisible] = useState(true);
+    const [visible, setVisible] = useState(false);
     const [type, setType] = useState<string>("delete-property");
 
-    function openContextMenu() {
+    function openDeletePropertyContextMenu() {
 
         setVisible(true);
     }
@@ -24,10 +24,14 @@ export const ContextMenu = (props: ContextMenuProps) => {
         setVisible(false);
     }
 
+    function handleConfirmClick() {
+        
+    }
+
     return (
-        <ContextMenuProvider value = {{openContextMenu: openContextMenu}}>
+        <ContextMenuProvider value = {{openDeletePropertyContextMenu: openDeletePropertyContextMenu}}>
             {props.children}
-            <Context visible = {visible} type={type} cancelClick={handleCancelClick}/>
+            <Context visible = {visible} type={type} cancelClick={handleCancelClick} confirmClick = {handleConfirmClick}/>
         </ContextMenuProvider>
     )
 }
@@ -37,12 +41,13 @@ interface ContextProps {
     visible: boolean;
     type: string;
     cancelClick: () => void;
+    confirmClick: () => void;
 }
 
 
-const Context = ({visible, type, cancelClick}: ContextProps) => {
+const Context = ({visible, type, cancelClick, confirmClick}: ContextProps) => {
 
-if (!visible) return null;
+    if (!visible) return null;
 
     return (
         <div className="contextmenu">
@@ -58,7 +63,7 @@ if (!visible) return null;
                             </div>
                         </div>
 
-                        <div className="btn save"> 
+                        <div className="btn save" onClick={confirmClick}> 
                             <div className="text">
                                 Confirm
                             </div>

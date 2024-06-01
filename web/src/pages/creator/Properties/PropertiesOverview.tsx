@@ -2,9 +2,10 @@ import { useState } from "react";
 import { getImagePath } from "../../../helpers/ItemImagePath";
 import DropDown, { IOption } from "../../../components/Dropdown/Dropdown";
 import Input from "../../../components/Input/Input";
-import  IProperty from "./IProperty";
 import NewProperty from "./NewProperty";
 import SelectedProperty from "./SelectedProperty";
+import IProperty from "./IProperty";
+import Action from "../Action/Action";
 
 interface PropertiesOverviewProps {
     properties: IProperty[];
@@ -24,6 +25,10 @@ const PropertiesOverview = ({properties}: PropertiesOverviewProps) => {
         setEditingProperty(false);
     }
 
+    function handleNewPropertyCreated() {
+        setAddingProperty(false);
+    }
+
     function handleCancelClick() {
         setAddingProperty(false);
         setEditingProperty(false);
@@ -33,7 +38,6 @@ const PropertiesOverview = ({properties}: PropertiesOverviewProps) => {
     function handlePropertyClick(property: IProperty) {
         setAddingProperty(false);
         setEditingProperty(true);
-        console.log(property);
         setSelectedProperty(property);
         currentSelectedProperty = property;
     }
@@ -71,10 +75,10 @@ const PropertiesOverview = ({properties}: PropertiesOverviewProps) => {
             </div>
             <div className="actions">
 
-                <NewProperty show = {addingProperty} cancelBtnCallback = {handleCancelClick}/>
+                <NewProperty show = {addingProperty} cancelBtnCallback = {handleCancelClick} handleNewPropertyCreated = {handleNewPropertyCreated}/>
                 <SelectedProperty show = {editingProperty} cancelBtnCallback = {handleCancelClick} selectedProperty={currentSelectedProperty} changeCallback = {handlePropertyChange}/>
 
-                <Action type = {"button"} label = "New property" onClick = {handleNewPropertyBtn}/>
+                <Action label = "New property" onClick = {handleNewPropertyBtn}/>
                 
             </div>
             
@@ -135,32 +139,6 @@ const PropertyImage = ({image}: PropertyImageProps) => {
 
     return (
         <img src={validateImage(image)} alt=""></img>
-    )
-}
-
-interface ActionProps {
-    type: "button" | "input";
-    label: string;
-    onClick?: () => void;
-}
-
-const Action = ({type, label, onClick}: ActionProps) => {
-
-    if (type === "input") {
-        return (
-            <div className="action">
-    
-            </div>
-        )
-    }
-
-    //Button
-    return (
-        <div className="action button" onClick={onClick}>
-            <div className="label">
-                {label}
-            </div>
-        </div>
     )
 }
 

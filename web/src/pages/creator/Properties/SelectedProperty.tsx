@@ -1,10 +1,11 @@
 import { useState } from "react";
-import IProperty from "./IProperty";
 import "./properties.scss";
 import DropDown from "../../../components/Dropdown/Dropdown";
 import { TypeDropdownOptions } from "./PropertiesOverview";
 import Input from "../../../components/Input/Input";
 import { getImagePath } from "../../../helpers/ItemImagePath";
+import IProperty from "./IProperty";
+import { useParent } from "../Context/contextMenuProvider";
 
 interface SelectedPropertyProps{
     show: boolean;
@@ -14,6 +15,7 @@ interface SelectedPropertyProps{
 }
 
 const SelectedProperty = ({show, cancelBtnCallback, selectedProperty, changeCallback}: SelectedPropertyProps) => {
+    const { openDeletePropertyContextMenu } = useParent();
     
 
     function handleTypeChange(type: string) {
@@ -29,9 +31,13 @@ const SelectedProperty = ({show, cancelBtnCallback, selectedProperty, changeCall
     }
 
     function handleCancelClick() {
-
+        cancelBtnCallback();
     }
 
+
+    function handleDeleteClick() {
+        openDeletePropertyContextMenu();
+    }
 
     function getImage(path: string) {
         if (path.match('http')) {
@@ -77,7 +83,7 @@ const SelectedProperty = ({show, cancelBtnCallback, selectedProperty, changeCall
                         Cancel
                     </div>
                 </div>
-                <div className="btn delete small">
+                <div className="btn delete small" onClick={handleDeleteClick}>
                     <div className="text">
                         Delete
                     </div>

@@ -2,22 +2,40 @@ import { useEffect, useState } from 'react';
 import NavBar from '../../components/Navigation/NavBar';
 import './creator.scss';
 import { fetchNui } from '../../utils/fetchNui';
-import CollectionsOverview from './CollectionsOverview';
+import CollectionsOverview from './Collections/CollectionsOverview';
 import PropertiesOverview from './Properties/PropertiesOverview';
-import IProperty from './Properties/IProperty';
 import { ContextMenu } from './Context/contextMenu';
+import { useNuiEvent } from '../../hooks/useNuiEvent';
+import IProperty from './Properties/IProperty';
+import ICollection from './Collections/ICollection';
 
 const Creator = () => {
     const [selectedPage, setSelectedPage] = useState<string>("collections");
-    const [collections, setCollections] = useState<Collection[]>(testCollections);
-    const [properties, setProperties] = useState<IProperty[]>(testProperty);
+    const [collections, setCollections] = useState<ICollection[]>(testCollections);
+    const [properties, setProperties] = useState<IProperty[]>(testProperties);
 
     useEffect(() => {
-        // fetchNui('getCollections').then((data) => {
-        //     setCollections(data);
-        // });
+        fetchNui('fetchCollections').then((data) => {
+            setProperties(data);
+        }).catch((err) => {
+            
+        });
+
+        fetchNui('fetchProperties').then((data) => {
+            setProperties(data);
+        }).catch((err) => {
+            
+        });
 
     }, []);
+
+    useNuiEvent<any>('setCollections', (data) => {
+        setCollections(data.collections);
+    });
+
+    useNuiEvent<any>('setProperties', (data) => {
+        setProperties(data.properties);
+    });
 
     function handleNavItemPressed(page: string) {
         setSelectedPage(page);
@@ -30,12 +48,12 @@ const Creator = () => {
 
                 {/* Collections */}
                 {selectedPage === "collections" && (
-                    <CollectionsOverview/>
+                    <CollectionsOverview collections = {collections}/>
                 )}
 
                 {/* Properties */}
                 {selectedPage === "properties" && (
-                    <PropertiesOverview properties = {testProperty}/>
+                    <PropertiesOverview properties = {properties}/>
                 )}
 
             </div>
@@ -46,19 +64,17 @@ const Creator = () => {
 
 export default Creator;
 
-interface Collection {
-    label: string;
-}
-
-let testCollections: Collection[] = [
+let testCollections: ICollection[] = [
     {
-        label: "First Edition"
+        identifier: 1,
+        label: "First Edition",
+        cardAmount: 10
     }
 ]
 
 
 
-let testProperty: IProperty[] = [
+let testProperties: IProperty[] = [
     {
         identifier: 1,
         type: "frame",

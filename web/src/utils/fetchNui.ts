@@ -23,6 +23,8 @@ export async function fetchNui<T = any>(eventName: string, data?: any, mockData?
 
   if (isEnvBrowser() && mockData) return mockData;
 
+  if (isEnvBrowser()) return Promise.reject('Attempted to use fetchNui in a non-NUI environment');
+
   const resourceName = (window as any).GetParentResourceName ? (window as any).GetParentResourceName() : 'nui-frame-app';
 
   const resp = await fetch(`https://${resourceName}/${eventName}`, options);

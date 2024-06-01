@@ -1,14 +1,20 @@
 import { useRef, useState } from "react";
 import "./card.scss"
-import flipsound from '../sounds/flipsound.mp3';
+import flipsound from '../../sounds/flipsound.mp3';
+import { getImagePath } from "../../helpers/ItemImagePath";
 
 interface CardProps {
     name: string;
     health: number;
     info: string;
-    attack: number;
+    attack: string;
     damage: number;
     cardNum: number;
+
+    frameImage: string;
+    elementImage: string;
+    imageOverlayImage: string;
+    cardImage: string;
 
     size: number;
     isOpeningCard?: boolean;
@@ -20,7 +26,7 @@ interface OpenCardData {
     isSpecial?: boolean;
 }
 
-const Card = ({name, health, info, attack, damage, cardNum, size, isOpeningCard}: CardProps) => {
+const Card = ({name, health, info, attack, damage, cardNum, size, isOpeningCard, frameImage, elementImage, cardImage, imageOverlayImage }: CardProps) => {
     let scale = 0.025 * size;
     let width = 1024 * scale
     let height = 1420 * scale
@@ -120,16 +126,23 @@ const Card = ({name, health, info, attack, damage, cardNum, size, isOpeningCard}
 
             <div className = "card-front" style={getFlipFrontTransform()}>
                 <div className='frame'>
-                    <img src={"https://i.imgur.com/4ONxA9H.png"} alt="frame" />
+                    <img src={getImagePath(frameImage)} alt=""/>
+    
                 </div>
 
                 <div className='element'>
-                    <img src={"https://i.imgur.com/kHEpSnJ.png"}/>
+                    <img src={getImagePath(elementImage)} alt=""/>
                 </div>
 
                 <div className='card-image'>
-                    <img src={"https://i.imgur.com/4paHYB2.jpg"} />
+                    <img src={getImagePath(cardImage)} alt=""/>
                 </div>
+
+                {imageOverlayImage !== "" && (
+                    <div className='card-image'>
+                        <img src={getImagePath(imageOverlayImage)} alt=""/>
+                    </div>
+                )}
 
                 <p className='name' style={{"fontSize": GetNameFontSize(scale)}}>{name}</p>
 

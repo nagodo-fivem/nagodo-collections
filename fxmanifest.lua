@@ -23,6 +23,7 @@ client_scripts {
 ui_page 'web/build/index.html'
 
 files {
+	'web/public/images/**/**/*',
 	'web/public/images/**/*',
 	'web/build/index.html',
 	'web/build/**/*'

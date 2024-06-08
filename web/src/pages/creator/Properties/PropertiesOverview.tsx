@@ -129,16 +129,9 @@ interface PropertyImageProps {
 
 const PropertyImage = ({image}: PropertyImageProps) => {
 
-    function validateImage(image: string) {
-        if (image.match('http')) {
-            return image;
-        } else {
-            return getImagePath(image);
-        }
-    }
 
     return (
-        <img src={validateImage(image)} alt=""></img>
+        <img src={getImagePath(image)} alt=""></img>
     )
 }
 

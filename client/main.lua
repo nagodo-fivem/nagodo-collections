@@ -23,6 +23,15 @@ function SendCollections(collections)
     })
 end
 
+function SendCards(cards) 
+    SendNUIMessage({
+        action = 'setCards',
+        data = {
+            cards = cards
+        }
+    })
+end
+
 function SendProperties(properties) 
     SendNUIMessage({
         action = 'setProperties',
@@ -73,7 +82,25 @@ RegisterNUICallback('createProperty', function(data, cb)
     cb('ok')
 end)
 
+RegisterNUICallback('saveCard', function(data, cb)
+    local collectionIdentifier = data.collection
+
+    local payload = {
+        collectionIdentifier = collectionIdentifier,
+        card = data.card
+    }
+
+    local allCards = UTILS.TriggerCallbackSync('nagodo-collections:server:saveCard', payload)
+    SendCards(allCards)
+end)
+
 RegisterNUICallback('close', function (data, cb)
     SetNuiFocus(false, false)
     cb('ok')
+end)
+
+
+RegisterNUICallback('saveImage', function(data, cb)
+    local base64 = data.blob
+    TriggerServerEvent('nagodo-collections:server:saveImage', base64)
 end)

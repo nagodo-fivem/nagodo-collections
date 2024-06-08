@@ -1,4 +1,5 @@
 import Input from "../../../components/Input/Input";
+import { useParent } from "../Context/contextMenuProvider";
 import ICollection from "./ICollection";
 
 interface EditingCollectionProps{
@@ -10,13 +11,23 @@ interface EditingCollectionProps{
 }
 
 const EditingCollection = ({show, cancelBtnCallback, selectedCollection, changeCallback, handleEditCardsClick}: EditingCollectionProps) => {
-    
+    const { openExportCardImagesContextMenu, openExportCardItemsContextMenu } = useParent();
+
+
     function handleLabelChange(label: string) {
         changeCallback({...selectedCollection, label: label});
     }
 
     function handleCancelClick() {
         cancelBtnCallback();
+    }
+
+    function handleExportCardImagesClick() {
+        openExportCardImagesContextMenu();
+    }
+
+    function handleExportItemsClick() {
+        openExportCardItemsContextMenu();
     }
 
     if (!show) return null;
@@ -33,6 +44,12 @@ const EditingCollection = ({show, cancelBtnCallback, selectedCollection, changeC
                 </div>
                 <div className="button" onClick={handleEditCardsClick}>
                     <div className="label"><i className="fa-solid fa-folder-open"></i>Edit Cards</div>
+                </div>
+                <div className="button" onClick={handleExportCardImagesClick}>
+                    <div className="label"><i className="fa-solid fa-file-export"></i>Export card images</div>
+                </div>
+                <div className="button" onClick={handleExportItemsClick}>
+                    <div className="label"><i className="fa-solid fa-file-export"></i>Export items</div>
                 </div>
             </div>
 

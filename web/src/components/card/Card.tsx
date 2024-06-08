@@ -143,22 +143,21 @@ const Card = ({name, health, info, attack, damage, cardNum, size, isOpeningCard,
                         <img src={getImagePath(imageOverlayImage)} alt=""/>
                     </div>
                 )}
+                <div className="name" style={{"fontSize": GetNameFontSize(scale)}}>{name}</div>
+                
+                <div className='health' style={{"fontSize": GetHealthFontSize(scale)}}>{health}HP</div>
 
-                <p className='name' style={{"fontSize": GetNameFontSize(scale)}}>{name}</p>
+                <div className='info' style={{"fontSize": GetInfoFontSize(scale)}}>{info}</div>
 
-                <p className='health' style={{"fontSize": GetHealthFontSize(scale)}}>{health}HP</p>
+                <div className='attack' style = {{"fontSize": GetAttackFontSize(scale)}}>{attack}</div>
 
-                <p className='info' style={{"fontSize": GetInfoFontSize(scale)}}>{info}</p>
+                <div className='damage' style = {{"fontSize": GetDamageFontSize(scale)}}>{damage}</div>
 
-                <p className='attack' style = {{"fontSize": GetAttackFontSize(scale)}}>{attack}</p>
-
-                <p className='damage' style = {{"fontSize": GetDamageFontSize(scale)}}>{damage}</p>
-
-                <p className='num' style = {{"fontSize": GetCardNumFontSize(scale)}}>{GetCardNum(cardNum)}</p>
+                <div className='num' style = {{"fontSize": GetCardNumFontSize(scale)}}>{GetCardNum(cardNum)}</div>
             </div>
 
             <div className='card-back' style={getFlipBackSideTransform()}>
-                <img src={"https://i.imgur.com/o2Ss6uk.png"} alt="frame" />
+                {/* <img src={"https://i.imgur.com/o2Ss6uk.png"} alt="frame" /> */}
             </div>
         </div>
     )

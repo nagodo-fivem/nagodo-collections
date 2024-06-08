@@ -1,14 +1,16 @@
 import { useState } from "react";
-import Card from "../../../components/Card/Card";
+import Card from "../../../components/card/Card";
 import Action from "../Action/Action";
 import { ICard } from "./ICard";
 import Input from "../../../components/Input/Input";
 import IProperty from "../Properties/IProperty";
 import { getImagePath } from "../../../helpers/ItemImagePath";
+import { fetchNui } from "../../../utils/fetchNui";
+import { useNuiEvent } from "../../../hooks/useNuiEvent";
 
 const defaultCard: ICard = {identifier: -1, name: "", health: 100, info: "", attack: "", damage: 99, cardNum: 1, rarity: 50, frameIdentifier: 1, elementIdentifier: 1, imageOverlayIdentifier: -1, cardImage: "Cards/FirstEdition Collection/CardPictures/black_blackgris_01.png"};
 const cardSize = 0.619;
-const CollectionCardEditor = () => {
+const CollectionCardEditor = ({collectionIdentifier}: {collectionIdentifier: number}) => {
     const [properties, setProperties] = useState<IProperty[]>(testProperties);
     const [selectingProperty, setSelectingProperty] = useState(false); 
     const [selectingPropertyType, setSelectingPropertyType] = useState("frame");
@@ -17,12 +19,18 @@ const CollectionCardEditor = () => {
     const [selectedCard, setSelectedCard] = useState<ICard>(defaultCard);
     const [cards, setCards] = useState<ICard[]>(testCards); 
 
+    useNuiEvent<any>('setCards', (data) => {
+        setCards(data.cards);
+    });
+
     function handleNewCardClick() {
-        console.log("New card clicked");
         setEditingCard(true);
-        defaultCard.name = "New card";
-        setSelectedCard(defaultCard);
-        setNewCardData(defaultCard);
+
+        let _defaultCard = {...defaultCard};
+        _defaultCard.name = "New card";
+
+        setSelectedCard(_defaultCard);
+        setNewCardData(_defaultCard);
     }
 
     function handleCardClick(card: ICard) {
@@ -32,10 +40,21 @@ const CollectionCardEditor = () => {
     }
 
     function handleCancelClick() {
+        console.log("Cancel clicked");
+        setSelectedCard(defaultCard);
         setEditingCard(false);
         setNewCardData(defaultCard);
-        setSelectedCard(defaultCard);
         setSelectingProperty(false);
+    }
+
+    function handleSaveClick() {
+        setEditingCard(false);
+        setSelectingProperty(false);
+
+        fetchNui("saveCard", {
+            collection: collectionIdentifier,
+            card: newCardData
+        });
     }
 
     function handleCardDataChange(card: ICard) {
@@ -166,7 +185,7 @@ const CollectionCardEditor = () => {
                             Delete
                         </div>
                     </div>
-                    <div className="btn save small">
+                    <div className="btn save small" onClick={handleSaveClick}>
                         <div className="text">
                             Save
                         </div>

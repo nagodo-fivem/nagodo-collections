@@ -7,7 +7,7 @@ import Creator from './creator/Creator';
 
 
 const App: React.FC = () => {
-    const [showType, setShowType] = useState<string>("")
+    const [showType, setShowType] = useState<string>("c")
 
     //NUI Hooks
     useNuiEvent<any>('setTranslations', (data) => { 

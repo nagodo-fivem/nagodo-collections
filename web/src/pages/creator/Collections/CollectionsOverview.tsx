@@ -24,6 +24,7 @@ const CollectionsOverview = ({collections}: CollectionsOverviewProps) => {
     }
     
     function handleCancelClick() {
+        console.log("cancel");
         setAddingNewCollection(false);
         setEditingCollection(false);
     }
@@ -33,9 +34,9 @@ const CollectionsOverview = ({collections}: CollectionsOverviewProps) => {
     }
 
     function handleCollectionClick(collection: ICollection) {
+        currentSelectedCollection = collection;
         setAddingNewCollection(false);
         setEditingCollection(true);
-        currentSelectedCollection = collection;
     }
 
     function handleEditCardsClick() {
@@ -46,7 +47,7 @@ const CollectionsOverview = ({collections}: CollectionsOverviewProps) => {
         <div className="collections">
 
             {editingCards && (
-                <CollectionCardEditor />
+                <CollectionCardEditor collectionIdentifier={currentSelectedCollection.identifier} />
             )}
 
             {!editingCards && (

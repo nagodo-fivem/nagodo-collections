@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ContextMenuProvider } from "./contextMenuProvider";
 import "./context.scss";
+import ImageExporter from "./Images Exporter/ImageExporter";
 
 export interface ContextMenuData {
     visible: boolean;
@@ -12,11 +13,23 @@ interface ContextMenuProps {
 }
 
 export const ContextMenu = (props: ContextMenuProps) => {
-    const [visible, setVisible] = useState(false);
-    const [type, setType] = useState<string>("delete-property");
+    const [visible, setVisible] = useState(true);
+    const [type, setType] = useState<string>("export-card-images");
+    
+    const [cardCollectionToExport, setCardCollectionToExport] = useState<number>(-1);
 
     function openDeletePropertyContextMenu() {
+        setType("delete-property");
+        setVisible(true);
+    }
 
+    function openExportCardImagesContextMenu() {
+        setType("export-card-images");
+        setVisible(true);
+    }
+
+    function openExportCardItemsContextMenu() {
+        setType("export-card-items");
         setVisible(true);
     }
 
@@ -29,9 +42,19 @@ export const ContextMenu = (props: ContextMenuProps) => {
     }
 
     return (
-        <ContextMenuProvider value = {{openDeletePropertyContextMenu: openDeletePropertyContextMenu}}>
+        <ContextMenuProvider value = {{
+                openDeletePropertyContextMenu: openDeletePropertyContextMenu, 
+                openExportCardImagesContextMenu: openExportCardImagesContextMenu,
+                openExportCardItemsContextMenu: openExportCardItemsContextMenu
+            }}>
             {props.children}
-            <Context visible = {visible} type={type} cancelClick={handleCancelClick} confirmClick = {handleConfirmClick}/>
+            <Context 
+                visible = {visible} 
+                type={type} 
+                cancelClick={handleCancelClick} 
+                confirmClick = {handleConfirmClick}
+                cardCollectionToExport = {cardCollectionToExport}
+            />
         </ContextMenuProvider>
     )
 }
@@ -42,10 +65,12 @@ interface ContextProps {
     type: string;
     cancelClick: () => void;
     confirmClick: () => void;
+
+    cardCollectionToExport: number;
 }
 
 
-const Context = ({visible, type, cancelClick, confirmClick}: ContextProps) => {
+const Context = ({visible, type, cancelClick, confirmClick, cardCollectionToExport}: ContextProps) => {
 
     if (!visible) return null;
 
@@ -70,6 +95,10 @@ const Context = ({visible, type, cancelClick, confirmClick}: ContextProps) => {
                         </div>
                     </div>
                 </div>
+            )}
+
+            {type === "export-card-images" && (
+                <ImageExporter collectionIdentifier={cardCollectionToExport}/>
             )}
 
         </div>

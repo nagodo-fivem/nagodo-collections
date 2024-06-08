@@ -23,15 +23,15 @@
     display: inline-block;
 
     transform-style: preserve-3d;
-
+    width: 26vh;
+    height: 35vh;
 	
 	transform: none;
 
     .card-front {
         width: 100%;
         height: 100%;
-        position: absolute;
-
+        position: relative;
         
         backface-visibility: hidden;
 	    transform: rotateY(180deg);
@@ -76,9 +76,10 @@
         
         .name {
             position: absolute;
-            top: 3.8%;
+            top: 8.7%;
             left: 10%;
             width: 55%;
+            line-height: 4%;
             height: 4%;
             
             line-height: 0;
@@ -90,9 +91,10 @@
     
         .health {
             position: absolute;
-            top: 3.8%;
+            top: 8.7%;
             right: 9.8%;
             width: 24%;
+            line-height: 4%;
             height: 4%;
     
             line-height: 0;
@@ -104,11 +106,12 @@
     
         .info {
             position: absolute;
-            top: 69%;
+            top: 71.8%;
+            color: black;
             left: 50%;
             transform: translateX(-50%);
-    
-            color: black;
+            line-height: 4%;
+            height: 4%;
             width: 60%;
      
             text-align: center;
@@ -118,11 +121,13 @@
             color: black;
             font-weight: bold;
             position: absolute;
-            bottom: 8.5%;
+            bottom: 12.5%;
             left: 50%;
             transform: translateX(-50%);
             width: 53%;
-            
+            line-height: 4%;
+            height: 4%;
+
             text-align: center;
             
         }
@@ -131,9 +136,11 @@
             color: black;
             font-weight: bold;
             position: absolute;
-            bottom: 8.5%;
+            bottom: 12.5%;
             right: 8%;
             width: 14.5%;
+            line-height: 4%;
+            height: 4%;
     
             text-align: right;
         }
@@ -142,10 +149,12 @@
             color: black;
             font-weight: bold;
             position: absolute;
-            bottom: 1.2%;
+            bottom: 2.5%;
             left: 6%;
             text-align: left;
             width: 20%;
+            line-height: 3%;
+            height: 3%;
     
         }
     

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ContextMenuProvider } from "./contextMenuProvider";
 import "./context.scss";
 import ImageExporter from "./Images Exporter/ImageExporter";
+import ItemsExporter from "./Items Exporter/ItemsExporter";
 
 export interface ContextMenuData {
     visible: boolean;
@@ -14,7 +15,7 @@ interface ContextMenuProps {
 
 export const ContextMenu = (props: ContextMenuProps) => {
     const [visible, setVisible] = useState(true);
-    const [type, setType] = useState<string>("export-card-images");
+    const [type, setType] = useState<string>("export-card-items");
     
     const [cardCollectionToExport, setCardCollectionToExport] = useState<number>(-1);
 
@@ -23,7 +24,7 @@ export const ContextMenu = (props: ContextMenuProps) => {
         setVisible(true);
     }
 
-    function openExportCardImagesContextMenu() {
+    function openExportCardImagesContextMenu(collectionIdentifier: number) {
         setType("export-card-images");
         setVisible(true);
     }
@@ -53,6 +54,7 @@ export const ContextMenu = (props: ContextMenuProps) => {
                 type={type} 
                 cancelClick={handleCancelClick} 
                 confirmClick = {handleConfirmClick}
+                closeContext = {handleCancelClick}
                 cardCollectionToExport = {cardCollectionToExport}
             />
         </ContextMenuProvider>
@@ -65,14 +67,19 @@ interface ContextProps {
     type: string;
     cancelClick: () => void;
     confirmClick: () => void;
+    closeContext: () => void;
 
     cardCollectionToExport: number;
 }
 
 
-const Context = ({visible, type, cancelClick, confirmClick, cardCollectionToExport}: ContextProps) => {
+const Context = ({visible, type, cancelClick, confirmClick, closeContext, cardCollectionToExport}: ContextProps) => {
 
     if (!visible) return null;
+
+    function handleCloseContext() {
+        closeContext();
+    }
 
     return (
         <div className="contextmenu">
@@ -99,6 +106,10 @@ const Context = ({visible, type, cancelClick, confirmClick, cardCollectionToExpo
 
             {type === "export-card-images" && (
                 <ImageExporter collectionIdentifier={cardCollectionToExport}/>
+            )}
+
+            {type === "export-card-items" && (
+                <ItemsExporter collectionIdentifier={cardCollectionToExport} closeContext = {handleCloseContext}/>
             )}
 
         </div>

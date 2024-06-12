@@ -165,6 +165,8 @@
 
     .card-back {
         position: absolute;
+        top: 0vh;
+        left: 0vh;
         height: 100%;
         width: 100%;
         transition: all 1s ease;
@@ -183,9 +185,4 @@
     }
 
     
-}
-
-.image {
-    width: 100%;
-    height: 100%;
 }

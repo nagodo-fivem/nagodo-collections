@@ -1,0 +1,212 @@
+.itemsexporter {
+    position: absolute;
+
+    width: 85vh;
+    height: 65vh;
+
+    line-height: 3vh;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    background-color: var(--background);
+
+    border-radius: var(--radius);
+    border: 0.3vh solid var(--border);
+
+    .exportingCollectionName {
+        position: absolute;
+
+        left: 1.5vh;
+        top: 1vh;
+
+        font-size: 2.5vh;
+        line-height: 2.5vh;
+
+        color: var(--foreground);
+    }
+
+    .settings {
+        position: absolute;
+
+        left: 1vh;
+        top: 5vh;
+
+        width: 31vh;
+        height: 50vh;
+
+    }
+
+    .output {
+        position: absolute;
+
+        right: 1vh;
+        top: 1vh;
+
+        width: 50vh;
+        height: 57vh;
+
+        border-radius: var(--radius);
+        border: 0.3vh solid var(--border);
+
+        .title {
+            font-size: 1.8vh;
+            line-height: 1.8vh;
+
+            width: 100%;
+            text-align: center;
+
+            top: 0.8vh;
+
+            position: absolute;
+         
+
+            color: var(--foreground);
+        }
+
+        .line {
+            position: absolute;
+
+            top: 3.8vh;
+            left: 1vh;
+            right: 1vh;
+
+            height: 0.1vh;
+
+            background-color: var(--border);
+        }
+
+        textarea {
+
+            position: absolute;
+
+            bottom: 1vh;
+            left: 50%;
+            transform: translateX(-50%);
+
+            background-color: transparent;
+            border: none;
+            outline: none;
+
+            font-size: 1.4vh;
+
+            color: var(--foreground);
+
+            height: 51vh;
+            width: 48vh;
+                text-wrap: nowrap;
+
+            resize: none;
+        }
+    }
+
+    .copytoclipboard {
+        position: absolute;
+
+        right: 1vh;
+        bottom: 1vh;
+
+        width: 50vh;
+        height: 4vh;
+
+        border-radius: var(--radius);
+        border: 0.3vh solid var(--border);
+
+        .label {
+            font-size: 1.8vh;
+            line-height: 1.8vh;
+
+            width: 100%;
+            text-align: center;
+
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+
+            color: var(--foreground);
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    .close-btn {
+        position: absolute;
+
+        left: 1vh;
+     
+        bottom: 1vh;
+
+        border: solid var(--border) 0.3vh;
+        border-radius: var(--radius);
+
+        background-color: var(--hover);
+
+        width: 12vh;
+        height: 4vh;
+
+        .label {
+            font-size: 2vh;
+            line-height: 2vh;
+
+            width: 100%;
+            text-align: center;
+
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+
+            color: var(--foreground);
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    .export-btn {
+        position: absolute;
+
+        left: 14vh;
+     
+        bottom: 1vh;
+
+        border: solid var(--border) 0.3vh;
+        border-radius: var(--radius);
+
+        background-color: var(--hover);
+
+        width: 12vh;
+        height: 4vh;
+
+        .label {
+            font-size: 2vh;
+            line-height: 2vh;
+
+            width: 100%;
+            text-align: center;
+
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+
+            color: var(--foreground);
+        }
+
+        &.noaccess {
+            
+            &:hover {
+                cursor: not-allowed;
+            }
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        
+    }
+}

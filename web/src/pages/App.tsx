@@ -4,10 +4,11 @@ import { fetchNui } from "../utils/fetchNui";
 import { useNuiEvent } from "../hooks/useNuiEvent";
 import { _T, setTranslations } from "../utils/translation";
 import Creator from './creator/Creator';
+import { isEnvBrowser } from '../utils/misc';
 
 
 const App: React.FC = () => {
-    const [showType, setShowType] = useState<string>("c")
+    const [showType, setShowType] = useState<string>(isEnvBrowser() ? "creator" : "");
 
     //NUI Hooks
     useNuiEvent<any>('setTranslations', (data) => { 

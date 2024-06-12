@@ -6,6 +6,7 @@ interface DropDownProps {
     options: IOption[];
     onChange: (option: string) => void;
     currentValue?: string;
+    customNotSelected?: string;
 }
 
 export interface IOption {
@@ -13,7 +14,7 @@ export interface IOption {
     label: string;
 }
 
-const DropDown = ({title, options, onChange, currentValue}: DropDownProps) => {
+const DropDown = ({title, options, onChange, currentValue, customNotSelected}: DropDownProps) => {
     const [selected, setSelected] = useState<IOption>({identifier: "", label: ""});
     const [open, setOpen] = useState<boolean>(false);
     const [init, setInit] = useState<boolean>(false);
@@ -57,7 +58,7 @@ const DropDown = ({title, options, onChange, currentValue}: DropDownProps) => {
 
         return (
             <div className="currentselection" >
-                {selected.identifier !== "" ? selected.label : "Select"}
+                {selected.identifier !== "" ? selected.label : (customNotSelected == null ? "Select" : customNotSelected)}
             </div>
         )
     }

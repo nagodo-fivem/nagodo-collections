@@ -1,0 +1,11 @@
+Cards:
+{collection_id}_{card_id}_card
+
+Packs:
+{collection_id}_{pack_id}_pack
+
+Card Folder
+{collection_id}_folder
+
+Card Boxes
+card_box

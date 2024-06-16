@@ -5,6 +5,7 @@ import { fetchNui } from "../../../../utils/fetchNui";
 import domtoimage from 'dom-to-image';
 import Card from "../../../../components/card/Card";
 import IProperty from "../../Properties/IProperty";
+import DropDown from "../../../../components/Dropdown/Dropdown";
 
 interface ImageExporterProps {
     collectionIdentifier: number;
@@ -15,6 +16,10 @@ const ImageExporter = ({collectionIdentifier}: ImageExporterProps) => {
     const [properties, setProperties] = useState<IProperty[]>(testProperties);
     const [currentCard, setCurrentCard] = useState<ICard>();
     const [isExporting, setIsExporting] = useState<boolean>(false);
+
+    const [cardAmountToExport, setCardAmountToExport] = useState<number>(1);
+    const [cardAmountExported, setCardAmountExported] = useState<number>(0);
+    const [cardQuality, setCardQuality] = useState<number>(4);
 
     const domToExport = useRef<HTMLDivElement>(null);
 
@@ -80,15 +85,54 @@ const ImageExporter = ({collectionIdentifier}: ImageExporterProps) => {
        
     }
 
+    function GetEstimatedFileSize() {
+        let perCard = 0.5;
+
+        if (cardQuality === 1) {
+            perCard = 0.5;
+        } else if (cardQuality === 2) {
+            perCard = 1;
+        }
+        else if (cardQuality === 3) {
+            perCard = 1.25;
+        }
+        else if (cardQuality === 4) {
+            perCard = 1.6;
+        }
+        
+
+        let allCards = cardAmountToExport * perCard;
+
+        return (perCard).toFixed(2) + " (" + allCards.toFixed(2) + ") MB";
+    }
+
+    function QualityToSize(quality: number) {
+        switch (quality) {
+            case 1:
+                return 0.5;
+            case 2:
+                return 1;
+            case 3:
+                return 1.25;
+            case 4:
+                return 1.6;
+            default:
+                return 0.5;
+        }
+    }
+
     return (
         <div className="imageexporter">
 
             <div id = "domToExport" className="domToExport" onClick={convertToImage} ref={domToExport}>
-                <Card size={1} name={"John Olsen"} health={100} info={"Din mor"} attack={"Cola her"} damage={99} cardNum={23} cardImage={"https://i1.sndcdn.com/artworks-000482128809-fp33kj-t500x500.jpg"} frameImage={getFrameByIdentifier(1)} elementImage = {getElementByIdentifier(1)} imageOverlayImage={getImageOverlayByIdentifier(1)}/>
+                <Card size={QualityToSize(cardQuality)} name={"John Olsen"} health={100} info={"Din mor"} attack={"Cola her"} damage={99} cardNum={23} cardImage={"https://i1.sndcdn.com/artworks-000482128809-fp33kj-t500x500.jpg"} frameImage={getFrameByIdentifier(1)} elementImage = {getElementByIdentifier(1)} imageOverlayImage={getImageOverlayByIdentifier(1)}/>
             </div>
 
             <div className="information">
-
+                <QualitySelector callback = {setCardQuality} />
+                <div className="cardToExport">Cards in collection: {cardAmountToExport}</div>
+                <div className="estimatedSize">Estimated file size: {GetEstimatedFileSize()}</div>
+                
             </div>
 
             <div className="export-btn" onClick={handleExportClick}>
@@ -97,6 +141,30 @@ const ImageExporter = ({collectionIdentifier}: ImageExporterProps) => {
         </div>
     )
 }
+
+
+interface QualitySelectorProps {
+    callback: (quality: number) => void;
+}
+
+const QualitySelector = ({callback}: QualitySelectorProps) => {
+
+    function handleChange(value: string) {
+        callback(parseInt(value));
+    }
+
+    return (
+        <div className="qualityselector">
+            <DropDown title="Quality" options={[
+                {label: "Low", identifier: "1"},
+                {label: "Medium", identifier: "2"},
+                {label: "High", identifier: "3"},
+                {label: "Ultra", identifier: "4"}
+            ]} onChange={handleChange}/>
+        </div>
+    )
+}
+
 
 let testProperties: IProperty[] = [
     {

@@ -15,7 +15,7 @@ interface ContextMenuProps {
 
 export const ContextMenu = (props: ContextMenuProps) => {
     const [visible, setVisible] = useState(true);
-    const [type, setType] = useState<string>("export-card-items");
+    const [type, setType] = useState<string>("export-card-images");
     
     const [cardCollectionToExport, setCardCollectionToExport] = useState<number>(-1);
 

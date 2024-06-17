@@ -9,7 +9,7 @@ import Opener from './cardOpener/Opener';
 
 
 const App: React.FC = () => {
-    const [showType, setShowType] = useState<string>(isEnvBrowser() ? "opener" : "");
+    const [showType, setShowType] = useState<string>(isEnvBrowser() ? "creator" : "");
 
     //NUI Hooks
     useNuiEvent<any>('setTranslations', (data) => { 

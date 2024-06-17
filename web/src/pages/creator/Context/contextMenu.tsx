@@ -105,7 +105,7 @@ const Context = ({visible, type, cancelClick, confirmClick, closeContext, cardCo
             )}
 
             {type === "export-card-images" && (
-                <ImageExporter collectionIdentifier={cardCollectionToExport}/>
+                <ImageExporter collectionIdentifier={cardCollectionToExport} closeContext={handleCloseContext}/>
             )}
 
             {type === "export-card-items" && (

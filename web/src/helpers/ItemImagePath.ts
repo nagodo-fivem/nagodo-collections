@@ -5,6 +5,9 @@ export function getImagePath(name: string) {
     if (name === "") return "";
 
     function validateImage(image: string) {
+
+        if (image === undefined) return false;
+
         if (image.match('http')) {
             return true;
         } else {

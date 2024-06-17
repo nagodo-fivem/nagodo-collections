@@ -100,7 +100,36 @@ RegisterNUICallback('close', function (data, cb)
 end)
 
 
+local currentPayload = {
+    amountReceived = 0,
+    successAmount = 0,
+    base64 = "",
+}
 RegisterNUICallback('saveImage', function(data, cb)
     local base64 = data.blob
-    TriggerServerEvent('nagodo-collections:server:saveImage', base64)
+    local cardName = data.cardName
+    local succesPayloadAmount = data.payloadAmount
+    local bps = data.bps or 20000
+    currentPayload.successAmount = succesPayloadAmount
+
+    if currentPayload.amountReceived == 0 then
+        currentPayload.base64 = base64
+    else
+        currentPayload.base64 = currentPayload.base64 .. base64
+    end
+
+    currentPayload.amountReceived = currentPayload.amountReceived + 1
+
+    if currentPayload.amountReceived == currentPayload.successAmount then
+        TriggerLatentServerEvent('nagodo-collections:server:saveImage', bps, currentPayload.base64, cardName)
+        currentPayload.amountReceived = 0
+        currentPayload.successAmount = 0
+        currentPayload.base64 = ""
+        Citizen.Wait(100)
+        cb('ok')
+
+    else
+        cb('ok')
+    end
+
 end)

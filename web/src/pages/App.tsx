@@ -5,10 +5,11 @@ import { useNuiEvent } from "../hooks/useNuiEvent";
 import { _T, setTranslations } from "../utils/translation";
 import Creator from './creator/Creator';
 import { isEnvBrowser } from '../utils/misc';
+import Opener from './cardOpener/Opener';
 
 
 const App: React.FC = () => {
-    const [showType, setShowType] = useState<string>(isEnvBrowser() ? "creator" : "");
+    const [showType, setShowType] = useState<string>(isEnvBrowser() ? "opener" : "");
 
     //NUI Hooks
     useNuiEvent<any>('setTranslations', (data) => { 
@@ -40,7 +41,15 @@ const App: React.FC = () => {
 
     return (
         <div className="App">
-            <Creator />
+
+            {showType === "creator" && (
+                <Creator />  
+            )}
+
+            {showType === "opener" && (
+                <Opener />
+            )}
+
         </div>
     );
 }

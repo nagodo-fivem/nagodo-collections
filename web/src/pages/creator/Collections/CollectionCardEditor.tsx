@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Card from "../../../components/card/Card";
+import FrontCard from "../../../components/card/Card";
 import Action from "../Action/Action";
 import { ICard } from "./ICard";
 import Input from "../../../components/Input/Input";
@@ -115,7 +115,7 @@ const CollectionCardEditor = ({collectionIdentifier}: {collectionIdentifier: num
                         {cards.map((card, index) => {
                             return (
                                 <div className="card-wrapper" onClick={() => {handleCardClick(card)}}>
-                                    <Card size={cardSize} name={card.name} health={card.health} info={card.info} attack={card.attack} damage={card.damage} cardNum={card.cardNum} cardImage={card.cardImage} frameImage={getFrameByIdentifier(card.frameIdentifier)} elementImage = {getElementByIdentifier(card.elementIdentifier)} imageOverlayImage={getImageOverlayByIdentifier(card.imageOverlayIdentifier)}/>
+                                    <FrontCard size={cardSize} name={card.name} health={card.health} info={card.info} attack={card.attack} damage={card.damage} cardNum={card.cardNum} cardImage={card.cardImage} frameImage={getFrameByIdentifier(card.frameIdentifier)} elementImage = {getElementByIdentifier(card.elementIdentifier)} imageOverlayImage={getImageOverlayByIdentifier(card.imageOverlayIdentifier)}/>
                                 </div>
                             )
 
@@ -127,7 +127,7 @@ const CollectionCardEditor = ({collectionIdentifier}: {collectionIdentifier: num
                 {(editingCard && selectedCard) && (
                     <div className="editor">
                         <div className="preview">
-                            <Card size={1.6} name={newCardData.name} health={newCardData.health} info={newCardData.info} attack={newCardData.attack} damage={newCardData.damage} cardNum={newCardData.cardNum} cardImage={newCardData.cardImage} frameImage={getFrameByIdentifier(newCardData.frameIdentifier)} elementImage = {getElementByIdentifier(newCardData.elementIdentifier)} imageOverlayImage={getImageOverlayByIdentifier(newCardData.imageOverlayIdentifier)} />
+                            <FrontCard size={1.6} name={newCardData.name} health={newCardData.health} info={newCardData.info} attack={newCardData.attack} damage={newCardData.damage} cardNum={newCardData.cardNum} cardImage={newCardData.cardImage} frameImage={getFrameByIdentifier(newCardData.frameIdentifier)} elementImage = {getElementByIdentifier(newCardData.elementIdentifier)} imageOverlayImage={getImageOverlayByIdentifier(newCardData.imageOverlayIdentifier)} />
                         </div>
 
                     </div>

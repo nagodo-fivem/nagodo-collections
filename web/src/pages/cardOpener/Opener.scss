@@ -1,0 +1,79 @@
+@keyframes shake {
+	0% { transform: translate(1px, 1px) rotate(0deg); }
+	10% { transform: translate(-1px, -2px) rotate(-1deg); }
+	20% { transform: translate(-3px, 0px) rotate(1deg); }
+	30% { transform: translate(3px, 2px) rotate(0deg); }
+	40% { transform: translate(1px, -1px) rotate(1deg); }
+	50% { transform: translate(-1px, 2px) rotate(-1deg); }
+	60% { transform: translate(-3px, 1px) rotate(0deg); }
+	70% { transform: translate(3px, 1px) rotate(-1deg); }
+	80% { transform: translate(-1px, -1px) rotate(1deg); }
+	90% { transform: translate(1px, 2px) rotate(0deg); }
+	100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+.opener {
+    position: absolute;
+    
+
+    width: 160vh;
+    height: 90vh;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    .cards {
+        position: absolute;
+
+        width: 100%;
+        height: 100%;
+
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+
+        .cardToOpen {
+            position: relative;
+
+            width: 26vh;
+            height: 39.5vh;
+
+            margin: 0.5vh;
+
+
+            .card-front {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                backface-visibility: hidden;
+                transform-style: preserve-3d;
+
+                z-index: 99;
+            }
+
+            .card-back {
+                position: absolute;
+                backface-visibility: hidden;
+
+                transform: none;
+
+                transform-style: preserve-3d;
+
+                width: 100%;
+                height: 100%;
+
+                img {
+                    width: 100%;
+                    height: 100%;   
+                }
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}

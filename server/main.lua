@@ -1,13 +1,21 @@
 local UTILS = exports['nagodo-utils']:GetUtils()
-local DATABASE = Database()
 
 Citizen.CreateThread(function()
     DATABASE.Init()
+
+    RegisterAllItemsForUse()
 
 end)
 
 function OpenCreatorMenu() 
     TriggerClientEvent("nagodo-collections:openCreatorMenu", -1)
+end
+
+
+function HandleCardUse(source, cardName)
+    local cardData = DATABASE.GetCardDataForUse(cardName)
+
+    TriggerClientEvent("nagodo-collections:client:openCard", source, cardData)
 end
 
 --Callbacks--

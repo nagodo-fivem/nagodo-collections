@@ -17,16 +17,21 @@ interface CardProps {
     cardImage: string;
 
     size: number;
+    fill?: boolean;
 }
 
 
 
-const FrontCard = ({name, health, info, attack, damage, cardNum, size, frameImage, elementImage, cardImage, imageOverlayImage }: CardProps) => {
+const FrontCard = ({name, health, info, attack, damage, cardNum, size, frameImage, elementImage, cardImage, imageOverlayImage, fill }: CardProps) => {
     let scale = 0.025 * size;
     let width = 1024 * scale
     let height = 1420 * scale
 
     function getCardStyle() {
+
+        if (fill) {
+            return {"transition": "all 1s ease", "height": "100%", "width": "100%"}
+        }
        
         return {"transition": "all 1s ease", "height": height + "vh", "width": width + "vh"}
     }

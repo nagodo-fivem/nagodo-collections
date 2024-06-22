@@ -21,13 +21,13 @@ interface CardToOpenProps {
     imageOverlayImage: string;
     cardImage: string;
 
-    size: number;
+    onCardFlipped: () => void;
 }
 
 const CardToOpen = (props: CardToOpenProps) => {
     const audioRef = useRef(null);
 
-    const [openCardData, setOpenCardData] = useState<OpenCardData>({"isFlipped": false, "isSpecial": false});
+    const [openCardData, setOpenCardData] = useState<OpenCardData>({"isFlipped": false, "isSpecial": true});
 
     function getFlipBackSideTransform() {
 
@@ -36,10 +36,10 @@ const CardToOpen = (props: CardToOpenProps) => {
         }
 
         if (!openCardData.isFlipped) {
-            return {"transform": "rotateY(0deg)", "animation": "none"}
+            return {"transform": "rotateY(0deg)", "animation": "none", "transition": "all 1s ease"}
         }
 
-        return {"transform": "rotateY(180deg)", "animation": "none"}
+        return {"transform": "rotateY(180deg)", "animation": "none", "transition": "all 1s ease"}
     }
 
     function playFlipSound() {
@@ -89,6 +89,7 @@ const CardToOpen = (props: CardToOpenProps) => {
             setOpenCardData(_openCardData);
         }
         
+        props.onCardFlipped();
     }
     
     return (
@@ -99,11 +100,11 @@ const CardToOpen = (props: CardToOpenProps) => {
             </audio>
 
             <div className="card-front" style={getFlipFrontTransform()}>
-                <FrontCard name = {props.name} health={props.health} info={props.info} attack={props.attack} damage={props.damage} cardNum={props.cardNum} frameImage={props.frameImage} elementImage={props.elementImage} imageOverlayImage={props.imageOverlayImage} cardImage={props.cardImage} size={1} />
+                <FrontCard name = {props.name} health={props.health} info={props.info} attack={props.attack} damage={props.damage} cardNum={props.cardNum} frameImage={props.frameImage} elementImage={props.elementImage} imageOverlayImage={props.imageOverlayImage} cardImage={props.cardImage} size={1} fill = {true} />
             </div>
 
             <div className='card-back' style={getFlipBackSideTransform()}>
-                {/* <img src={"https://i.imgur.com/o2Ss6uk.png"} alt="frame" /> */}
+                <img src={"images/Backs/backOfCard01.png"} alt="frame" />
             </div>
 
         </div>

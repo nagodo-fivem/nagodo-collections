@@ -4,14 +4,29 @@ RegisterNetEvent("nagodo-collections:openCreatorMenu", function()
     OpenCreatorMenu()
 end)
 
-function OpenCreatorMenu() 
+RegisterNetEvent('nagodo-collections:client:openCard', function(cardData)
     SetNuiFocus(true, true)
+    SetShowType(ShowType.ShowCard)
+    SendNUIMessage({
+        action = "showCard",
+        data = {
+            cardData = cardData
+        }
+    })
+end)
+
+function SetShowType(showType)
     SendNUIMessage({
         action = 'setShowType',
         data = {
-            type = "creator"
+            type = showType
         }
     })
+end
+
+function OpenCreatorMenu() 
+    SetNuiFocus(true, true)
+    SetShowType(ShowType.Creator)
 end
 
 function SendCollections(collections) 

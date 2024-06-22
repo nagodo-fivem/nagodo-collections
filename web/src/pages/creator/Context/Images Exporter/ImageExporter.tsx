@@ -40,7 +40,7 @@ const ImageExporter = ({collectionIdentifier, closeContext}: ImageExporterProps)
     }, []);
 
     useEffect(() => {
-        if (cardAmountExported == cardAmountToExport) return;
+        if (cardAmountExported === cardAmountToExport) return;
         if (!isExporting) return;
         setTimeout(() => {
             convertToImage();

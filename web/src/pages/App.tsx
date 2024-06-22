@@ -6,10 +6,11 @@ import { _T, setTranslations } from "../utils/translation";
 import Creator from './creator/Creator';
 import { isEnvBrowser } from '../utils/misc';
 import Opener from './cardOpener/Opener';
+import ShowCard from './showCard/ShowCard';
 
 
 const App: React.FC = () => {
-    const [showType, setShowType] = useState<string>(isEnvBrowser() ? "creator" : "");
+    const [showType, setShowType] = useState<string>(isEnvBrowser() ? "showCard" : "");
 
     //NUI Hooks
     useNuiEvent<any>('setTranslations', (data) => { 
@@ -48,6 +49,10 @@ const App: React.FC = () => {
 
             {showType === "opener" && (
                 <Opener />
+            )}
+
+            {showType === "showCard" && (
+                <ShowCard />
             )}
 
         </div>

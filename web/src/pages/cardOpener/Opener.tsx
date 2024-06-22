@@ -2,20 +2,34 @@ import { useState } from "react";
 import FrontCard from "../../components/card/Card";
 import { useNuiEvent } from "../../hooks/useNuiEvent";
 import CardToOpen from "./CardToOpen";
+import { ICardToOpen } from "./ICardToOpen";
+import "./Opener.scss"
+import { fetchNui } from "../../utils/fetchNui";
 
 const Opener = () => {
-    const [cardsToOpen, setCardsToOpen] = useState<any[]>(testCards);
+    const [cardsToOpen, setCardsToOpen] = useState<ICardToOpen[]>(testCards);
+    const [amountOfCardsOpened, setAmountOfCardsOpened] = useState<number>(0);
 
     useNuiEvent<any>('setCardsToOpen', (data) => {
 
     })
+
+    function handleCardFlipped() {
+        if (amountOfCardsOpened + 1 === cardsToOpen.length) {
+            fetchNui('doneOpeningPackage', {
+                
+            })
+        }
+
+        setAmountOfCardsOpened(amountOfCardsOpened + 1);
+    }
 
 
     return (
         <div className="opener">
             <div className="cards">
                 {cardsToOpen.map((card, index) => {
-                    return <CardToOpen key={index} {...card} size={5} />
+                    return <CardToOpen key={index} {...card} onCardFlipped={handleCardFlipped} />
                 })}
             </div>
         </div>
@@ -24,12 +38,125 @@ const Opener = () => {
 
 export default Opener;
 
-let testCards = [
+let testCards: ICardToOpen[] = [
     {
         name: "Card 1",
         health : 100,
         info: "This is a card",
-        attack : 50,
-        damage : 10
-    }
+        attack : "Din mor",
+        damage : 10,
+        cardNum : 1,
+        frameImage : "Frames/normal.png",
+        elementImage : "Elements/FireElement.png",
+        imageOverlayImage : "",
+        cardImage : "Cards/FirstEdition Collection/CardPictures/g_holo_john_olsen_01.jpg",
+    },
+    {
+        name: "Card 2",
+        health : 100,
+        info: "This is a card",
+        attack : "Din mor2",
+        damage : 10,
+        cardNum : 1,
+        frameImage : "Frames/normal.png",
+        elementImage : "Elements/FireElement.png",
+        imageOverlayImage : "",
+        cardImage : "Cards/FirstEdition Collection/CardPictures/g_holo_john_olsen_01.jpg",
+    },
+    {
+        name: "Card 1",
+        health : 100,
+        info: "This is a card",
+        attack : "Din mor",
+        damage : 10,
+        cardNum : 1,
+        frameImage : "Frames/normal.png",
+        elementImage : "Elements/FireElement.png",
+        imageOverlayImage : "",
+        cardImage : "Cards/FirstEdition Collection/CardPictures/g_holo_john_olsen_01.jpg",
+    },
+    {
+        name: "Card 2",
+        health : 100,
+        info: "This is a card",
+        attack : "Din mor2",
+        damage : 10,
+        cardNum : 1,
+        frameImage : "Frames/normal.png",
+        elementImage : "Elements/FireElement.png",
+        imageOverlayImage : "",
+        cardImage : "Cards/FirstEdition Collection/CardPictures/g_holo_john_olsen_01.jpg",
+    },
+    {
+        name: "Card 1",
+        health : 100,
+        info: "This is a card",
+        attack : "Din mor",
+        damage : 10,
+        cardNum : 1,
+        frameImage : "Frames/normal.png",
+        elementImage : "Elements/FireElement.png",
+        imageOverlayImage : "",
+        cardImage : "Cards/FirstEdition Collection/CardPictures/g_holo_john_olsen_01.jpg",
+    },
+    {
+        name: "Card 2",
+        health : 100,
+        info: "This is a card",
+        attack : "Din mor2",
+        damage : 10,
+        cardNum : 1,
+        frameImage : "Frames/normal.png",
+        elementImage : "Elements/FireElement.png",
+        imageOverlayImage : "",
+        cardImage : "Cards/FirstEdition Collection/CardPictures/g_holo_john_olsen_01.jpg",
+    },
+    {
+        name: "Card 1",
+        health : 100,
+        info: "This is a card",
+        attack : "Din mor",
+        damage : 10,
+        cardNum : 1,
+        frameImage : "Frames/normal.png",
+        elementImage : "Elements/FireElement.png",
+        imageOverlayImage : "",
+        cardImage : "Cards/FirstEdition Collection/CardPictures/g_holo_john_olsen_01.jpg",
+    },
+    {
+        name: "Card 2",
+        health : 100,
+        info: "This is a card",
+        attack : "Din mor2",
+        damage : 10,
+        cardNum : 1,
+        frameImage : "Frames/normal.png",
+        elementImage : "Elements/FireElement.png",
+        imageOverlayImage : "",
+        cardImage : "Cards/FirstEdition Collection/CardPictures/g_holo_john_olsen_01.jpg",
+    },
+    {
+        name: "Card 1",
+        health : 100,
+        info: "This is a card",
+        attack : "Din mor",
+        damage : 10,
+        cardNum : 1,
+        frameImage : "Frames/normal.png",
+        elementImage : "Elements/FireElement.png",
+        imageOverlayImage : "",
+        cardImage : "Cards/FirstEdition Collection/CardPictures/g_holo_john_olsen_01.jpg",
+    },
+    {
+        name: "Card 2",
+        health : 100,
+        info: "This is a card",
+        attack : "Din mor2",
+        damage : 10,
+        cardNum : 1,
+        frameImage : "Frames/normal.png",
+        elementImage : "Elements/FireElement.png",
+        imageOverlayImage : "",
+        cardImage : "Cards/FirstEdition Collection/CardPictures/g_holo_john_olsen_01.jpg",
+    },
 ]

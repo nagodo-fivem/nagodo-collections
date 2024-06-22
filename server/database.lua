@@ -123,6 +123,70 @@ function Database()
         return cards
     end
 
+    self.GetCardsForItemRegister = function()
+        local result = exports.oxmysql:executeSync('SELECT * FROM nagodo_collections_cards', {}) 
+
+        local cards = {}
+
+        if next(result) then
+            for k, v in pairs(result) do
+                local card = {
+                    identifier = v.id,
+                    collectionId =  v.collection,
+                    name = v.label
+                }
+                table.insert(cards, card)
+            end
+        end
+
+        return cards
+    end
+
+    self.GetCardDataForUse = function(cardName)
+        local collectionId = cardName[1]
+        local cardId = cardName[3]
+        local result = exports.oxmysql:executeSync('SELECT * FROM nagodo_collections_cards WHERE collection = ? AND id = ?', {collectionId, cardId}) 
+    
+        
+        if next(result) then
+            
+            local fetchedData = result[1]
+            local additionelData = json.decode(fetchedData.data)
+
+            local sqlPropertyIds = "" .. additionelData.frameIdentifier .. "," .. additionelData.elementIdentifier .. "," .. additionelData.imageOverlayIdentifier
+            local properties = exports.oxmysql:executeSync('SELECT * FROM nagodo_collections_properties WHERE id IN (?))', {sqlPropertyIds})
+
+            local sortedProperties = self.SortProperties(properties)
+
+            local cardData = {
+                name = fetchedData.name,
+                health = additionelData.health,
+                attack = additionelData.attack,
+                damage = additionelData.damage,
+                info = additionelData.info,
+
+                cardImage = additionelData.cardImage,
+                frameImage = sortedProperties["frame"],
+                elementImage = sortedProperties["element"],
+                overlayImage = sortedProperties["overlay"]
+            }
+
+            return cardData
+        end
+
+        return false
+    end
+    
+    self.SortProperties = function(properties)
+        local sorted = {}
+
+        for k, v in pairs(properties) do
+            sorted[v.type] = v.image
+        end
+
+        return sorted
+    end
+
     self.CreateCard = function(collectionIdentifier, card)
         local data = {
             health = card.health,
@@ -163,3 +227,5 @@ function Database()
 
     return self
 end
+
+DATABASE = Database()

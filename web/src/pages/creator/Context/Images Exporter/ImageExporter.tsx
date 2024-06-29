@@ -284,13 +284,13 @@ const BytesPerSecond = ({callback}: BytesPerSecondProps) => {
 
     return (
         <div className="bytespersecond">
-            <DropDown title="Bytes per second" options={[
-                {label: "20000", identifier: "20000"},
-                {label: "30000", identifier: "30000"},
-                {label: "40000", identifier: "40000"},
-                {label: "50000", identifier: "50000"},
-                {label: "60000", identifier: "60000"}
-            ]} onChange={handleChange} currentValue="40000"/>
+            <DropDown title="Speed" options={[
+                {label: "Default", identifier: "20000"},
+                {label: "1.5x", identifier: "30000"},
+                {label: "2x", identifier: "40000"},
+                {label: "2.5x", identifier: "50000"},
+                {label: "3x", identifier: "60000"}
+            ]} onChange={handleChange} currentValue="20000"/>
         </div>
     )
 }

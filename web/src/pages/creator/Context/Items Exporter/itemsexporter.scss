@@ -78,26 +78,29 @@
             background-color: var(--border);
         }
 
-        textarea {
-
+        .outputtext {
+        
             position: absolute;
-
+        
             bottom: 1vh;
             left: 50%;
             transform: translateX(-50%);
-
+        
             background-color: transparent;
             border: none;
             outline: none;
-
+        
             font-size: 1.4vh;
-
+            line-height: 1.8vh;
+        
             color: var(--foreground);
 
+            overflow-x: scroll;
+        
             height: 51vh;
             width: 48vh;
-                text-wrap: nowrap;
-
+            white-space: nowrap;
+        
             resize: none;
         }
     }

@@ -13,7 +13,13 @@ interface PropertiesOverviewProps {
 
 let emptyProperty: IProperty = {identifier: 0, type: "", label: "", image: ""};
 let currentSelectedProperty: IProperty = {identifier: 0, type: "", label: "", image: ""};
-export const TypeDropdownOptions: IOption[] = [{identifier: "frame", label: "Frame"}, {identifier: "element", label: "Element"}, {identifier: "image-overlay", label: "Overlay"}, {identifier: "back", label: "Back"}];
+export const TypeDropdownOptions: IOption[] = [
+    {identifier: "frame", label: "Frame"}, 
+    {identifier: "element", label: "Element"}, 
+    {identifier: "image-overlay", label: "Overlay"}, 
+    {identifier: "sticker", label: "Sticker"},
+    {identifier: "back", label: "Back"},
+];
 
 const PropertiesOverview = ({properties}: PropertiesOverviewProps) => {
     const [addingProperty, setAddingProperty] = useState(false);
@@ -26,7 +32,11 @@ const PropertiesOverview = ({properties}: PropertiesOverviewProps) => {
     }
 
     function handleNewPropertyCreated() {
-        setAddingProperty(false);
+        setEditingProperty(false);
+    }
+
+    function handlePropertySaved() {
+        setEditingProperty(false);
     }
 
     function handleCancelClick() {
@@ -62,6 +72,10 @@ const PropertiesOverview = ({properties}: PropertiesOverviewProps) => {
         return properties.filter(property => property.type === "image-overlay");
     }
 
+    function getStickersProperties() {
+        return properties.filter(property => property.type === "sticker");
+    }
+
     return (
         <div className="properties">
 
@@ -69,6 +83,7 @@ const PropertiesOverview = ({properties}: PropertiesOverviewProps) => {
                 <Property title = {"Frames"} properties = {getFrameProperties()} onPropertyClick={handlePropertyClick}/>
                 <Property title = {"Elements"} properties={getElementProperties()} onPropertyClick={handlePropertyClick}/>
                 <Property title = {"Image overlays"} properties={getImageOverlayProperties()} onPropertyClick={handlePropertyClick}/>
+                <Property title = {"Stickers"} properties={getStickersProperties()} onPropertyClick={handlePropertyClick}/>
             
                 <Property title = {"Backs"} properties={getBackProperties()} onPropertyClick={handlePropertyClick}/>
             
@@ -76,7 +91,7 @@ const PropertiesOverview = ({properties}: PropertiesOverviewProps) => {
             <div className="actions">
 
                 <NewProperty show = {addingProperty} cancelBtnCallback = {handleCancelClick} handleNewPropertyCreated = {handleNewPropertyCreated}/>
-                <SelectedProperty show = {editingProperty} cancelBtnCallback = {handleCancelClick} selectedProperty={currentSelectedProperty} changeCallback = {handlePropertyChange}/>
+                <SelectedProperty show = {editingProperty} cancelBtnCallback = {handleCancelClick} handlePropertySaved = {handlePropertySaved} selectedProperty={selectedProperty} changeCallback = {handlePropertyChange}/>
 
                 <Action label = "New property" onClick = {handleNewPropertyBtn}/>
                 

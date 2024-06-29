@@ -9,8 +9,9 @@ interface NavBarProps {
 const NavBar = ({selectedPage, navigationCallback}: NavBarProps) => {
     return (
         <div className="navbar">
-            <NavItem label="Collections" selectedPage={selectedPage} callback={navigationCallback} />
-            <NavItem label="Properties" selectedPage={selectedPage} callback={navigationCallback} />
+            <NavItem label = "Collections" selectedPage={selectedPage} callback={navigationCallback} />
+            <NavItem label = "Properties" selectedPage={selectedPage} callback={navigationCallback} />
+            <NavItem label = "Animations" selectedPage={selectedPage} callback={navigationCallback} />
         </div>
     )
 }

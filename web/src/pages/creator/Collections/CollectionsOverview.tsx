@@ -5,12 +5,14 @@ import './collections.scss';
 import EditingCollection from "./EditingCollection";
 import CollectionCardEditor from "./CollectionCardEditor";
 import Action from "../Action/Action";
+import IProperty from "../Properties/IProperty";
 
 interface CollectionsOverviewProps {
     collections: ICollection[];
+    properties: IProperty[];
 }
 let currentSelectedCollection: ICollection = {identifier: 0, label: "", cardAmount: 0};
-const CollectionsOverview = ({collections}: CollectionsOverviewProps) => {
+const CollectionsOverview = ({collections, properties}: CollectionsOverviewProps) => {
     const [addingNewCollection, setAddingNewCollection] = useState(false);
     const [editingCollection, setEditingCollection] = useState(false);
     const [editingCards, setEditingCards] = useState(false);
@@ -47,7 +49,7 @@ const CollectionsOverview = ({collections}: CollectionsOverviewProps) => {
         <div className="collections">
 
             {editingCards && (
-                <CollectionCardEditor collectionIdentifier={currentSelectedCollection.identifier} />
+                <CollectionCardEditor collectionIdentifier={currentSelectedCollection.identifier} _properties = {properties} />
             )}
 
             {!editingCards && (
@@ -66,7 +68,7 @@ const CollectionsOverview = ({collections}: CollectionsOverviewProps) => {
                     
                     <div className="actions">
                         <NewCollection show = {addingNewCollection} cancelBtnCallback={handleCancelClick} handleNewCollectionCreated = {handleNewCollectionCreated}/>
-                        <EditingCollection show = {editingCollection} cancelBtnCallback = {handleCancelClick} selectedCollection={currentSelectedCollection} changeCallback={handleCollectionChange} handleEditCardsClick = {handleEditCardsClick} />
+                        <EditingCollection show = {editingCollection && !addingNewCollection} cancelBtnCallback = {handleCancelClick} selectedCollection={currentSelectedCollection} changeCallback={handleCollectionChange} handleEditCardsClick = {handleEditCardsClick} />
 
                         <Action label = "New Collection" onClick={handleNewCollectionBtn}/>
                     </div>

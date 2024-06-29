@@ -13,6 +13,7 @@ server_scripts {
 }
 
 client_scripts {
+	'client/enums/*',
 	'client/editable_client.lua',
 	'client/main.lua',
 }

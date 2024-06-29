@@ -49,7 +49,8 @@ const ItemsExporter = ({collectionIdentifier, closeContext}: ItemsExporterProps)
     }
 
     function handleCopyToClipboard() {
-        navigator.clipboard.writeText(output);
+        let toClipBoard = output.replace(/<br>/g, "\n");
+        navigator.clipboard.writeText(toClipBoard);
         setCopyToClipboardStatus("Output has been copied to clipboard!");
     }
 
@@ -70,7 +71,7 @@ const ItemsExporter = ({collectionIdentifier, closeContext}: ItemsExporterProps)
                     Output
                 </div>
                 <div className="line"></div>
-                <textarea spellCheck = {false} readOnly value={output}></textarea>
+                <div className="outputtext" dangerouslySetInnerHTML= {{ __html: output }}></div>
             </div>
 
             <div className="copytoclipboard" onClick={handleCopyToClipboard}>

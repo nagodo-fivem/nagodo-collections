@@ -16,35 +16,16 @@ interface ShowCard {
     overlayImage: string;
 }
 
-interface IRotation {
-    x: number;
-    y: number;
-}
-
 const ShowCard = () => {
-    const [currentRotation, setCurrentRotation] = useState<IRotation>({x: 0, y: 0});
-    const [lastPostion, setLastPosition] = useState<number[]>([0, 0]);
-    
-    function handleDrag(event: any) {
-        let newRotation: IRotation = currentRotation;
-        if (lastPostion[1] - event.clientY >= 1) {
-            newRotation.y += 1;
-        } else if (lastPostion[1] - event.clientY <= 1) {
-            newRotation.y -= 1;
-        }
+    const [rotated, setRotated] = useState(false);
 
-        if (lastPostion[0] - event.clientX >= 1) {
-            newRotation.x += 1;
-        } else if (lastPostion[0] - event.clientX <= 1) {
-            newRotation.x -= 1;
-        }
-        setCurrentRotation(newRotation);
-        setLastPosition([event.clientX, event.clientY])
+    function handleClick() {
+        setRotated(!rotated);
     }
 
     return (
-        <div className="showcard" onMouseMove={handleDrag}  >
-            <SpinningCard card = {testCard} rotation = {currentRotation} />
+        <div className="showcard" onClick={handleClick}>
+            <SpinningCard card = {testCard} rotated = {rotated} />
         </div>
     )
 }
@@ -54,17 +35,25 @@ export default ShowCard;
 
 interface SpinningCardProps {
     card: ShowCard;
-    rotation: IRotation;
+    rotated: boolean;
 }
 
-const SpinningCard = ({card, rotation}: SpinningCardProps) => {
+const SpinningCard = ({card, rotated}: SpinningCardProps) => {
 
     function getFrontRotationStyle() {
-        return {"transform": "rotateX(" + rotation.x + "deg) rotateY(" + rotation.y + "deg)"}
+        if (rotated) {
+            return {"transform": "rotateY(" + (180) + "deg)", "transition": "all 1s ease"}
+        }
+
+        return {"transform": "rotateY(" + (0) + "deg)", "transition": "all 1s ease"}
     }
 
     function getBackRotationStyle() {
-        return {"transform": "rotateX(" + (rotation.x + 0) + "deg) rotateY(" + (rotation.y + 180) + "deg)"}
+        if (rotated) {
+            return {"transform": "rotateY(" + (0) + "deg)", "transition": "all 1s ease"}
+        }
+
+        return {"transform": "rotateY(" + (180) + "deg)", "transition": "all 1s ease"}
     }
 
     return (

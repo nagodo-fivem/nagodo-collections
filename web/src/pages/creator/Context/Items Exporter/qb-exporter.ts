@@ -1,6 +1,6 @@
 import { ICard } from "../../Collections/ICard";
 
-let defaultItemFormat = "(itemname) = { name = '(itemname)', label = '(itemlabel)', weight = (itemweight), type = 'item', image = '(itemimage)', unique = false, useable = true, shouldClose = true, description = '(itemdesc)' },";
+let defaultItemFormat = "['(itemname)'] = { name = '(itemname)', label = '(itemlabel)', weight = (itemweight), type = 'item', image = '(itemimage)', unique = false, useable = true, shouldClose = true, description = '(itemdesc)' },";
 
 let qbExporter = (collectionId: number, cards: ICard[]) => {
     let qbString = "";
@@ -14,7 +14,7 @@ let qbExporter = (collectionId: number, cards: ICard[]) => {
     let itemImage = "collection_folder.png";
     let description = "Folder for collection: " + collectionId;
     qbString += defaultItemFormat.replace(/\(itemname\)/g, itemName).replace(/\(itemlabel\)/g, itemLabel).replace(/\(itemweight\)/g, itemWeight).replace(/\(itemimage\)/g, itemImage).replace(/\(itemdesc\)/g, description);
-    qbString += "\n\n";
+    qbString += "<br><br>";
   
     //Cards
     cards.forEach(card => {
@@ -26,7 +26,7 @@ let qbExporter = (collectionId: number, cards: ICard[]) => {
         let description = "Card from collection: " + collectionId;
 
         qbString += defaultItemFormat.replace(/\(itemname\)/g, itemName).replace(/\(itemlabel\)/g, itemLabel).replace(/\(itemweight\)/g, itemWeight).replace(/\(itemimage\)/g, itemImage).replace(/\(itemdesc\)/g, description);
-        qbString += "\n";
+        qbString += "<br>";
     });
 
 

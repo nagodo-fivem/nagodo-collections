@@ -97,6 +97,35 @@ RegisterNUICallback('createProperty', function(data, cb)
     cb('ok')
 end)
 
+RegisterNUICallback('saveProperty', function(data, cb)
+    local identifier = data.identifier
+    local type = data.type
+    local label = data.label
+    local image = data.image
+
+    local property = {
+        identifier = identifier,
+        type = type,
+        label = label,
+        image = image
+    }
+
+    local allProperties = UTILS.TriggerCallbackSync('nagodo-collections:server:saveProperty', property)
+    SendProperties(allProperties)
+
+    cb('ok')
+end)
+
+RegisterNUICallback('deleteProperty', function(data, cb)
+    local identifier = data.identifier
+    print(identifier)
+
+    local allProperties = UTILS.TriggerCallbackSync('nagodo-collections:server:deleteProperty', identifier)
+    SendProperties(allProperties)
+
+    cb('ok')
+end)
+
 RegisterNUICallback('saveCard', function(data, cb)
     local collectionIdentifier = data.collection
 

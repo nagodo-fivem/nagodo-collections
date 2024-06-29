@@ -6,17 +6,21 @@ import Input from "../../../components/Input/Input";
 import { getImagePath } from "../../../helpers/ItemImagePath";
 import IProperty from "./IProperty";
 import { useParent } from "../Context/contextMenuProvider";
+import { fetchNui } from "../../../utils/fetchNui";
 
 interface SelectedPropertyProps{
     show: boolean;
     cancelBtnCallback: () => void;
     selectedProperty: IProperty;
+    handlePropertySaved: () => void;
     changeCallback: (property: IProperty) => void;
 }
 
-const SelectedProperty = ({show, cancelBtnCallback, selectedProperty, changeCallback}: SelectedPropertyProps) => {
+const SelectedProperty = ({show, cancelBtnCallback, selectedProperty, handlePropertySaved, changeCallback}: SelectedPropertyProps) => {
     const { openDeletePropertyContextMenu } = useParent();
     
+    console.log(selectedProperty);
+    console.log(selectedProperty.identifier);
 
     function handleTypeChange(type: string) {
         changeCallback({...selectedProperty, type: type});
@@ -36,7 +40,18 @@ const SelectedProperty = ({show, cancelBtnCallback, selectedProperty, changeCall
 
 
     function handleDeleteClick() {
-        openDeletePropertyContextMenu();
+        openDeletePropertyContextMenu(selectedProperty.identifier);
+    }
+
+    function handleSaveClick() {
+        fetchNui<any>("saveProperty", {
+            identifier: selectedProperty.identifier,
+            type: selectedProperty.type,
+            label: selectedProperty.label,
+            image: selectedProperty.image
+        }).then((response) => {
+            handlePropertySaved();
+        });
     }
 
     function getImage(path: string) {
@@ -88,7 +103,7 @@ const SelectedProperty = ({show, cancelBtnCallback, selectedProperty, changeCall
                         Delete
                     </div>
                 </div>
-                <div className="btn save small">
+                <div className="btn save small" onClick={handleSaveClick}>
                     <div className="text">
                         Save
                     </div>

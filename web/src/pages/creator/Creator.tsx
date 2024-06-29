@@ -8,21 +8,31 @@ import { ContextMenu } from './Context/contextMenu';
 import { useNuiEvent } from '../../hooks/useNuiEvent';
 import IProperty from './Properties/IProperty';
 import ICollection from './Collections/ICollection';
+import IAnimation from './Animations/IAnimation';
+import AnimationsOverview from './Animations/AnimationsOverview';
+import { isEnvBrowser } from '../../utils/misc';
 
 const Creator = () => {
     const [selectedPage, setSelectedPage] = useState<string>("collections");
-    const [collections, setCollections] = useState<ICollection[]>(testCollections);
-    const [properties, setProperties] = useState<IProperty[]>(testProperties);
+    const [collections, setCollections] = useState<ICollection[]>(isEnvBrowser() ? testCollections : []);
+    const [properties, setProperties] = useState<IProperty[]>(isEnvBrowser() ? testProperties : []);
+    const [animations, setAnimations] = useState<IAnimation[]>(isEnvBrowser() ? testAnimations : []);
 
     useEffect(() => {
         fetchNui('fetchCollections').then((data) => {
-            setProperties(data);
+            setCollections(data);
         }).catch((err) => {
             
         });
 
         fetchNui('fetchProperties').then((data) => {
             setProperties(data);
+        }).catch((err) => {
+            
+        });
+
+        fetchNui('fetchAnimations').then((data) => {
+            setAnimations(data);
         }).catch((err) => {
             
         });
@@ -48,12 +58,17 @@ const Creator = () => {
 
                 {/* Collections */}
                 {selectedPage === "collections" && (
-                    <CollectionsOverview collections = {collections}/>
+                    <CollectionsOverview collections = {collections} properties = {properties}/>
                 )}
 
                 {/* Properties */}
                 {selectedPage === "properties" && (
                     <PropertiesOverview properties = {properties}/>
+                )}
+
+                {/* Animations */}
+                {selectedPage === "animations" && (
+                    <AnimationsOverview animations = {animations}/>
                 )}
 
             </div>
@@ -69,6 +84,24 @@ let testCollections: ICollection[] = [
         identifier: 1,
         label: "First Edition",
         cardAmount: 10
+    }
+]
+
+let testAnimations: IAnimation[] = [
+    {
+        identifier: 1,
+        label: "Flip1",
+        type: "flip",
+    },
+    {
+        identifier: 2,
+        label: "Flip2",
+        type: "flip",
+    },
+    {
+        identifier: 3,
+        label: "Open1",
+        type: "open",
     }
 ]
 
@@ -134,5 +167,11 @@ let testProperties: IProperty[] = [
         type: "image-overlay",
         label: "Holo",
         image: "Overlays/Holo.png"
+    },
+    {
+        identifier: 11,
+        type: "sticker",
+        label: "Sticker",
+        image: "Stickers/firstedition.png"
     }
 ]

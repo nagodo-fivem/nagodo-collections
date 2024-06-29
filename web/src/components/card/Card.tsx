@@ -30,10 +30,10 @@ const FrontCard = ({name, health, info, attack, damage, cardNum, size, frameImag
     function getCardStyle() {
 
         if (fill) {
-            return {"transition": "all 1s ease", "height": "100%", "width": "100%"}
+            return {"height": "100%", "width": "100%"}
         }
        
-        return {"transition": "all 1s ease", "height": height + "vh", "width": width + "vh"}
+        return {"height": height + "vh", "width": width + "vh"}
     }
 
     function GetCardNum(cardNum: number | string) {

@@ -3,6 +3,7 @@ import { ContextMenuProvider } from "./contextMenuProvider";
 import "./context.scss";
 import ImageExporter from "./Images Exporter/ImageExporter";
 import ItemsExporter from "./Items Exporter/ItemsExporter";
+import { fetchNui } from "../../../utils/fetchNui";
 
 export interface ContextMenuData {
     visible: boolean;
@@ -14,13 +15,15 @@ interface ContextMenuProps {
 }
 
 export const ContextMenu = (props: ContextMenuProps) => {
-    const [visible, setVisible] = useState(true);
+    const [visible, setVisible] = useState(false);
     const [type, setType] = useState<string>("export-card-images");
     
     const [cardCollectionToExport, setCardCollectionToExport] = useState<number>(-1);
+    const [propertyToDelete, setPropertyToDelete] = useState<number>(-1);
 
-    function openDeletePropertyContextMenu() {
+    function openDeletePropertyContextMenu(propertyIdentifier: number) {
         setType("delete-property");
+        setPropertyToDelete(propertyIdentifier);
         setVisible(true);
     }
 
@@ -39,7 +42,13 @@ export const ContextMenu = (props: ContextMenuProps) => {
     }
 
     function handleConfirmClick() {
-        
+        if (type === "delete-property") {
+            fetchNui<any>("deleteProperty", {
+                identifier: propertyToDelete
+            }).then((response) => {
+                setVisible(false);
+            });
+        }
     }
 
     return (

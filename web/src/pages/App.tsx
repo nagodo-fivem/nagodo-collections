@@ -10,7 +10,7 @@ import ShowCard from './showCard/ShowCard';
 
 
 const App: React.FC = () => {
-    const [showType, setShowType] = useState<string>(isEnvBrowser() ? "showCard" : "");
+    const [showType, setShowType] = useState<string>(isEnvBrowser() ? "creator" : "");
 
     //NUI Hooks
     useNuiEvent<any>('setTranslations', (data) => { 

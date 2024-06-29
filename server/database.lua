@@ -75,6 +75,22 @@ function Database()
         return result
     end
 
+    self.UpdateProperty = function(property)
+        local data = {
+            image = property.image
+        }
+
+        local result = exports.oxmysql:executeSync('UPDATE nagodo_collections_properties SET label = ?, type = ?, data = ? WHERE id = ?', {property.label, property.type, json.encode(data), property.identifier})   
+
+        return result
+    end
+
+    self.DeleteProperty = function(propertyIdentifier)
+        local result = exports.oxmysql:executeSync('DELETE FROM nagodo_collections_properties WHERE id = ?', {propertyIdentifier})   
+
+        return result
+    end
+
     self.GetAllProperties = function()
         local result = exports.oxmysql:executeSync('SELECT * FROM nagodo_collections_properties')
 

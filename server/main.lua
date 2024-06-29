@@ -47,6 +47,24 @@ UTILS.CreateCallback('nagodo-collections:server:createNewProperty', function(sou
     cb(properties)
 end)
 
+UTILS.CreateCallback('nagodo-collections:server:saveProperty', function(source, cb, property)
+
+    local result = DATABASE.UpdateProperty(property)
+
+    local properties = DATABASE.GetAllProperties()
+
+    cb(properties)
+end)
+
+UTILS.CreateCallback('nagodo-collections:server:deleteProperty', function(source, cb, propertyIdentifier)
+    
+    DATABASE.DeleteProperty(propertyIdentifier)
+
+    local properties = DATABASE.GetAllProperties()
+
+    cb(properties)
+end)
+
 UTILS.CreateCallback('nagodo-collections:server:saveCard', function(source, cb, payload)
     
     if payload.card.identifier == -1 then

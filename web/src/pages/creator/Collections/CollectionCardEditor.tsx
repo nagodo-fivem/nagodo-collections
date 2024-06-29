@@ -7,17 +7,19 @@ import IProperty from "../Properties/IProperty";
 import { getImagePath } from "../../../helpers/ItemImagePath";
 import { fetchNui } from "../../../utils/fetchNui";
 import { useNuiEvent } from "../../../hooks/useNuiEvent";
+import StickerPlacement from "./StickerPlacement";
+import { isEnvBrowser } from "../../../utils/misc";
 
 const defaultCard: ICard = {identifier: -1, name: "", health: 100, info: "", attack: "", damage: 99, cardNum: 1, rarity: 50, frameIdentifier: 1, elementIdentifier: 1, imageOverlayIdentifier: -1, cardImage: "Cards/FirstEdition Collection/CardPictures/black_blackgris_01.png"};
 const cardSize = 0.619;
-const CollectionCardEditor = ({collectionIdentifier}: {collectionIdentifier: number}) => {
-    const [properties, setProperties] = useState<IProperty[]>(testProperties);
+const CollectionCardEditor = ({collectionIdentifier, _properties}: {collectionIdentifier: number, _properties: IProperty[]}) => {
+    const [properties, setProperties] = useState<IProperty[]>(isEnvBrowser() ? testProperties : _properties);
     const [selectingProperty, setSelectingProperty] = useState(false); 
     const [selectingPropertyType, setSelectingPropertyType] = useState("frame");
     const [editingCard, setEditingCard] = useState(false); 
     const [newCardData, setNewCardData] = useState<ICard>(defaultCard);
     const [selectedCard, setSelectedCard] = useState<ICard>(defaultCard);
-    const [cards, setCards] = useState<ICard[]>(testCards); 
+    const [cards, setCards] = useState<ICard[]>(isEnvBrowser() ? testCards : []); 
 
     useNuiEvent<any>('setCards', (data) => {
         setCards(data.cards);
@@ -25,6 +27,7 @@ const CollectionCardEditor = ({collectionIdentifier}: {collectionIdentifier: num
 
     function handleNewCardClick() {
         setEditingCard(true);
+        setSelectingProperty(true);
 
         let _defaultCard = {...defaultCard};
         _defaultCard.name = "New card";
@@ -35,6 +38,7 @@ const CollectionCardEditor = ({collectionIdentifier}: {collectionIdentifier: num
 
     function handleCardClick(card: ICard) {
         setEditingCard(true);
+        setSelectingProperty(true);
         setSelectedCard(card);
         setNewCardData(card);
     }
@@ -48,6 +52,7 @@ const CollectionCardEditor = ({collectionIdentifier}: {collectionIdentifier: num
     }
 
     function handleSaveClick() {
+
         setEditingCard(false);
         setSelectingProperty(false);
 
@@ -133,7 +138,7 @@ const CollectionCardEditor = ({collectionIdentifier}: {collectionIdentifier: num
                     </div>
                 )}
 
-                {selectingProperty && (
+                {(selectingProperty && (selectingPropertyType != "sticker")) && (
                     <div className="selectingProperty">
 
                         {getPropertiesByType(selectingPropertyType).map((property) => {
@@ -152,8 +157,12 @@ const CollectionCardEditor = ({collectionIdentifier}: {collectionIdentifier: num
                     </div>
                 )}
                 
+                {(selectingProperty && (selectingPropertyType == "sticker")) && (
+                    <div className="selectingProperty">
 
-                
+                        <StickerPlacement />
+                    </div>
+                )}
 
             </div>
             
@@ -288,6 +297,9 @@ const SelectedCardProperty = ({startCardData, handleCardDataChange, handleSelect
                 <div className="button" onClick={() => {handleSelectVisualType("image-overlay")}}>
                     <div className="label"><i className="fa-solid fa-folder-open"></i>Image Overlay</div>
                 </div>
+                <div className="button" onClick={() => {handleSelectVisualType("sticker")}}>
+                    <div className="label"><i className="fa-solid fa-folder-open"></i>Stickers</div>
+                </div>
             </div>
         </div>
     )
@@ -398,5 +410,11 @@ let testProperties: IProperty[] = [
         type: "image-overlay",
         label: "Holo",
         image: "Overlays/Holo.png"
+    },
+    {
+        identifier: 1,
+        type: "sticker",
+        label: "Sticker",
+        image: "Stickers/firstedition.png"
     }
 ]

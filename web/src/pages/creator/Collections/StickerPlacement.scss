@@ -1,0 +1,29 @@
+.stickerplacement {
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    .currentstickers {
+        position: absolute;
+
+        top: 1vh;
+        right: 1vh;
+
+        width: 6vh;
+        height: 60vh;
+
+        .sticker {
+            position: relative;
+
+            width: 6vh;
+            height: 6vh;
+
+            margin-bottom: 0.75vh;
+
+            border: 0.3vh solid var(--border);
+            border-radius: var(--radius);
+        }
+
+    }
+}

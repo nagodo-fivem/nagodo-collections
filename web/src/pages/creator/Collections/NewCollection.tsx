@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { fetchNui } from "../../../utils/fetchNui";
-import Input from "../../../components/Input/Input";
+import { fetchNui } from "@utils/fetchNui";
+import Input from "@components/Input/Input";
 
 interface NewCollectionProps {
     show: boolean;

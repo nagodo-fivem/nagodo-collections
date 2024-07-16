@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { ContextMenuProvider } from "./contextMenuProvider";
 import "./context.scss";
-import ImageExporter from "./Images Exporter/ImageExporter";
-import ItemsExporter from "./Items Exporter/ItemsExporter";
-import { fetchNui } from "../../../utils/fetchNui";
+import ImageExporter from "./ImagesExporter/ImageExporter";
+import ItemsExporter from "./ItemsExporter/ItemsExporter";
+import { fetchNui } from "@utils/fetchNui";
 
 export interface ContextMenuData {
     visible: boolean;

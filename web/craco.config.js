@@ -1,4 +1,5 @@
 const path = require("path");
+
 module.exports = {
   webpack: {
     configure: (webpackConfig) => {
@@ -8,9 +9,23 @@ module.exports = {
         webpackConfig.devtool = 'eval-source-map'
         webpackConfig.output.path = path.join(__dirname, 'build')
       }
-
+      
+      webpackConfig.resolve = {
+        ...webpackConfig.resolve,
+        alias: {
+          '@': path.resolve(__dirname, './'),
+          '@components': path.resolve(__dirname, './src/components'),
+          '@utils': path.resolve(__dirname, './src/utils'),
+          '@hooks': path.resolve(__dirname, './src/hooks'),
+          '@helpers': path.resolve(__dirname, './src/helpers'),
+          '@sounds': path.resolve(__dirname, './src/sounds')
+        },
+        extensions: ['.js', '.jsx', '.ts', '.tsx'] // add other extensions if needed
+      };
+      
       return webpackConfig
-    }
+    },
+    
   },
 
   devServer: (devServerConfig) => {

@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import NavBar from '../../components/Navigation/NavBar';
+import NavBar from '@components/Navigation/NavBar';
 import './creator.scss';
-import { fetchNui } from '../../utils/fetchNui';
+import { fetchNui } from '@utils/fetchNui';
 import CollectionsOverview from './Collections/CollectionsOverview';
 import PropertiesOverview from './Properties/PropertiesOverview';
 import { ContextMenu } from './Context/contextMenu';
-import { useNuiEvent } from '../../hooks/useNuiEvent';
+import { useNuiEvent } from '@hooks/useNuiEvent';
 import IProperty from './Properties/IProperty';
 import ICollection from './Collections/ICollection';
 import IAnimation from './Animations/IAnimation';

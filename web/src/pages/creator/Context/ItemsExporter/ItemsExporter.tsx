@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import "./itemsexporter.scss";
 import { ICard } from "../../Collections/ICard";
-import { fetchNui } from "../../../../utils/fetchNui";
-import DropDown from "../../../../components/Dropdown/Dropdown";
+import { fetchNui } from "@utils/fetchNui";
+import DropDown from "@components/Dropdown/Dropdown";
 import qbExporter from "./qb-exporter";
 
 interface ItemsExporterProps {

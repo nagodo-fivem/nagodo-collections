@@ -1,0 +1,12 @@
+.cardToOpen {
+    background-color: red;
+
+    position: relative;
+
+    width: fit-content;
+    height: 35vh;
+
+    .card-back {
+        position: absolute;
+    }
+}

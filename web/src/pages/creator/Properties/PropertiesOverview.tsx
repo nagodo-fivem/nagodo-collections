@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { getImagePath } from "../../../helpers/ItemImagePath";
-import DropDown, { IOption } from "../../../components/Dropdown/Dropdown";
-import Input from "../../../components/Input/Input";
+import getImagePath from "@helpers/getImagePath";
+import { IOption } from "@components/Dropdown/Dropdown";
 import NewProperty from "./NewProperty";
 import SelectedProperty from "./SelectedProperty";
 import IProperty from "./IProperty";

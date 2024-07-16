@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { getImagePath } from "../../../helpers/ItemImagePath";
-import DropDown from "../../../components/Dropdown/Dropdown";
-import Input from "../../../components/Input/Input";
+import getImagePath from "@helpers/getImagePath";
+import DropDown from "@components/Dropdown/Dropdown";
+import Input from "@components/Input/Input";
 import { TypeDropdownOptions } from "./PropertiesOverview";
-import { fetchNui } from "../../../utils/fetchNui";
+import { fetchNui } from "@utils/fetchNui";
 
 interface NewPropertyProps {
     show: boolean;

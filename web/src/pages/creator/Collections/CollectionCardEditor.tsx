@@ -1,14 +1,14 @@
 import { useState } from "react";
-import FrontCard from "../../../components/card/Card";
+import { FrontCard } from "@components/card/Card";
 import Action from "../Action/Action";
 import { ICard } from "./ICard";
-import Input from "../../../components/Input/Input";
+import Input from "@components/Input/Input";
 import IProperty from "../Properties/IProperty";
-import { getImagePath } from "../../../helpers/ItemImagePath";
-import { fetchNui } from "../../../utils/fetchNui";
-import { useNuiEvent } from "../../../hooks/useNuiEvent";
+import getImagePath from "@helpers/getImagePath";
+import { fetchNui } from "@utils/fetchNui";
+import { useNuiEvent } from "@hooks/useNuiEvent";
+import { isEnvBrowser } from "@utils/misc";
 import StickerPlacement from "./StickerPlacement";
-import { isEnvBrowser } from "../../../utils/misc";
 
 const defaultCard: ICard = {identifier: -1, name: "", health: 100, info: "", attack: "", damage: 99, cardNum: 1, rarity: 50, frameIdentifier: 1, elementIdentifier: 1, imageOverlayIdentifier: -1, cardImage: "Cards/FirstEdition Collection/CardPictures/black_blackgris_01.png"};
 const cardSize = 0.619;

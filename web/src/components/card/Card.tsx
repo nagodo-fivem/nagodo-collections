@@ -1,13 +1,13 @@
 import { useRef, useState } from "react";
 import "./card.scss"
 
-import { getImagePath } from "../../helpers/ItemImagePath";
+import getImagePath from "@helpers/getImagePath";
 
 interface CardProps {
     name: string;
     health: number;
     info: string;
-    attack: string;
+    attack: number | string;
     damage: number;
     cardNum: number;
 
@@ -22,7 +22,7 @@ interface CardProps {
 
 
 
-const FrontCard = ({name, health, info, attack, damage, cardNum, size, frameImage, elementImage, cardImage, imageOverlayImage, fill }: CardProps) => {
+export const FrontCard = ({name, health, info, attack, damage, cardNum, size, frameImage, elementImage, cardImage, imageOverlayImage, fill }: CardProps) => {
     let scale = 0.025 * size;
     let width = 1024 * scale
     let height = 1420 * scale
@@ -77,6 +77,26 @@ const FrontCard = ({name, health, info, attack, damage, cardNum, size, frameImag
     )
 }
 
+export const BackCard = ({size, image}: {size: number, image: string}) => {
+    let scale = 0.025 * size;
+    let width = 1024 * scale
+    let height = 1420 * scale
+
+    function getCardStyle() {
+       
+        return {"transition": "all 1s ease", "height": height + "vh", "width": width + "vh"}
+    }
+
+    return (
+        <div className="card" style={getCardStyle() }>
+            <img src={getImagePath(image)}></img>
+
+        </div>
+    )
+}
+
+
+
 function GetNameFontSize(scale: number) {
     return 70 * scale + "vh";
 }
@@ -100,5 +120,3 @@ function GetDamageFontSize(scale: number) {
 function GetCardNumFontSize(scale: number) {
     return 40 * scale + "vh";
 }
-
-export default FrontCard;

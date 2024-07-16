@@ -1,9 +1,9 @@
 import { useState } from "react";
 import "./properties.scss";
-import DropDown from "../../../components/Dropdown/Dropdown";
+import DropDown from "@components/Dropdown/Dropdown";
 import { TypeDropdownOptions } from "./PropertiesOverview";
-import Input from "../../../components/Input/Input";
-import { getImagePath } from "../../../helpers/ItemImagePath";
+import Input from "@components/Input/Input";
+import getImagePath from "@helpers/getImagePath";
 import IProperty from "./IProperty";
 import { useParent } from "../Context/contextMenuProvider";
 import { fetchNui } from "../../../utils/fetchNui";

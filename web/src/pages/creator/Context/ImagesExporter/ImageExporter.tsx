@@ -3,7 +3,7 @@ import "./imageexporter.scss";
 import { ICard } from "../../Collections/ICard";
 import { fetchNui } from "../../../../utils/fetchNui";
 import domtoimage from 'dom-to-image';
-import FrontCard from "../../../../components/card/Card";
+import { FrontCard } from "../../../../components/card/Card";
 import IProperty from "../../Properties/IProperty";
 import DropDown from "../../../../components/Dropdown/Dropdown";
 

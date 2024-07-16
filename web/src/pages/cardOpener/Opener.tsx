@@ -29,7 +29,19 @@ const Opener = () => {
         <div className="opener">
             <div className="cards">
                 {cardsToOpen.map((card, index) => {
-                    return <CardToOpen key={index} {...card} onCardFlipped={handleCardFlipped} />
+                    return <CardToOpen key={index} 
+                        name={card.name}
+                        health={card.health}
+                        info={card.info}
+                        attack={card.attack}
+                        damage={card.damage}
+                        cardNum={card.cardNum}
+                        frameImage={card.frameImage}
+                        elementImage={card.elementImage}
+                        imageOverlayImage={card.imageOverlayImage}
+                        cardImage={card.cardImage}
+                        onCardFlipped={handleCardFlipped}
+                    />
                 })}
             </div>
         </div>

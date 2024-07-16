@@ -1,6 +1,8 @@
 import { useRef, useState } from "react";
-import flipsound from '../../sounds/flipsound.mp3';
-import FrontCard from "../../components/card/Card";
+import "./cardToOpen.scss";
+import flipsound from '@sounds/flipsound.mp3';
+import { FrontCard, BackCard } from "@components/card/Card";
+import getImagePath from "@helpers/getImagePath";
 
 interface OpenCardData {
     isFlipped: boolean;
@@ -12,7 +14,7 @@ interface CardToOpenProps {
     name: string;
     health: number;
     info: string;
-    attack: string;
+    attack: number | string;
     damage: number;
     cardNum: number;
 
@@ -27,7 +29,7 @@ interface CardToOpenProps {
 const CardToOpen = (props: CardToOpenProps) => {
     const audioRef = useRef(null);
 
-    const [openCardData, setOpenCardData] = useState<OpenCardData>({"isFlipped": false, "isSpecial": true});
+    const [openCardData, setOpenCardData] = useState<OpenCardData>({"isFlipped": true, "isSpecial": false});
 
     function getFlipBackSideTransform() {
 

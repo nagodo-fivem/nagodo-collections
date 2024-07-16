@@ -1,4 +1,4 @@
-import Input from "../../../components/Input/Input";
+import Input from "@components/Input/Input";
 import { useParent } from "../Context/contextMenuProvider";
 import ICollection from "./ICollection";
 

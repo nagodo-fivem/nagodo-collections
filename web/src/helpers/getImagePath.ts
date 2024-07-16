@@ -1,6 +1,6 @@
 import { isEnvBrowser } from "../utils/misc";
 
-export function getImagePath(name: string) {
+export default function getImagePath(name: string) {
 
     if (name === "") return "";
 

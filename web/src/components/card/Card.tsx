@@ -68,7 +68,7 @@ export const FrontCard = ({name, health, info, attack, damage, cardNum, size, fr
 
             <div className='info' style={{"fontSize": GetInfoFontSize(scale)}}>{info}</div>
 
-            <div className='attack' style = {{"fontSize": GetAttackFontSize(scale)}}>{attack}</div>
+            <p className='attack' style = {{"fontSize": GetAttackFontSize(scale)}}>{attack}</p>
 
             <div className='damage' style = {{"fontSize": GetDamageFontSize(scale)}}>{damage}</div>
 

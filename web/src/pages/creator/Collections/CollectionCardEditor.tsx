@@ -239,7 +239,7 @@ const SelectedCardProperty = ({startCardData, handleCardDataChange, handleSelect
     }
 
     function handleDamageChange(damage: string) {
-        if (damage.length > 5) return;
+        if (damage.length > 4) return;
         let _damage = parseInt(damage);
         handleCardDataChange({...startCardData, damage: _damage});
     }
@@ -297,8 +297,8 @@ const SelectedCardProperty = ({startCardData, handleCardDataChange, handleSelect
                 <div className="button" onClick={() => {handleSelectVisualType("image-overlay")}}>
                     <div className="label"><i className="fa-solid fa-folder-open"></i>Image Overlay</div>
                 </div>
-                <div className="button" onClick={() => {handleSelectVisualType("sticker")}}>
-                    <div className="label"><i className="fa-solid fa-folder-open"></i>Stickers</div>
+                <div className="button">
+                    <div className="label"><i className="fa-solid fa-folder-open"></i>Stickers (coming soon)</div>
                 </div>
             </div>
         </div>
@@ -311,13 +311,13 @@ let testCards: ICard[] = [
         name: "John Olsen",
         health: 100,
         info: "Test her",
-        attack: "Kredit her",
-        damage: 99,
+        attack: "Kredit her dwdwdw dww dwdwdddd",
+        damage: 9999,
         cardNum: 1,
         frameIdentifier: 1,
         elementIdentifier: 1,
         imageOverlayIdentifier: -1,
-        cardImage: "Cards/FirstEdition Collection/CardPictures/black_blackgris_01.png",
+        cardImage: "Cards/FirstEditionCollection/CardPictures/black_blackgris_01.png",
         rarity: 50
     },
     {
@@ -331,7 +331,7 @@ let testCards: ICard[] = [
         frameIdentifier: 1,
         elementIdentifier: 1,
         imageOverlayIdentifier: 1,
-        cardImage: "Cards/FirstEdition Collection/CardPictures/black_blackgris_01.png",
+        cardImage: "Cards/FirstEditionCollection/CardPictures/black_blackgris_01.png",
         rarity: 50
     },
     {
@@ -345,7 +345,7 @@ let testCards: ICard[] = [
         frameIdentifier: 1,
         elementIdentifier: 1,
         imageOverlayIdentifier: -1,
-        cardImage: "Cards/FirstEdition Collection/CardPictures/black_blackgris_01.png",        
+        cardImage: "Cards/FirstEditionCollection/CardPictures/black_blackgris_01.png",        
         rarity: 50
     }
 ]

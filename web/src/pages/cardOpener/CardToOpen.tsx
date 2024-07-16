@@ -29,7 +29,7 @@ interface CardToOpenProps {
 const CardToOpen = (props: CardToOpenProps) => {
     const audioRef = useRef(null);
 
-    const [openCardData, setOpenCardData] = useState<OpenCardData>({"isFlipped": true, "isSpecial": false});
+    const [openCardData, setOpenCardData] = useState<OpenCardData>({"isFlipped": false, "isSpecial": true});
 
     function getFlipBackSideTransform() {
 

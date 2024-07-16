@@ -1,7 +1,7 @@
 import { useState } from "react";
-import FrontCard from "../../components/card/Card";
+import { FrontCard } from "@components/card/Card";
 import "./showcard.scss";
-import { getImagePath } from "../../helpers/ItemImagePath";
+import  getImagePath from "@helpers/getImagePath";
 
 interface ShowCard {
     name: string;

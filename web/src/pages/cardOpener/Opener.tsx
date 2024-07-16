@@ -1,5 +1,4 @@
 import { useState } from "react";
-import FrontCard from "../../components/card/Card";
 import { useNuiEvent } from "../../hooks/useNuiEvent";
 import CardToOpen from "./CardToOpen";
 import { ICardToOpen } from "./ICardToOpen";
@@ -18,6 +17,10 @@ const Opener = () => {
         if (amountOfCardsOpened + 1 === cardsToOpen.length) {
             fetchNui('doneOpeningPackage', {
                 
+            }).then((data) => {
+                console.log(data);
+            }).catch((error) => {
+                console.error(error);
             })
         }
 
@@ -61,7 +64,7 @@ let testCards: ICardToOpen[] = [
         frameImage : "Frames/normal.png",
         elementImage : "Elements/FireElement.png",
         imageOverlayImage : "",
-        cardImage : "Cards/FirstEdition Collection/CardPictures/g_holo_john_olsen_01.jpg",
+        cardImage : "Cards/FirstEditionCollection/CardPictures/g_holo_john_olsen_01.jpg",
     },
     {
         name: "Card 2",
@@ -73,7 +76,7 @@ let testCards: ICardToOpen[] = [
         frameImage : "Frames/normal.png",
         elementImage : "Elements/FireElement.png",
         imageOverlayImage : "",
-        cardImage : "Cards/FirstEdition Collection/CardPictures/g_holo_john_olsen_01.jpg",
+        cardImage : "Cards/FirstEditionCollection/CardPictures/g_holo_john_olsen_01.jpg",
     },
     {
         name: "Card 1",
@@ -85,7 +88,7 @@ let testCards: ICardToOpen[] = [
         frameImage : "Frames/normal.png",
         elementImage : "Elements/FireElement.png",
         imageOverlayImage : "",
-        cardImage : "Cards/FirstEdition Collection/CardPictures/g_holo_john_olsen_01.jpg",
+        cardImage : "Cards/FirstEditionCollection/CardPictures/g_holo_john_olsen_01.jpg",
     },
     {
         name: "Card 2",
@@ -97,7 +100,7 @@ let testCards: ICardToOpen[] = [
         frameImage : "Frames/normal.png",
         elementImage : "Elements/FireElement.png",
         imageOverlayImage : "",
-        cardImage : "Cards/FirstEdition Collection/CardPictures/g_holo_john_olsen_01.jpg",
+        cardImage : "Cards/FirstEditionCollection/CardPictures/g_holo_john_olsen_01.jpg",
     },
     {
         name: "Card 1",
@@ -109,7 +112,7 @@ let testCards: ICardToOpen[] = [
         frameImage : "Frames/normal.png",
         elementImage : "Elements/FireElement.png",
         imageOverlayImage : "",
-        cardImage : "Cards/FirstEdition Collection/CardPictures/g_holo_john_olsen_01.jpg",
+        cardImage : "Cards/FirstEditionCollection/CardPictures/g_holo_john_olsen_01.jpg",
     },
     {
         name: "Card 2",
@@ -121,7 +124,7 @@ let testCards: ICardToOpen[] = [
         frameImage : "Frames/normal.png",
         elementImage : "Elements/FireElement.png",
         imageOverlayImage : "",
-        cardImage : "Cards/FirstEdition Collection/CardPictures/g_holo_john_olsen_01.jpg",
+        cardImage : "Cards/FirstEditionCollection/CardPictures/g_holo_john_olsen_01.jpg",
     },
     {
         name: "Card 1",
@@ -133,7 +136,7 @@ let testCards: ICardToOpen[] = [
         frameImage : "Frames/normal.png",
         elementImage : "Elements/FireElement.png",
         imageOverlayImage : "",
-        cardImage : "Cards/FirstEdition Collection/CardPictures/g_holo_john_olsen_01.jpg",
+        cardImage : "Cards/FirstEditionCollection/CardPictures/g_holo_john_olsen_01.jpg",
     },
     {
         name: "Card 2",
@@ -145,7 +148,7 @@ let testCards: ICardToOpen[] = [
         frameImage : "Frames/normal.png",
         elementImage : "Elements/FireElement.png",
         imageOverlayImage : "",
-        cardImage : "Cards/FirstEdition Collection/CardPictures/g_holo_john_olsen_01.jpg",
+        cardImage : "Cards/FirstEditionCollection/CardPictures/g_holo_john_olsen_01.jpg",
     },
     {
         name: "Card 1",
@@ -157,7 +160,7 @@ let testCards: ICardToOpen[] = [
         frameImage : "Frames/normal.png",
         elementImage : "Elements/FireElement.png",
         imageOverlayImage : "",
-        cardImage : "Cards/FirstEdition Collection/CardPictures/g_holo_john_olsen_01.jpg",
+        cardImage : "Cards/FirstEditionCollection/CardPictures/g_holo_john_olsen_01.jpg",
     },
     {
         name: "Card 2",
@@ -169,6 +172,6 @@ let testCards: ICardToOpen[] = [
         frameImage : "Frames/normal.png",
         elementImage : "Elements/FireElement.png",
         imageOverlayImage : "",
-        cardImage : "Cards/FirstEdition Collection/CardPictures/g_holo_john_olsen_01.jpg",
+        cardImage : "Cards/FirstEditionCollection/CardPictures/g_holo_john_olsen_01.jpg",
     },
 ]

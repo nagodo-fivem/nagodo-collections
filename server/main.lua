@@ -78,7 +78,13 @@ UTILS.CreateCallback('nagodo-collections:server:saveCard', function(source, cb, 
     cb(cards)
 end)
 
-function decode_base64(data)
+UTILS.CreateCallback('nagodo-collections:server:getCardsInCollection', function(source, cb, collectionIdentifier)
+    print(collectionIdentifier)
+    local cards = DATABASE.GetAllCards(collectionIdentifier)
+    cb(cards)
+end)
+
+function DecodeBase64(data)
     local b64chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
     local decchars = {}
     for i = 1, 64 do
@@ -107,13 +113,17 @@ RegisterNetEvent('nagodo-collections:server:saveImage', function(base64, cardNam
 
     local prefix = "data:image/png;base64,"
     local base64_data = string.gsub(base64, prefix, '')  -- Remove the prefix
-    local decodedImage = decode_base64(base64_data)
+    local decodedImage = DecodeBase64(base64_data)
     if not decodedImage then
         print("No image to write.")
         return
     end
 
-    local file, err = io.open(cardName .. ".png", "wb") -- Open file in binary mode
+    local path = GetResourcePath(GetCurrentResourceName())
+    path = path .. Config.ImageExportSavePath
+    print(path)
+
+    local file, err = io.open(path .. cardName .. ".png", "wb") -- Open file in binary mode
     if not file then
         print("Failed to open file:", err)
         return

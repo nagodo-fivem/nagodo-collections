@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { fetchNui } from "@utils/fetchNui";
 import Input from "@components/Input/Input";
+import { _T } from "@utils/translation";
 
 interface NewCollectionProps {
     show: boolean;
@@ -37,12 +38,12 @@ const NewCollection = ({show, cancelBtnCallback, handleNewCollectionCreated} : N
             <div className="buttons">
                 <div className="btn cancel" onClick={handleCancelClick}>
                     <div className="text">
-                        Cancel
+                        {_T("CANCEL")}
                     </div>
                 </div>
                 <div className="btn save" onClick={handleCreateCollectionClick}>
                     <div className="text">
-                        Create
+                        {_T("CREATE")}
                     </div>
                 </div>
             </div>

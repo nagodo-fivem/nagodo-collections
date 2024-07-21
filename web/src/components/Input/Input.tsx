@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./input.scss";
+import { _T } from "@utils/translation";
 
 interface InputProps {
     title: string;
@@ -39,7 +40,7 @@ const Input = ({title, placeholder, onChange, startValue, onlyNumbers = false}: 
                 {title}
             </div>
             <div className="wrapper">
-                <input className="input" type={onlyNumbers ?  "number" : "text"} value={getValue()} onChange={handleChange} placeholder={placeholder ? placeholder : "Enter..."}/>
+                <input className="input" type={onlyNumbers ?  "number" : "text"} value={getValue()} onChange={handleChange} placeholder={placeholder ? placeholder : _T("ENTER")}/>
             </div>
             
             

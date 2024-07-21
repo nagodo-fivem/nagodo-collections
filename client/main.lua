@@ -1,4 +1,6 @@
 local UTILS = exports['nagodo-utils']:GetUtils()
+
+
 --Events--
 RegisterNetEvent("nagodo-collections:openCreatorMenu", function()
     OpenCreatorMenu()
@@ -15,6 +17,15 @@ RegisterNetEvent('nagodo-collections:client:openCard', function(cardData)
     })
 end)
 
+function SetTranslations()
+    SendNUIMessage({
+        action = "setTranslations",
+        data = {
+            translations = json.encode(Locale[Config.Language])
+        }
+    })
+end
+
 function SetShowType(showType)
     SendNUIMessage({
         action = 'setShowType',
@@ -25,6 +36,7 @@ function SetShowType(showType)
 end
 
 function OpenCreatorMenu() 
+    SetTranslations()
     SetNuiFocus(true, true)
     SetShowType(ShowType.Creator)
 end
@@ -73,6 +85,13 @@ RegisterNUICallback('createCollection', function(data, cb)
     SendCollections(allCollections)
     
     cb('ok')
+end)
+
+RegisterNUICallback('fetchCards', function(data, cb)
+    local collectionIdentifier = data.collection
+
+    local cardsInCollection = UTILS.TriggerCallbackSync('nagodo-collections:server:getCardsInCollection', collectionIdentifier)
+    SendCards(cardsInCollection)
 end)
 
 RegisterNuiCallback('fetchProperties', function(data, cb)
@@ -136,6 +155,27 @@ RegisterNUICallback('saveCard', function(data, cb)
 
     local allCards = UTILS.TriggerCallbackSync('nagodo-collections:server:saveCard', payload)
     SendCards(allCards)
+end)
+
+RegisterNUICallback('getCardsForItemsExport', function(data, cb)
+    local collectionIdentifier = data.collectionIdentifier
+
+    local cardsInCollection = UTILS.TriggerCallbackSync('nagodo-collections:server:getCardsInCollection', collectionIdentifier)
+    cb(cardsInCollection)
+end)
+
+RegisterNUICallback('getCardsForImageExport', function(data, cb)
+    local collectionIdentifier = data.collectionIdentifier
+
+    local cardsInCollection = UTILS.TriggerCallbackSync('nagodo-collections:server:getCardsInCollection', collectionIdentifier)
+    print(#cardsInCollection)
+    cb(cardsInCollection)
+end)
+
+RegisterNUICallback('getPropertiesForImageExport', function(data, cb)
+    local allProperties = UTILS.TriggerCallbackSync('nagodo-collections:server:getAllProperties')
+
+    cb(allProperties)
 end)
 
 RegisterNUICallback('close', function (data, cb)

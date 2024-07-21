@@ -1,14 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FrontCard } from "@components/card/Card";
 import Action from "../Action/Action";
 import { ICard } from "./ICard";
-import Input from "@components/Input/Input";
 import IProperty from "../Properties/IProperty";
 import getImagePath from "@helpers/getImagePath";
 import { fetchNui } from "@utils/fetchNui";
 import { useNuiEvent } from "@hooks/useNuiEvent";
 import { isEnvBrowser } from "@utils/misc";
 import StickerPlacement from "./StickerPlacement";
+import { _T } from "@utils/translation";
+import SelectedCardProperty from "./SelectedCardPropertyEditor";
 
 const defaultCard: ICard = {identifier: -1, name: "", health: 100, info: "", attack: "", damage: 99, cardNum: 1, rarity: 50, frameIdentifier: 1, elementIdentifier: 1, imageOverlayIdentifier: -1, cardImage: "Cards/FirstEdition Collection/CardPictures/black_blackgris_01.png"};
 const cardSize = 0.619;
@@ -25,12 +26,20 @@ const CollectionCardEditor = ({collectionIdentifier, _properties}: {collectionId
         setCards(data.cards);
     });
 
+    useEffect(() => {
+        fetchNui("fetchCards", {
+            collection: collectionIdentifier
+        }, testCards).then((data) => {
+            setCards(data)
+            });
+    }, []);
+
     function handleNewCardClick() {
         setEditingCard(true);
         setSelectingProperty(true);
 
         let _defaultCard = {...defaultCard};
-        _defaultCard.name = "New card";
+        _defaultCard.name = _T("NEW_CARD");
 
         setSelectedCard(_defaultCard);
         setNewCardData(_defaultCard);
@@ -44,7 +53,6 @@ const CollectionCardEditor = ({collectionIdentifier, _properties}: {collectionId
     }
 
     function handleCancelClick() {
-        console.log("Cancel clicked");
         setSelectedCard(defaultCard);
         setEditingCard(false);
         setNewCardData(defaultCard);
@@ -76,7 +84,7 @@ const CollectionCardEditor = ({collectionIdentifier, _properties}: {collectionId
         _properties = properties.filter(property => property.type === type);
 
         if (type === "image-overlay") {
-            _properties.unshift({identifier: -1, type: "image-overlay", label: "None", image: ""})
+            _properties.unshift({identifier: -1, type: "image-overlay", label: _T("NONE"), image: ""})
         }
 
 
@@ -177,8 +185,12 @@ const CollectionCardEditor = ({collectionIdentifier, _properties}: {collectionId
                 )}
                 
                 {selectedCard.name === "" && (
-                    <Action label = "New card" onClick={handleNewCardClick}/>
+                    <Action label = "New card" onClick={handleNewCardClick}/>          
                 )}
+
+                {/* {selectedCard.name === "" && (
+                    // filter 
+                )} */}
                 
             </div>
 
@@ -186,17 +198,17 @@ const CollectionCardEditor = ({collectionIdentifier, _properties}: {collectionId
                 <div className="btns">
                     <div className="btn cancel small" onClick={handleCancelClick}>
                         <div className="text">
-                            Cancel
+                            {_T("CANCEL")}
                         </div>
                     </div>
                     <div className="btn delete small">
                         <div className="text">
-                            Delete
+                            {_T("DELETE")}
                         </div>
                     </div>
                     <div className="btn save small" onClick={handleSaveClick}>
                         <div className="text">
-                            Save
+                            {_T("SAVE")}
                         </div>
                     </div>
                 </div>
@@ -207,103 +219,6 @@ const CollectionCardEditor = ({collectionIdentifier, _properties}: {collectionId
     )
 }
 export default CollectionCardEditor;
-
-
-interface SelectedCardPropertyProps {
-    startCardData: ICard;
-    handleCardDataChange: (data: ICard) => void;
-    handleSelectVisualType: (type: string) => void;
-}
-
-const SelectedCardProperty = ({startCardData, handleCardDataChange, handleSelectVisualType}: SelectedCardPropertyProps) => {
-    
-    function handleNameChange(name: string) {
-        if (name.length > 13) return;
-        handleCardDataChange({...startCardData, name: name});
-    }
-
-    function handleHealthChange(health: string) {
-        if (health.length > 4) return;
-        let _health = parseInt(health);
-        handleCardDataChange({...startCardData, health: _health});
-    }
-
-    function handleInfoChange(info: string) {
-        if (info.length > 42) return;
-        handleCardDataChange({...startCardData, info: info});
-    }
-
-    function handleAttackChange(attack: string) {
-        if (attack.length > 29) return;
-        handleCardDataChange({...startCardData, attack: attack});
-    }
-
-    function handleDamageChange(damage: string) {
-        if (damage.length > 4) return;
-        let _damage = parseInt(damage);
-        handleCardDataChange({...startCardData, damage: _damage});
-    }
-
-    function handleImageChange(image: string) {
-        console.log("Image change", image);
-        handleCardDataChange({...startCardData, cardImage: image});
-    }
-
-    function handleRarityChange(rarity: string) {
-        let _rarity = parseInt(rarity);
-        handleCardDataChange({...startCardData, rarity: _rarity});
-    }
-    
-    return (
-        <div className="selectedcardproperty">
-            <div className="element">
-                <Input title="Name" onChange={handleNameChange} startValue={startCardData.name} />
-            </div>
-
-            <div className="element">
-                <Input title="Health" onChange={handleHealthChange} startValue={startCardData.health.toString()} onlyNumbers = {true} />
-            </div>
-
-            <div className="element">
-                <Input title="Info" onChange={handleInfoChange} startValue={startCardData.info} />
-            </div>
-
-            <div className="element">
-                <Input title="Attack" onChange={handleAttackChange} startValue={startCardData.attack}/>
-            </div>
-
-            <div className="element">
-                <Input title="Damage" onChange={handleDamageChange} startValue={startCardData.damage.toString()} onlyNumbers = {true}/>
-            </div>
-
-            <div className="element">
-                <Input title="Image" onChange={handleImageChange} startValue={startCardData.cardImage}/>
-            </div>
-
-            <div className="element">
-                <Input title="Rarity" onChange={handleRarityChange} startValue={startCardData.rarity.toString()} onlyNumbers = {true}/>
-            </div>
-
-            <div className="element">
-                <div className="title">
-                    Visuals
-                </div>
-                <div className="button" onClick={() => {handleSelectVisualType("frame")}}>
-                    <div className="label"><i className="fa-solid fa-folder-open"></i>Frame</div>
-                </div>
-                <div className="button" onClick={() => {handleSelectVisualType("element")}}>
-                    <div className="label"><i className="fa-solid fa-folder-open"></i>Element</div>
-                </div>
-                <div className="button" onClick={() => {handleSelectVisualType("image-overlay")}}>
-                    <div className="label"><i className="fa-solid fa-folder-open"></i>Image Overlay</div>
-                </div>
-                <div className="button">
-                    <div className="label"><i className="fa-solid fa-folder-open"></i>Stickers (coming soon)</div>
-                </div>
-            </div>
-        </div>
-    )
-}
 
 let testCards: ICard[] = [
     {

@@ -14,7 +14,7 @@ const App: React.FC = () => {
 
     //NUI Hooks
     useNuiEvent<any>('setTranslations', (data) => { 
-        setTranslations(JSON.parse(data));
+        setTranslations(JSON.parse(data.translations));
     })
 
     useNuiEvent<any>('setShowType', (data) => {

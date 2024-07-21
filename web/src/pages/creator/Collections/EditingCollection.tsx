@@ -1,6 +1,7 @@
 import Input from "@components/Input/Input";
 import { useParent } from "../Context/contextMenuProvider";
 import ICollection from "./ICollection";
+import { _T } from "@utils/translation";
 
 interface EditingCollectionProps{
     show: boolean;
@@ -23,11 +24,11 @@ const EditingCollection = ({show, cancelBtnCallback, selectedCollection, changeC
     }
 
     function handleExportCardImagesClick() {
-        openExportCardImagesContextMenu();
+        openExportCardImagesContextMenu(selectedCollection.identifier, selectedCollection.label);
     }
 
     function handleExportItemsClick() {
-        openExportCardItemsContextMenu();
+        openExportCardItemsContextMenu(selectedCollection.identifier, selectedCollection.label);
     }
 
     if (!show) return null;
@@ -40,33 +41,33 @@ const EditingCollection = ({show, cancelBtnCallback, selectedCollection, changeC
 
             <div className="element">
                 <div className="title">
-                    Actions
+                    {_T("ACTIONS")}
                 </div>
                 <div className="button" onClick={handleEditCardsClick}>
-                    <div className="label"><i className="fa-solid fa-folder-open"></i>Edit Cards</div>
+                    <div className="label"><i className="fa-solid fa-folder-open"></i>{_T("EDIT_CARDS")}</div>
                 </div>
                 <div className="button" onClick={handleExportCardImagesClick}>
-                    <div className="label"><i className="fa-solid fa-file-export"></i>Export card images</div>
+                    <div className="label"><i className="fa-solid fa-file-export"></i>{_T("EXPORT_CARD_IMAGES")}</div>
                 </div>
                 <div className="button" onClick={handleExportItemsClick}>
-                    <div className="label"><i className="fa-solid fa-file-export"></i>Export items</div>
+                    <div className="label"><i className="fa-solid fa-file-export"></i>{_T("EXPORT_ITEMS")}</div>
                 </div>
             </div>
 
             <div className="buttons">
                 <div className="btn cancel small" onClick={handleCancelClick}>
                     <div className="text">
-                        Cancel
+                        {_T("CANCEL")}
                     </div>
                 </div>
                 <div className="btn delete small">
                     <div className="text">
-                        Delete
+                    {_T("DELETE")}
                     </div>
                 </div>
                 <div className="btn save small">
                     <div className="text">
-                        Save
+                    {_T("SAVE")}
                     </div>
                 </div>
             </div>

@@ -8,6 +8,7 @@ shared_scripts {
 	
 server_scripts {
 	'server/database.lua',
+	'server/framework.lua',
 	'server/editable_server.lua',
 	'server/main.lua',
 }
@@ -15,6 +16,7 @@ server_scripts {
 client_scripts {
 	'client/enums/*',
 	'client/editable_client.lua',
+	'client/framework.lua',
 	'client/main.lua',
 }
 

@@ -6,6 +6,7 @@ import EditingCollection from "./EditingCollection";
 import CollectionCardEditor from "./CollectionCardEditor";
 import Action from "../Action/Action";
 import IProperty from "../Properties/IProperty";
+import { _T } from "@utils/translation";
 
 interface CollectionsOverviewProps {
     collections: ICollection[];
@@ -13,6 +14,7 @@ interface CollectionsOverviewProps {
 }
 let currentSelectedCollection: ICollection = {identifier: 0, label: "", cardAmount: 0};
 const CollectionsOverview = ({collections, properties}: CollectionsOverviewProps) => {
+    const [currentSelectedCollection, setCurrentSelectedCollection] = useState<ICollection>({identifier: 0, label: "", cardAmount: 0});
     const [addingNewCollection, setAddingNewCollection] = useState(false);
     const [editingCollection, setEditingCollection] = useState(false);
     const [editingCards, setEditingCards] = useState(false);
@@ -26,17 +28,16 @@ const CollectionsOverview = ({collections, properties}: CollectionsOverviewProps
     }
     
     function handleCancelClick() {
-        console.log("cancel");
         setAddingNewCollection(false);
         setEditingCollection(false);
     }
 
     function handleCollectionChange(collection: ICollection) {
-        currentSelectedCollection = collection;
+        setCurrentSelectedCollection(collection);
     }
 
     function handleCollectionClick(collection: ICollection) {
-        currentSelectedCollection = collection;
+        setCurrentSelectedCollection(collection);
         setAddingNewCollection(false);
         setEditingCollection(true);
     }
@@ -70,7 +71,7 @@ const CollectionsOverview = ({collections, properties}: CollectionsOverviewProps
                         <NewCollection show = {addingNewCollection} cancelBtnCallback={handleCancelClick} handleNewCollectionCreated = {handleNewCollectionCreated}/>
                         <EditingCollection show = {editingCollection && !addingNewCollection} cancelBtnCallback = {handleCancelClick} selectedCollection={currentSelectedCollection} changeCallback={handleCollectionChange} handleEditCardsClick = {handleEditCardsClick} />
 
-                        <Action label = "New Collection" onClick={handleNewCollectionBtn}/>
+                        <Action label = {_T('NEW_COLLECTION')} onClick={handleNewCollectionBtn}/>
                     </div>
                 </>
             )}

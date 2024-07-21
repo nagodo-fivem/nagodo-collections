@@ -1,20 +1,22 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import "./itemsexporter.scss";
-import { ICard } from "../../Collections/ICard";
 import { fetchNui } from "@utils/fetchNui";
 import DropDown from "@components/Dropdown/Dropdown";
 import qbExporter from "./qb-exporter";
+import { IItemExporterData } from "./IItemExporterData";
+import { _T } from "@utils/translation";
 
 interface ItemsExporterProps {
     collectionIdentifier: number;
+    collectionName: string;
     closeContext: () => void;
 }
 
-const ItemsExporter = ({collectionIdentifier, closeContext}: ItemsExporterProps) => {
-    const [cards, setCards] = useState<ICard[]>(testCards);
+const ItemsExporter = ({collectionIdentifier, collectionName, closeContext}: ItemsExporterProps) => {
+    const [cards, setCards] = useState<IItemExporterData[]>(testCards);
     const [exportType, setExportType] = useState<string>("");
     const [output, setOutput] = useState<string>("");
-    const [copyToClipboardStatus, setCopyToClipboardStatus] = useState<string>("Copy to clipboard");
+    const [copyToClipboardStatus, setCopyToClipboardStatus] = useState<string>(_T("COPY_TO_CLIPBOARD"));
 
     useEffect(() => {
         fetchNui<any>("getCardsForItemsExport", {
@@ -42,7 +44,7 @@ const ItemsExporter = ({collectionIdentifier, closeContext}: ItemsExporterProps)
     function handleExportClick() {
         
         if (exportType === "qb") {
-            let qbString = qbExporter(collectionIdentifier, cards);
+            let qbString = qbExporter(collectionIdentifier, collectionName, cards);
             setOutput(qbString);
         }
        
@@ -50,15 +52,23 @@ const ItemsExporter = ({collectionIdentifier, closeContext}: ItemsExporterProps)
 
     function handleCopyToClipboard() {
         let toClipBoard = output.replace(/<br>/g, "\n");
-        navigator.clipboard.writeText(toClipBoard);
-        setCopyToClipboardStatus("Output has been copied to clipboard!");
+        
+        const element = document.createElement('textarea');
+        element.value = toClipBoard;
+        document.body.appendChild(element);
+        element.select();
+        document.execCommand('copy');
+        document.body.removeChild(element);
+
+        // navigator.clipboard.writeText(toClipBoard);
+        setCopyToClipboardStatus(_T("COPIED_TO_CLIPBOARD"));
     }
 
     return (
         <div className="itemsexporter">
 
             <div className="exportingCollectionName">
-                Exporting collection: {collectionIdentifier}
+                {_T("EXPORTING_COLLECTION")} {collectionIdentifier}
             </div>
             
             <div className="settings">
@@ -97,49 +107,22 @@ const ItemsExporter = ({collectionIdentifier, closeContext}: ItemsExporterProps)
     )
 }
 
-let testCards: ICard[] = [
+let testCards: IItemExporterData[] = [
     {
-        identifier: 1,
-        name: "John Olsen",
-        health: 100,
-        info: "Test her",
-        attack: "Kredit her",
-        damage: 99,
-        cardNum: 1,
-        frameIdentifier: 1,
-        elementIdentifier: 1,
-        imageOverlayIdentifier: -1,
-        cardImage: "Cards/FirstEdition Collection/CardPictures/black_blackgris_01.png",
-        rarity: 50
+        collectionIdentifier: 1,
+        cardIdentifier: 1,
+        cardName: "John Olsen"
     },
     {
-        identifier: 2,
-        name: "John Olsen",
-        health: 100,
-        info: "Test her",
-        attack: "Kredit her",
-        damage: 99,
-        cardNum: 1,
-        frameIdentifier: 1,
-        elementIdentifier: 1,
-        imageOverlayIdentifier: 1,
-        cardImage: "Cards/FirstEdition Collection/CardPictures/black_blackgris_01.png",
-        rarity: 50
+        collectionIdentifier: 1,
+        cardIdentifier: 2,
+        cardName: "John Olsen1"
     },
     {
-        identifier: 3,
-        name: "John Olsen",
-        health: 1100,
-        info: "Test her",
-        attack: "Kredit her",
-        damage: 99,
-        cardNum: 1,
-        frameIdentifier: 1,
-        elementIdentifier: 1,
-        imageOverlayIdentifier: -1,
-        cardImage: "Cards/FirstEdition Collection/CardPictures/black_blackgris_01.png",        
-        rarity: 50
-    }
+        collectionIdentifier: 1,
+        cardIdentifier: 3,
+        cardName: "John Olsen2"
+    },
 ]
 
 export default ItemsExporter;

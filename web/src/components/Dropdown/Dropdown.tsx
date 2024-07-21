@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./dropdown.scss";
+import { _T } from "@utils/translation";
 
 interface DropDownProps {
     title: string;
@@ -58,7 +59,7 @@ const DropDown = ({title, options, onChange, currentValue, customNotSelected}: D
 
         return (
             <div className="currentselection" >
-                {selected.identifier !== "" ? selected.label : (customNotSelected == null ? "Select" : customNotSelected)}
+                {selected.identifier !== "" ? selected.label : (customNotSelected == null ? _T("SELECT") : customNotSelected)}
             </div>
         )
     }

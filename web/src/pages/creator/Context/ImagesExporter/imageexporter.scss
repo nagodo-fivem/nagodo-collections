@@ -16,6 +16,51 @@
     border-radius: var(--radius);
     border: 0.3vh solid var(--border);
 
+    .nocardstoexport {
+        position: absolute;
+
+        width: 100%;
+
+        color: var(--foreground);
+        font-size: 2vh;
+
+        text-align: center;
+
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .returnbtn {
+        position: absolute;
+
+        width: 12vh;
+        height: 4vh;
+
+        left: 50%;
+        transform: translateX(-50%);
+
+        top: 36vh;
+
+        border: solid var(--border) 0.3vh;
+        border-radius: var(--radius);
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        .text {
+            position: absolute;
+            width: 100%;
+            
+            top: 50%;
+            transform: translateY(-50%); 
+            color: var(--foreground);
+            font-size: 1.6vh;
+
+            text-align: center;
+        }
+    }
+
     .domToExport {
         position: absolute;
 
@@ -23,9 +68,6 @@
         top: 1vh;
 
         padding-right: 1vh;
-
-        width: fit-content;
-        height: fit-content;
 
         display: block;
 

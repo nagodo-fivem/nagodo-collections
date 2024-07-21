@@ -6,6 +6,7 @@ import domtoimage from 'dom-to-image';
 import { FrontCard } from "../../../../components/card/Card";
 import IProperty from "../../Properties/IProperty";
 import DropDown from "../../../../components/Dropdown/Dropdown";
+import { _T } from "@utils/translation";
 
 interface ImageExporterProps {
     collectionIdentifier: number;
@@ -26,6 +27,14 @@ const ImageExporter = ({collectionIdentifier, closeContext}: ImageExporterProps)
     const domToExport = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
+        fetchNui<any>("getPropertiesForImageExport", {
+
+        }).then((data) => {
+            setProperties(data);
+        }).catch((error) => {
+            setProperties(testProperties);
+        })
+
         fetchNui<any>("getCardsForImageExport", {
             collectionIdentifier: collectionIdentifier
         }).then((data) => {
@@ -84,7 +93,7 @@ const ImageExporter = ({collectionIdentifier, closeContext}: ImageExporterProps)
 
                 for (let i = 0; i < splitChunks.length; i++) {
                     await fetchNui("saveImage", {
-                        cardName: collectionIdentifier + "_" + currentCard.identifier + ".png",
+                        cardName: collectionIdentifier + "_" + currentCard.identifier,
                         payloadAmount: splitChunks.length,
                         payloadIndex: i,
                         blob: splitChunks[i],
@@ -146,13 +155,13 @@ const ImageExporter = ({collectionIdentifier, closeContext}: ImageExporterProps)
         if (cardQuality === 1) {
             perCard = 0.06;
         } else if (cardQuality === 2) {
-            perCard = 0.18;
+            perCard = 0.24;
         }
         else if (cardQuality === 3) {
-            perCard = 0.252;
+            perCard = 0.36;
         }
         else if (cardQuality === 4) {
-            perCard = 0.371;
+            perCard = 0.54;
         }
         
 
@@ -199,29 +208,51 @@ const ImageExporter = ({collectionIdentifier, closeContext}: ImageExporterProps)
         }
     }
 
+    function getDomToExportSize(size: number) {
+        let scale = 0.025 * size;
+        let width = 1024 * scale
+        let height = 1420 * scale
+
+        return {"height": height + "vh", "width": width + "vh"}
+    }
+
     return (
         <div className="imageexporter">
+
+            {cards.length === 0 && (
+                <div >
+                    <div className="nocardstoexport" >
+                        {_T("NO_CARDS_TO_EXPORT")}
+                    </div>
+                    <div className="returnbtn" onClick={handleCancelClick}>
+                        <div className="text">
+                            {_T("BACK")}
+                        </div>
+                    </div>
+                </div>
+                
+            )}
 
 
             {cards.length > 0 && currentCard && (
                 <>
-                    <div id = "domToExport" className="domToExport" ref={domToExport}>
-                        <FrontCard size={QualityToSize(cardQuality)} name={currentCard.name} health={100} info={"Din mor"} attack={"Cola her"} damage={99} cardNum={23} cardImage={"https://i1.sndcdn.com/artworks-000482128809-fp33kj-t500x500.jpg"} frameImage={getFrameByIdentifier(1)} elementImage = {getElementByIdentifier(1)} imageOverlayImage={getImageOverlayByIdentifier(1)}/>
+                    <div id = "domToExport" className="domToExport" ref={domToExport} style={getDomToExportSize(QualityToSize(cardQuality))}>
+                        <FrontCard size={QualityToSize(cardQuality)} name={currentCard.name} health={currentCard.health} info={currentCard.info} attack={currentCard.attack} damage={currentCard.damage} cardNum={23} cardImage={currentCard.cardImage} frameImage={getFrameByIdentifier(currentCard.frameIdentifier)} elementImage = {getElementByIdentifier(currentCard.elementIdentifier)} imageOverlayImage={getImageOverlayByIdentifier(currentCard.imageOverlayIdentifier)}/>
                     </div>
 
                     <div className="information">
                         <QualitySelector callback = {setCardQuality} />
                         <BytesPerSecond callback = {setBytesPerSecond} />
-                        <div className="cardToExport">Cards in collection: {cardAmountToExport}</div>
-                        <div className="estimatedSize">Estimated file size: {GetEstimatedFileSize()}</div>
-                        <div className="estimatedTime">Estimated time: {GetEstimatedTime()}</div>
+                        <div className="cardToExport">{_T("CARDS_IN_COLLECTION")} {cardAmountToExport}</div>
+                        <div className="estimatedSize">{_T("ESTIMATED_FILE_SIZE")} {GetEstimatedFileSize()}</div>
+                        <div className="estimatedTime">{_T("ESTIMATED_TIME")} {GetEstimatedTime()}</div>
                         
                     </div>
 
                     {isExporting && (
                         <>
                             <div className="stop-btn" onClick={handleStopExportClick}>
-                                <div className="label">Stop</div>
+                                <div className="label">{_T("STOP")}</div>
                             </div>
                         </>
                         
@@ -231,14 +262,14 @@ const ImageExporter = ({collectionIdentifier, closeContext}: ImageExporterProps)
 
                     {!isExporting && (
                         <div className="cancel-btn" onClick={handleCancelClick}>
-                            <div className="label">Cancel</div>
+                            <div className="label">{_T("CANCEL")}</div>
                         </div>
                     )}
 
                     {!isExporting && (
 
                         <div className="export-btn" onClick={handleExportClick}>
-                            <div className="label">Export</div>
+                            <div className="label">{_T("EXPORT")}</div>
                         </div>
                     )}
                 </>
@@ -262,11 +293,11 @@ const QualitySelector = ({callback}: QualitySelectorProps) => {
 
     return (
         <div className="qualityselector">
-            <DropDown title="Quality" options={[
-                {label: "Low", identifier: "1"},
-                {label: "Medium", identifier: "2"},
-                {label: "High", identifier: "3"},
-                {label: "Ultra", identifier: "4"}
+            <DropDown title= {_T("QUALITY")} options={[
+                {label: _T("LOW"), identifier: "1"},
+                {label: _T("MEDIUM"), identifier: "2"},
+                {label: _T("HIGH"), identifier: "3"},
+                {label: _T("ULTRA"), identifier: "4"}
             ]} onChange={handleChange} currentValue="2"/>
         </div>
     )
@@ -284,8 +315,8 @@ const BytesPerSecond = ({callback}: BytesPerSecondProps) => {
 
     return (
         <div className="bytespersecond">
-            <DropDown title="Speed" options={[
-                {label: "Default", identifier: "20000"},
+            <DropDown title={_T("SPEED")} options={[
+                {label: _T("DEFAULT"), identifier: "20000"},
                 {label: "1.5x", identifier: "30000"},
                 {label: "2x", identifier: "40000"},
                 {label: "2.5x", identifier: "50000"},

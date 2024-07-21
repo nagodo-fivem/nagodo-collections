@@ -4,6 +4,7 @@ import "./context.scss";
 import ImageExporter from "./ImagesExporter/ImageExporter";
 import ItemsExporter from "./ItemsExporter/ItemsExporter";
 import { fetchNui } from "@utils/fetchNui";
+import { _T } from "@utils/translation";
 
 export interface ContextMenuData {
     visible: boolean;
@@ -19,6 +20,7 @@ export const ContextMenu = (props: ContextMenuProps) => {
     const [type, setType] = useState<string>("export-card-images");
     
     const [cardCollectionToExport, setCardCollectionToExport] = useState<number>(-1);
+    const [cardCollectionName, setCardCollectionName] = useState<string>("");
     const [propertyToDelete, setPropertyToDelete] = useState<number>(-1);
 
     function openDeletePropertyContextMenu(propertyIdentifier: number) {
@@ -27,12 +29,16 @@ export const ContextMenu = (props: ContextMenuProps) => {
         setVisible(true);
     }
 
-    function openExportCardImagesContextMenu(collectionIdentifier: number) {
+    function openExportCardImagesContextMenu(collectionIdentifier: number, collectionName: string) {
+        setCardCollectionName(collectionName);
+        setCardCollectionToExport(collectionIdentifier);
         setType("export-card-images");
         setVisible(true);
     }
 
-    function openExportCardItemsContextMenu() {
+    function openExportCardItemsContextMenu(collectionIdentifier: number, collectionName: string) {
+        setCardCollectionName(collectionName);
+        setCardCollectionToExport(collectionIdentifier);
         setType("export-card-items");
         setVisible(true);
     }
@@ -65,6 +71,7 @@ export const ContextMenu = (props: ContextMenuProps) => {
                 confirmClick = {handleConfirmClick}
                 closeContext = {handleCancelClick}
                 cardCollectionToExport = {cardCollectionToExport}
+                cardCollectionName = {cardCollectionName}
             />
         </ContextMenuProvider>
     )
@@ -79,10 +86,11 @@ interface ContextProps {
     closeContext: () => void;
 
     cardCollectionToExport: number;
+    cardCollectionName: string;
 }
 
 
-const Context = ({visible, type, cancelClick, confirmClick, closeContext, cardCollectionToExport}: ContextProps) => {
+const Context = ({visible, type, cancelClick, confirmClick, closeContext, cardCollectionToExport, cardCollectionName}: ContextProps) => {
 
     if (!visible) return null;
 
@@ -95,18 +103,18 @@ const Context = ({visible, type, cancelClick, confirmClick, closeContext, cardCo
 
             {type === "delete-property" && (
                 <div className="deleteproperty">
-                    <div className="title"> Delete Property </div>
+                    <div className="title"> {_T('DELETE_PROPERTY')} </div>
 
                     <div className="btns">
                         <div className="btn cancel" onClick={cancelClick}> 
                             <div className="text">
-                                Cancel
+                            {_T('CANCEL')}
                             </div>
                         </div>
 
                         <div className="btn save" onClick={confirmClick}> 
                             <div className="text">
-                                Confirm
+                            {_T('CONFIRM')}
                             </div>
                         </div>
                     </div>
@@ -118,7 +126,7 @@ const Context = ({visible, type, cancelClick, confirmClick, closeContext, cardCo
             )}
 
             {type === "export-card-items" && (
-                <ItemsExporter collectionIdentifier={cardCollectionToExport} closeContext = {handleCloseContext}/>
+                <ItemsExporter collectionIdentifier={cardCollectionToExport} collectionName={cardCollectionName} closeContext = {handleCloseContext}/>
             )}
 
         </div>

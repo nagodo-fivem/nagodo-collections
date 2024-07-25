@@ -11,7 +11,7 @@ import StickerPlacement from "./StickerPlacement";
 import { _T } from "@utils/translation";
 import SelectedCardProperty from "./SelectedCardPropertyEditor";
 
-const defaultCard: ICard = {identifier: -1, name: "", health: 100, info: "", attack: "", damage: 99, cardNum: 1, rarity: 50, frameIdentifier: 1, elementIdentifier: 1, imageOverlayIdentifier: -1, cardImage: "Cards/FirstEdition Collection/CardPictures/black_blackgris_01.png"};
+const defaultCard: ICard = {identifier: -1, name: "", health: 100, info: "", attack: "", damage: 99, cardNum: 1, rarity: 50, frameIdentifier: 1, elementIdentifier: 1, imageOverlayIdentifier: -1, cardImage: "Cards/FirstEditionCollection/CardPictures/black_blackgris_01.png"};
 const cardSize = 0.619;
 const CollectionCardEditor = ({collectionIdentifier, _properties}: {collectionIdentifier: number, _properties: IProperty[]}) => {
     const [properties, setProperties] = useState<IProperty[]>(isEnvBrowser() ? testProperties : _properties);

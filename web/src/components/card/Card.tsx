@@ -62,7 +62,7 @@ export const FrontCard = ({name, health, info, attack, damage, cardNum, size, fr
                     <img src={getImagePath(imageOverlayImage)} alt=""/>
                 </div>
             )}
-            <div className="name" style={{"fontSize": GetNameFontSize(scale)}}>{name}</div>
+            <div className="name" style={{"fontSize": GetNameFontSize(scale, name.length)}}>{name}</div>
             
             <div className='health' style={{"fontSize": GetHealthFontSize(scale)}}>{health}HP</div>
 
@@ -97,7 +97,12 @@ export const BackCard = ({size, image}: {size: number, image: string}) => {
 
 
 
-function GetNameFontSize(scale: number) {
+function GetNameFontSize(scale: number, textLength: number) {
+    if (textLength < 19) return 70 * scale + "vh";
+    if (textLength < 20) return 60 * scale + "vh";
+    if (textLength < 22) return 50 * scale + "vh";
+    if (textLength < 29) return 40 * scale + "vh";
+
     return 70 * scale + "vh";
 }
 

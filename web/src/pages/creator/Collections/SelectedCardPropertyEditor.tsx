@@ -11,7 +11,7 @@ interface SelectedCardPropertyProps {
 const SelectedCardProperty = ({startCardData, handleCardDataChange, handleSelectVisualType}: SelectedCardPropertyProps) => {
     
     function handleNameChange(name: string) {
-        if (name.length > 13) return;
+        if (name.length > 26) return;
         handleCardDataChange({...startCardData, name: name});
     }
 

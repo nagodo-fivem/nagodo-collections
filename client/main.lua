@@ -161,7 +161,18 @@ RegisterNUICallback('getCardsForItemsExport', function(data, cb)
     local collectionIdentifier = data.collectionIdentifier
 
     local cardsInCollection = UTILS.TriggerCallbackSync('nagodo-collections:server:getCardsInCollection', collectionIdentifier)
-    cb(cardsInCollection)
+
+    local cards = {}
+
+    for k, v in pairs(cardsInCollection) do
+        table.insert(cards, {
+            cardIdentifier = v.identifier,
+            cardName = v.name
+        })
+    end
+
+
+    cb(cards)
 end)
 
 RegisterNUICallback('getCardsForImageExport', function(data, cb)

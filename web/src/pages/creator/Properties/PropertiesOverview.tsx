@@ -82,7 +82,6 @@ const PropertiesOverview = ({properties}: PropertiesOverviewProps) => {
                 <Property title = {"Frames"} properties = {getFrameProperties()} onPropertyClick={handlePropertyClick}/>
                 <Property title = {"Elements"} properties={getElementProperties()} onPropertyClick={handlePropertyClick}/>
                 <Property title = {"Image overlays"} properties={getImageOverlayProperties()} onPropertyClick={handlePropertyClick}/>
-                <Property title = {"Stickers"} properties={getStickersProperties()} onPropertyClick={handlePropertyClick}/>
             
                 <Property title = {"Backs"} properties={getBackProperties()} onPropertyClick={handlePropertyClick}/>
             

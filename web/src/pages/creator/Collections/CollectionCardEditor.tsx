@@ -68,6 +68,8 @@ const CollectionCardEditor = ({collectionIdentifier, _properties}: {collectionId
             collection: collectionIdentifier,
             card: newCardData
         });
+
+        setSelectedCard(defaultCard);
     }
 
     function handleCardDataChange(card: ICard) {

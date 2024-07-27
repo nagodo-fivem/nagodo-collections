@@ -61,7 +61,7 @@ const ItemsExporter = ({collectionIdentifier, collectionName, closeContext}: Ite
         document.body.removeChild(element);
 
         // navigator.clipboard.writeText(toClipBoard);
-        setCopyToClipboardStatus(_T("COPIED_TO_CLIPBOARD"));
+        setCopyToClipboardStatus(_T("OUTPUT_WAS_COPIED"));
     }
 
     return (
@@ -78,7 +78,7 @@ const ItemsExporter = ({collectionIdentifier, collectionName, closeContext}: Ite
 
             <div className="output">
                 <div className="title">
-                    Output
+                    {_T("OUTPUT")}
                 </div>
                 <div className="line"></div>
                 <div className="outputtext" dangerouslySetInnerHTML= {{ __html: output }}></div>
@@ -89,18 +89,18 @@ const ItemsExporter = ({collectionIdentifier, collectionName, closeContext}: Ite
             </div>
 
             <div className="close-btn" onClick={handleCloseClick}>
-                <div className="label">Close</div>
+                <div className="label">{_T("CLOSE")}</div>
             </div>
 
             {exportType === "" && (
                 <div className="export-btn noaccess">
-                    <div className="label">Generate</div>
+                    <div className="label">{_T("GENERATE")}</div>
                 </div>
             )}
 
             {exportType !== "" && (
                 <div className="export-btn" onClick={handleExportClick}>
-                    <div className="label">Generate</div>
+                    <div className="label">{_T("GENERATE")}</div>
                 </div>
             )}
         </div>

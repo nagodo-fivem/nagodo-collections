@@ -28,6 +28,12 @@ Locale = {
         ['COPY_TO_CLIPBOARD'] = "Copy to clipboard",
         ['OUTPUT_WAS_COPIED'] = "Output has been copied to clipboard!",
         ['EXPORTING_COLLECTION'] = "Exporting collection: ",
+        ['GENERATE'] = "Generate",
+        ['OUTPUT'] = "Output",
+
+        ['FOLDER_FOR_COLLECTION'] = "Folder for collection: ",
+        ['CARD_FROM_COLLECTION'] = "Card from collection: ",
+        ['PACK_FOR_COLLECTION'] = "Pack with cards from: ",
 
         -- Image Export --
         ['NO_CARDS_TO_EXPORT'] = "No cards to export",
@@ -47,6 +53,8 @@ Locale = {
         ['BACK'] = "Back",
         ['STOP'] = "Stop",
         ['CANCEL'] = "Cancel",
+        ['CLOSE'] = "Close",
+        
         ['DELETE'] = "Delete",
         ['SAVE'] = "Save",
         ['CONFIRM'] = "Confirm",

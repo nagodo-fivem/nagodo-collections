@@ -24,7 +24,12 @@ function RegisterItemForUse(name, type, data, removeItemOnUse)
             end
 
             if type == "card" then
+        
                 HandleCardUse(source, data.cardToOpen)
+            end
+
+            if type == "pack" then
+                HandlePackUse(source, data.collectionId)
             end
         end)
 

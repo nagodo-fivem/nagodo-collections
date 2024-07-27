@@ -11,6 +11,7 @@ import ShowCard from './showCard/ShowCard';
 
 const App: React.FC = () => {
     const [showType, setShowType] = useState<string>(isEnvBrowser() ? "creator" : "");
+    const [cardToShow, setCardToShow] = useState<any>(null);
 
     //NUI Hooks
     useNuiEvent<any>('setTranslations', (data) => { 
@@ -19,6 +20,11 @@ const App: React.FC = () => {
 
     useNuiEvent<any>('setShowType', (data) => {
         setShowType(data.type);
+    })
+
+    useNuiEvent<any>('showCard', (data) => {
+        console.log(JSON.stringify(data.cardData));
+        setCardToShow(data.cardData);
     })
 
     const keyHandler = (e: KeyboardEvent) => {
@@ -52,7 +58,7 @@ const App: React.FC = () => {
             )}
 
             {showType === "showCard" && (
-                <ShowCard />
+                <ShowCard card = {cardToShow} />
             )}
 
         </div>

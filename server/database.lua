@@ -160,8 +160,12 @@ function Database()
     end
 
     self.GetCardDataForUse = function(cardName)
-        local collectionId = cardName[1]
-        local cardId = cardName[3]
+ 
+        local removePrefix = string.gsub(cardName, "card_", "")
+  
+        local collectionId = string.sub(removePrefix, 1, 1)
+        local cardId = string.sub(removePrefix, 3, removePrefix:len())
+ 
         local result = exports.oxmysql:executeSync('SELECT * FROM nagodo_collections_cards WHERE collection = ? AND id = ?', {collectionId, cardId}) 
     
         
@@ -170,13 +174,40 @@ function Database()
             local fetchedData = result[1]
             local additionelData = json.decode(fetchedData.data)
 
-            local sqlPropertyIds = "" .. additionelData.frameIdentifier .. "," .. additionelData.elementIdentifier .. "," .. additionelData.imageOverlayIdentifier
-            local properties = exports.oxmysql:executeSync('SELECT * FROM nagodo_collections_properties WHERE id IN (?))', {sqlPropertyIds})
+            local ids = {
+                additionelData.frameIdentifier,
+                additionelData.elementIdentifier,
+                additionelData.imageOverlayIdentifier
+            }
+
+            local final = {}
+
+            for k, v in ipairs(ids) do
+                if v ~= -1 then
+                    table.insert(final, v)
+                end     
+            end
+
+
+            local properties = {}
+            for k, v in ipairs(final) do
+
+                local property = exports.oxmysql:executeSync('SELECT * FROM nagodo_collections_properties WHERE id = ?', {v})
+                if next(property) then
+                    table.insert(properties, {
+                        type = property[1].type,
+                        image = json.decode(property[1].data).image
+                    })
+                end
+
+                
+            end
+
 
             local sortedProperties = self.SortProperties(properties)
 
             local cardData = {
-                name = fetchedData.name,
+                name = fetchedData.label,
                 health = additionelData.health,
                 attack = additionelData.attack,
                 damage = additionelData.damage,
@@ -189,6 +220,9 @@ function Database()
 
                 isCustomCard = additionelData.isCustomCard,
             }
+
+            print("-------------------")
+            print(json.encode(cardData))
 
             return cardData
         end

@@ -1,1 +1,0 @@
-All exported images will by default be saved in this folder

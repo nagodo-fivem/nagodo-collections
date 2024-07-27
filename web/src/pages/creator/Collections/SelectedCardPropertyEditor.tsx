@@ -59,7 +59,13 @@ const SelectedCardProperty = ({startCardData, handleCardDataChange, handleSelect
         return (
             <div className="selectedcardproperty" style={{height: "40vh", width: "98%"}}>
                 <div className="element">
+                    <Input title="Name" key={"c-name"} onChange={handleNameChange} startValue={startCardData.name} />
+                </div>
+                <div className="element">
                     <Input title="Custom Image" key={"ci"} onChange={handleCustomImageChange} startValue={startCardData.cardImage} />
+                </div>
+                <div className="element">
+                    <Input title="Rarity" key={"c-rarity"} onChange={handleRarityChange} startValue={startCardData.rarity.toString()} onlyNumbers = {true} />
                 </div>
 
                 <div className="element">
@@ -117,9 +123,6 @@ const SelectedCardProperty = ({startCardData, handleCardDataChange, handleSelect
                 </div>
                 <div className="button" onClick={() => {handleSelectVisualType("image-overlay")}}>
                     <div className="label"><i className="fa-solid fa-folder-open"></i>{_T("IMAGE_OVERLAY")}</div>
-                </div>
-                <div className="button">
-                    <div className="label"><i className="fa-solid fa-folder-open"></i>Stickers (coming soon)</div>
                 </div>
                 <div className="button" onClick={() => {handleIsCustomImageClick()}}>
                     <div className="label"><i className="fa-solid fa-maximize"></i>{_T("IS_CUSTOM")}</div>

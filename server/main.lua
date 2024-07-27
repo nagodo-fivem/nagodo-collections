@@ -18,6 +18,80 @@ function HandleCardUse(source, cardName)
     TriggerClientEvent("nagodo-collections:client:openCard", source, cardData)
 end
 
+function HandlePackUse(source, collectionId)
+    local cardAmount = 8
+
+    local cardsToOpen = CalculateCardsToOpen(collectionId, cardAmount)
+
+    local sortedByRarity = SortByRarity(cardsToOpen)
+
+    print("Cards to open: " .. json.encode(cardsToOpen))
+end
+
+function CalculateCardsToOpen(collectionId, amount)
+    local allCards = DATABASE.GetAllCards(collectionId)
+
+    local lowestRarity = 100000000
+
+    for k, v in pairs(allCards) do
+        if v.rarity < lowestRarity then
+            lowestRarity = v.rarity
+        end
+    end
+
+    local multi = 1
+    --Convert to int
+    if lowestRarity < 0 then
+        local decimalAmount = #tostring(lowestRarity) - 2
+
+        local pow = 10 ^ decimalAmount
+        multi = pow
+
+    end
+
+    local cardsToOpen = {}
+        
+    local sumRarity = 0
+    for k, v in pairs(allCards) do
+        local inc = (v.rarity * multi)
+
+        table.insert(cardsToOpen, {
+            min = sumRarity,
+            max = sumRarity + inc,
+            rarity = inc,
+            cardId = v.identifier
+        })
+
+        sumRarity = sumRarity + inc
+    end
+
+    local cards = {}
+
+    for i = 1, amount, 1 do
+        local random = math.random(0, sumRarity)
+
+        for k, v in pairs(cardsToOpen) do
+            if random >= v.min and random <= v.max then
+                table.insert(cards, {
+                    id = v.cardId,
+                    rarity = v.rarity
+                })
+                break
+            end
+        end
+    end
+
+    return cards
+end
+
+function SortByRarity(cards)
+    table.sort(cards, function(a, b)
+        return a.rarity > b.rarity
+    end)
+
+    return cards
+end
+
 --Callbacks--
 UTILS.CreateCallback('nagodo-collections:server:getAllCollections', function(source, cb)
     local collections = DATABASE.GetAllCollections()
@@ -123,7 +197,7 @@ RegisterNetEvent('nagodo-collections:server:saveImage', function(base64, cardNam
     path = path .. Config.ImageExportSavePath
     print(path)
 
-    local file, err = io.open(path .. cardName .. ".png", "wb") -- Open file in binary mode
+    local file, err = io.open(path .. "card_" .. cardName .. ".png", "wb") -- Open file in binary mode
     if not file then
         print("Failed to open file:", err)
         return

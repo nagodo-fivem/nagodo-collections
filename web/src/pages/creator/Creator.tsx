@@ -8,15 +8,13 @@ import { ContextMenu } from './Context/contextMenu';
 import { useNuiEvent } from '@hooks/useNuiEvent';
 import IProperty from './Properties/IProperty';
 import ICollection from './Collections/ICollection';
-import IAnimation from './Animations/IAnimation';
-import AnimationsOverview from './Animations/AnimationsOverview';
 import { isEnvBrowser } from '../../utils/misc';
 
 const Creator = () => {
     const [selectedPage, setSelectedPage] = useState<string>("collections");
     const [collections, setCollections] = useState<ICollection[]>(isEnvBrowser() ? testCollections : []);
     const [properties, setProperties] = useState<IProperty[]>(isEnvBrowser() ? testProperties : []);
-    const [animations, setAnimations] = useState<IAnimation[]>(isEnvBrowser() ? testAnimations : []);
+
 
     useEffect(() => {
         fetchNui('fetchCollections').then((data) => {
@@ -27,12 +25,6 @@ const Creator = () => {
 
         fetchNui('fetchProperties').then((data) => {
             setProperties(data);
-        }).catch((err) => {
-            
-        });
-
-        fetchNui('fetchAnimations').then((data) => {
-            setAnimations(data);
         }).catch((err) => {
             
         });
@@ -66,11 +58,6 @@ const Creator = () => {
                     <PropertiesOverview properties = {properties}/>
                 )}
 
-                {/* Animations */}
-                {selectedPage === "animations" && (
-                    <AnimationsOverview animations = {animations}/>
-                )}
-
             </div>
         </ContextMenu>
         
@@ -86,25 +73,6 @@ let testCollections: ICollection[] = [
         cardAmount: 10
     }
 ]
-
-let testAnimations: IAnimation[] = [
-    {
-        identifier: 1,
-        label: "Flip1",
-        type: "flip",
-    },
-    {
-        identifier: 2,
-        label: "Flip2",
-        type: "flip",
-    },
-    {
-        identifier: 3,
-        label: "Open1",
-        type: "open",
-    }
-]
-
 
 
 let testProperties: IProperty[] = [

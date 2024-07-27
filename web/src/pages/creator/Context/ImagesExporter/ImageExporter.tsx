@@ -7,6 +7,7 @@ import { FrontCard } from "../../../../components/card/Card";
 import IProperty from "../../Properties/IProperty";
 import DropDown from "../../../../components/Dropdown/Dropdown";
 import { _T } from "@utils/translation";
+import { isContext } from "vm";
 
 interface ImageExporterProps {
     collectionIdentifier: number;
@@ -237,7 +238,7 @@ const ImageExporter = ({collectionIdentifier, closeContext}: ImageExporterProps)
             {cards.length > 0 && currentCard && (
                 <>
                     <div id = "domToExport" className="domToExport" ref={domToExport} style={getDomToExportSize(QualityToSize(cardQuality))}>
-                        <FrontCard size={QualityToSize(cardQuality)} name={currentCard.name} health={currentCard.health} info={currentCard.info} attack={currentCard.attack} damage={currentCard.damage} cardNum={23} cardImage={currentCard.cardImage} frameImage={getFrameByIdentifier(currentCard.frameIdentifier)} elementImage = {getElementByIdentifier(currentCard.elementIdentifier)} imageOverlayImage={getImageOverlayByIdentifier(currentCard.imageOverlayIdentifier)}/>
+                        <FrontCard size={QualityToSize(cardQuality)} name={currentCard.name} health={currentCard.health} info={currentCard.info} attack={currentCard.attack} damage={currentCard.damage} cardNum={23} cardImage={currentCard.cardImage} frameImage={getFrameByIdentifier(currentCard.frameIdentifier)} elementImage = {getElementByIdentifier(currentCard.elementIdentifier)} imageOverlayImage={getImageOverlayByIdentifier(currentCard.imageOverlayIdentifier)} isCustomCard = {currentCard.isCustomCard}/>
                     </div>
 
                     <div className="information">
@@ -404,7 +405,8 @@ let testCards = [
         elementIdentifier: 1,
         imageOverlayIdentifier: -1,
         cardImage: "Cards/FirstEdition Collection/CardPictures/black_blackgris_01.png",
-        rarity: 50
+        rarity: 50,
+        isCustomCard: false
     },
     {
         identifier: 2,
@@ -418,7 +420,8 @@ let testCards = [
         elementIdentifier: 1,
         imageOverlayIdentifier: 1,
         cardImage: "Cards/FirstEdition Collection/CardPictures/black_blackgris_01.png",
-        rarity: 50
+        rarity: 50,
+        isCustomCard: false
     },
     {
         identifier: 3,
@@ -432,7 +435,8 @@ let testCards = [
         elementIdentifier: 1,
         imageOverlayIdentifier: -1,
         cardImage: "Cards/FirstEdition Collection/CardPictures/black_blackgris_01.png",        
-        rarity: 50
+        rarity: 50,
+        isCustomCard: false
     },
     {
         identifier: 4,
@@ -446,7 +450,8 @@ let testCards = [
         elementIdentifier: 1,
         imageOverlayIdentifier: 1,
         cardImage: "Cards/FirstEdition Collection/CardPictures/black_blackgris_01.png",
-        rarity: 50
+        rarity: 50,
+        isCustomCard: false
     },
     {
         identifier: 5,
@@ -460,360 +465,9 @@ let testCards = [
         elementIdentifier: 1,
         imageOverlayIdentifier: -1,
         cardImage: "Cards/FirstEdition Collection/CardPictures/black_blackgris_01.png",
-        rarity: 50
+        rarity: 50,
+        isCustomCard: false
     },
-    {
-        identifier: 6,
-        name: "John Olsen6",
-        health: 100,
-        info: "Test her",
-        attack: "Kredit her",
-        damage: 99,
-        cardNum: 1,
-        frameIdentifier: 1,
-        elementIdentifier: 1,
-        imageOverlayIdentifier: 1,
-        cardImage: "Cards/FirstEdition Collection/CardPictures/black_blackgris_01.png",
-        rarity: 50
-    },
-    {
-        identifier: 7,
-        name: "John Olsen7",
-        health: 100,
-        info: "Test her",
-        attack: "Kredit her",
-        damage: 99,
-        cardNum: 1,
-        frameIdentifier: 1,
-        elementIdentifier: 1,
-        imageOverlayIdentifier: -1,
-        cardImage: "Cards/FirstEdition Collection/CardPictures/black_blackgris_01.png",
-        rarity: 50
-    },
-    {
-        identifier: 8,
-        name: "John Olsen8",
-        health: 100,
-        info: "Test her",
-        attack: "Kredit her",
-        damage: 99,
-        cardNum: 1,
-        frameIdentifier: 1,
-        elementIdentifier: 1,
-        imageOverlayIdentifier: 1,
-        cardImage: "Cards/FirstEdition Collection/CardPictures/black_blackgris_01.png",
-        rarity: 50
-    },
-    {
-        identifier: 9,
-        name: "John Olsen9",
-        health: 100,
-        info: "Test her",
-        attack: "Kredit her",
-        damage: 99,
-        cardNum: 1,
-        frameIdentifier: 1,
-        elementIdentifier: 1,
-        imageOverlayIdentifier: -1,
-        cardImage: "Cards/FirstEdition Collection/CardPictures/black_blackgris_01.png",
-        rarity: 50
-    },
-    {
-        identifier: 10,
-        name: "John Olsen10",
-        health: 100,
-        info: "Test her",
-        attack: "Kredit her",
-        damage: 99,
-        cardNum: 1,
-        frameIdentifier: 1,
-        elementIdentifier: 1,
-        imageOverlayIdentifier: 1,
-        cardImage: "Cards/FirstEdition Collection/CardPictures/black_blackgris_01.png",
-        rarity: 50
-    },
-    {
-        identifier: 11,
-        name: "John Olsen11",
-        health: 100,
-        info: "Test her",
-        attack: "Kredit her",
-        damage: 99,
-        cardNum: 1,
-        frameIdentifier: 1,
-        elementIdentifier: 1,
-        imageOverlayIdentifier: -1,
-        cardImage: "Cards/FirstEdition Collection/CardPictures/black_blackgris_01.png",
-        rarity: 50
-    },
-    {
-        identifier: 12,
-        name: "John Olsen12",
-        health: 100,
-        info: "Test her",
-        attack: "Kredit her",
-        damage: 99,
-        cardNum: 1,
-        frameIdentifier: 1,
-        elementIdentifier: 1,
-        imageOverlayIdentifier: 1,
-        cardImage: "Cards/FirstEdition Collection/CardPictures/black_blackgris_01.png",
-        rarity: 50
-    },
-    {
-        identifier: 13,
-        name: "John Olsen13",
-        health: 100,
-        info: "Test her",
-        attack: "Kredit her",
-        damage: 99,
-        cardNum: 1,
-        frameIdentifier: 1,
-        elementIdentifier: 1,
-        imageOverlayIdentifier: -1,
-        cardImage: "Cards/FirstEdition Collection/CardPictures/black_blackgris_01.png",
-        rarity: 50
-    },
-    {
-        identifier: 14,
-        name: "John Olsen14",
-        health: 100,
-        info: "Test her",
-        attack: "Kredit her",
-        damage: 99,
-        cardNum: 1,
-        frameIdentifier: 1,
-        elementIdentifier: 1,
-        imageOverlayIdentifier: 1,
-        cardImage: "Cards/FirstEdition Collection/CardPictures/black_blackgris_01.png",
-        rarity: 50
-    },
-    {
-        identifier: 15,
-        name: "John Olsen15",
-        health: 100,
-        info: "Test her",
-        attack: "Kredit her",
-        damage: 99,
-        cardNum: 1,
-        frameIdentifier: 1,
-        elementIdentifier: 1,
-        imageOverlayIdentifier: -1,
-        cardImage: "Cards/FirstEdition Collection/CardPictures/black_blackgris_01.png",
-        rarity: 50
-    },
-    {
-        identifier: 16,
-        name: "John Olsen16",
-        health: 100,
-        info: "Test her",
-        attack: "Kredit her",
-        damage: 99,
-        cardNum: 1,
-        frameIdentifier: 1,
-        elementIdentifier: 1,
-        imageOverlayIdentifier: 1,
-        cardImage: "Cards/FirstEdition Collection/CardPictures/black_blackgris_01.png",
-        rarity: 50
-    },
-    {
-        identifier: 17,
-        name: "John Olsen17",
-        health: 100,
-        info: "Test her",
-        attack: "Kredit her",
-        damage: 99,
-        cardNum: 1,
-        frameIdentifier: 1,
-        elementIdentifier: 1,
-        imageOverlayIdentifier: -1,
-        cardImage: "Cards/FirstEdition Collection/CardPictures/black_blackgris_01.png",
-        rarity: 50
-    },
-    {
-        identifier: 18,
-        name: "John Olsen18",
-        health: 100,
-        info: "Test her",
-        attack: "Kredit her",
-        damage: 99,
-        cardNum: 1,
-        frameIdentifier: 1,
-        elementIdentifier: 1,
-        imageOverlayIdentifier: 1,
-        cardImage: "Cards/FirstEdition Collection/CardPictures/black_blackgris_01.png",
-        rarity: 50
-    },
-    {
-        identifier: 19,
-        name: "John Olsen19",
-        health: 100,
-        info: "Test her",
-        attack: "Kredit her",
-        damage: 99,
-        cardNum: 1,
-        frameIdentifier: 1,
-        elementIdentifier: 1,
-        imageOverlayIdentifier: -1,
-        cardImage: "Cards/FirstEdition Collection/CardPictures/black_blackgris_01.png",
-        rarity: 50
-    },
-    {
-        identifier: 20,
-        name: "John Olsen20",
-        health: 100,
-        info: "Test her",
-        attack: "Kredit her",
-        damage: 99,
-        cardNum: 1,
-        frameIdentifier: 1,
-        elementIdentifier: 1,
-        imageOverlayIdentifier: 1,
-        cardImage: "Cards/FirstEdition Collection/CardPictures/black_blackgris_01.png",
-        rarity: 50
-    },
-    {
-        identifier: 21,
-        name: "John Olsen21",
-        health: 100,
-        info: "Test her",
-        attack: "Kredit her",
-        damage: 99,
-        cardNum: 1,
-        frameIdentifier: 1,
-        elementIdentifier: 1,
-        imageOverlayIdentifier: -1,
-        cardImage: "Cards/FirstEdition Collection/CardPictures/black_blackgris_01.png",
-        rarity: 50
-    },
-    {
-        identifier: 22,
-        name: "John Olsen22",
-        health: 100,
-        info: "Test her",
-        attack: "Kredit her",
-        damage: 99,
-        cardNum: 1,
-        frameIdentifier: 1,
-        elementIdentifier: 1,
-        imageOverlayIdentifier: 1,
-        cardImage: "Cards/FirstEdition Collection/CardPictures/black_blackgris_01.png",
-        rarity: 50
-    },
-    {
-        identifier: 23,
-        name: "John Olsen23",
-        health: 100,
-        info: "Test her",
-        attack: "Kredit her",
-        damage: 99,
-        cardNum: 1,
-        frameIdentifier: 1,
-        elementIdentifier: 1,
-        imageOverlayIdentifier: -1,
-        cardImage: "Cards/FirstEdition Collection/CardPictures/black_blackgris_01.png",
-        rarity: 50
-    },
-    {
-        identifier: 24,
-        name: "John Olsen24",
-        health: 100,
-        info: "Test her",
-        attack: "Kredit her",
-        damage: 99,
-        cardNum: 1,
-        frameIdentifier: 1,
-        elementIdentifier: 1,
-        imageOverlayIdentifier: 1,
-        cardImage: "Cards/FirstEdition Collection/CardPictures/black_blackgris_01.png",
-        rarity: 50
-    },
-    {
-        identifier: 25,
-        name: "John Olsen25",
-        health: 100,
-        info: "Test her",
-        attack: "Kredit her",
-        damage: 99,
-        cardNum: 1,
-        frameIdentifier: 1,
-        elementIdentifier: 1,
-        imageOverlayIdentifier: -1,
-        cardImage: "Cards/FirstEdition Collection/CardPictures/black_blackgris_01.png",
-        rarity: 50
-    },
-    {
-        identifier: 26,
-        name: "John Olsen26",
-        health: 100,
-        info: "Test her",
-        attack: "Kredit her",
-        damage: 99,
-        cardNum: 1,
-        frameIdentifier: 1,
-        elementIdentifier: 1,
-        imageOverlayIdentifier: 1,
-        cardImage: "Cards/FirstEdition Collection/CardPictures/black_blackgris_01.png",
-        rarity: 50
-    },
-    {
-        identifier: 27,
-        name: "John Olsen27",
-        health: 100,
-        info: "Test her",
-        attack: "Kredit her",
-        damage: 99,
-        cardNum: 1,
-        frameIdentifier: 1,
-        elementIdentifier: 1,
-        imageOverlayIdentifier: -1,
-        cardImage: "Cards/FirstEdition Collection/CardPictures/black_blackgris_01.png",
-        rarity: 50
-    },
-    {
-        identifier: 28,
-        name: "John Olsen28",
-        health: 100,
-        info: "Test her",
-        attack: "Kredit her",
-        damage: 99,
-        cardNum: 1,
-        frameIdentifier: 1,
-        elementIdentifier: 1,
-        imageOverlayIdentifier: 1,
-        cardImage: "Cards/FirstEdition Collection/CardPictures/black_blackgris_01.png",
-        rarity: 50
-    },
-    {
-        identifier: 29,
-        name: "John Olsen29",
-        health: 100,
-        info: "Test her",
-        attack: "Kredit her",
-        damage: 99,
-        cardNum: 1,
-        frameIdentifier: 1,
-        elementIdentifier: 1,
-        imageOverlayIdentifier: -1,
-        cardImage: "Cards/FirstEdition Collection/CardPictures/black_blackgris_01.png",
-        rarity: 50
-    },
-    {
-        identifier: 30,
-        name: "John Olsen30",
-        health: 100,
-        info: "Test her",
-        attack: "Kredit her",
-        damage: 99,
-        cardNum: 1,
-        frameIdentifier: 1,
-        elementIdentifier: 1,
-        imageOverlayIdentifier: 1,
-        cardImage: "Cards/FirstEdition Collection/CardPictures/black_blackgris_01.png",
-        rarity: 50
-    }
-
-
 ]
 
 export default ImageExporter;

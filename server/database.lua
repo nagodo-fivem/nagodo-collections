@@ -131,6 +131,7 @@ function Database()
                     frameIdentifier = data.frameIdentifier,
                     elementIdentifier = data.elementIdentifier,
                     imageOverlayIdentifier = data.imageOverlayIdentifier,
+                    isCustomCard = data.isCustomCard or false,
                     cardImage = data.cardImage
                 })
             end
@@ -184,7 +185,9 @@ function Database()
                 cardImage = additionelData.cardImage,
                 frameImage = sortedProperties["frame"],
                 elementImage = sortedProperties["element"],
-                overlayImage = sortedProperties["overlay"]
+                overlayImage = sortedProperties["overlay"],
+
+                isCustomCard = additionelData.isCustomCard,
             }
 
             return cardData
@@ -211,6 +214,7 @@ function Database()
             damage = card.damage,
             cardNum = card.cardNum,
             cardImage = card.cardImage,
+            isCustomCard = card.isCustomCard,
 
             frameIdentifier = card.frameIdentifier,
             elementIdentifier = card.elementIdentifier,
@@ -230,6 +234,7 @@ function Database()
             damage = card.damage,
             cardNum = card.cardNum,
             cardImage = card.cardImage,
+            isCustomCard = card.isCustomCard,
 
             frameIdentifier = card.frameIdentifier,
             elementIdentifier = card.elementIdentifier,

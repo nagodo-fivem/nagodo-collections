@@ -22,6 +22,7 @@ interface CardToOpenProps {
     elementImage: string;
     imageOverlayImage: string;
     cardImage: string;
+    isCustomCard: boolean;
 
     onCardFlipped: () => void;
 }
@@ -102,7 +103,7 @@ const CardToOpen = (props: CardToOpenProps) => {
             </audio>
 
             <div className="card-front" style={getFlipFrontTransform()}>
-                <FrontCard name = {props.name} health={props.health} info={props.info} attack={props.attack} damage={props.damage} cardNum={props.cardNum} frameImage={props.frameImage} elementImage={props.elementImage} imageOverlayImage={props.imageOverlayImage} cardImage={props.cardImage} size={1} fill = {true} />
+                <FrontCard name = {props.name} health={props.health} info={props.info} attack={props.attack} damage={props.damage} cardNum={props.cardNum} frameImage={props.frameImage} elementImage={props.elementImage} imageOverlayImage={props.imageOverlayImage} cardImage={props.cardImage} size={1} fill = {true} isCustomCard = {props.isCustomCard} />
             </div>
 
             <div className='card-back' style={getFlipBackSideTransform()}>

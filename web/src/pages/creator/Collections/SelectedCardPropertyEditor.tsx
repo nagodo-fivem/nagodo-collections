@@ -1,6 +1,7 @@
 import Input from "@components/Input/Input";
 import { _T } from "@utils/translation";
 import { ICard } from "./ICard";
+import { useState } from "react";
 
 interface SelectedCardPropertyProps {
     startCardData: ICard;
@@ -9,7 +10,15 @@ interface SelectedCardPropertyProps {
 }
 
 const SelectedCardProperty = ({startCardData, handleCardDataChange, handleSelectVisualType}: SelectedCardPropertyProps) => {
-    
+
+    function handleCustomImageChange(image: string) {
+        handleCardDataChange({...startCardData, cardImage: image});
+    }
+
+    function handleIsCustomImageClick() {
+        handleCardDataChange({...startCardData, isCustomCard: !startCardData.isCustomCard});
+    }
+
     function handleNameChange(name: string) {
         if (name.length > 26) return;
         handleCardDataChange({...startCardData, name: name});
@@ -45,11 +54,31 @@ const SelectedCardProperty = ({startCardData, handleCardDataChange, handleSelect
         let _rarity = parseInt(rarity);
         handleCardDataChange({...startCardData, rarity: _rarity});
     }
+
+    if (startCardData.isCustomCard) {
+        return (
+            <div className="selectedcardproperty" style={{height: "40vh", width: "98%"}}>
+                <div className="element">
+                    <Input title="Custom Image" key={"ci"} onChange={handleCustomImageChange} startValue={startCardData.cardImage} />
+                </div>
+
+                <div className="element">
+                    <div className="title">
+                        {_T("VISUALS")}
+                    </div>
+                    <div className="button" onClick={() => {handleIsCustomImageClick()}}>
+                        <div className="label"><i className="fa-solid fa-maximize"></i>{_T("IS_CUSTOM")}</div>
+                    </div>
+
+                </div>
+            </div>
+        )
+    }
     
     return (
         <div className="selectedcardproperty">
             <div className="element">
-                <Input title="Name" onChange={handleNameChange} startValue={startCardData.name} />
+                <Input title="Name" key={"name"} onChange={handleNameChange} startValue={startCardData.name} />
             </div>
 
             <div className="element">
@@ -91,6 +120,9 @@ const SelectedCardProperty = ({startCardData, handleCardDataChange, handleSelect
                 </div>
                 <div className="button">
                     <div className="label"><i className="fa-solid fa-folder-open"></i>Stickers (coming soon)</div>
+                </div>
+                <div className="button" onClick={() => {handleIsCustomImageClick()}}>
+                    <div className="label"><i className="fa-solid fa-maximize"></i>{_T("IS_CUSTOM")}</div>
                 </div>
             </div>
         </div>

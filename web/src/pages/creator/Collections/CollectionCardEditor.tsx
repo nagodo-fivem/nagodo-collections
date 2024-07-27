@@ -11,7 +11,7 @@ import StickerPlacement from "./StickerPlacement";
 import { _T } from "@utils/translation";
 import SelectedCardProperty from "./SelectedCardPropertyEditor";
 
-const defaultCard: ICard = {identifier: -1, name: "", health: 100, info: "", attack: "", damage: 99, cardNum: 1, rarity: 50, frameIdentifier: 1, elementIdentifier: 1, imageOverlayIdentifier: -1, cardImage: "Cards/FirstEditionCollection/CardPictures/black_blackgris_01.png"};
+const defaultCard: ICard = {identifier: -1, name: "", health: 100, info: "", attack: "", damage: 99, cardNum: 1, rarity: 50, frameIdentifier: 1, elementIdentifier: 1, imageOverlayIdentifier: -1, cardImage: "Cards/FirstEditionCollection/CardPictures/black_blackgris_01.png", isCustomCard: false};
 const cardSize = 0.619;
 const CollectionCardEditor = ({collectionIdentifier, _properties}: {collectionIdentifier: number, _properties: IProperty[]}) => {
     const [properties, setProperties] = useState<IProperty[]>(isEnvBrowser() ? testProperties : _properties);
@@ -128,7 +128,7 @@ const CollectionCardEditor = ({collectionIdentifier, _properties}: {collectionId
                         {cards.map((card, index) => {
                             return (
                                 <div className="card-wrapper" onClick={() => {handleCardClick(card)}}>
-                                    <FrontCard size={cardSize} name={card.name} health={card.health} info={card.info} attack={card.attack} damage={card.damage} cardNum={card.cardNum} cardImage={card.cardImage} frameImage={getFrameByIdentifier(card.frameIdentifier)} elementImage = {getElementByIdentifier(card.elementIdentifier)} imageOverlayImage={getImageOverlayByIdentifier(card.imageOverlayIdentifier)}/>
+                                    <FrontCard size={cardSize} name={card.name} health={card.health} info={card.info} attack={card.attack} damage={card.damage} cardNum={card.cardNum} cardImage={card.cardImage} frameImage={getFrameByIdentifier(card.frameIdentifier)} elementImage = {getElementByIdentifier(card.elementIdentifier)} imageOverlayImage={getImageOverlayByIdentifier(card.imageOverlayIdentifier)} isCustomCard = {card.isCustomCard}/>
                                 </div>
                             )
 
@@ -140,7 +140,7 @@ const CollectionCardEditor = ({collectionIdentifier, _properties}: {collectionId
                 {(editingCard && selectedCard) && (
                     <div className="editor">
                         <div className="preview">
-                            <FrontCard size={1.6} name={newCardData.name} health={newCardData.health} info={newCardData.info} attack={newCardData.attack} damage={newCardData.damage} cardNum={newCardData.cardNum} cardImage={newCardData.cardImage} frameImage={getFrameByIdentifier(newCardData.frameIdentifier)} elementImage = {getElementByIdentifier(newCardData.elementIdentifier)} imageOverlayImage={getImageOverlayByIdentifier(newCardData.imageOverlayIdentifier)} />
+                            <FrontCard size={1.6} name={newCardData.name} health={newCardData.health} info={newCardData.info} attack={newCardData.attack} damage={newCardData.damage} cardNum={newCardData.cardNum} cardImage={newCardData.cardImage} frameImage={getFrameByIdentifier(newCardData.frameIdentifier)} elementImage = {getElementByIdentifier(newCardData.elementIdentifier)} imageOverlayImage={getImageOverlayByIdentifier(newCardData.imageOverlayIdentifier)} isCustomCard = {newCardData.isCustomCard} />
                         </div>
 
                     </div>
@@ -233,7 +233,8 @@ let testCards: ICard[] = [
         elementIdentifier: 1,
         imageOverlayIdentifier: -1,
         cardImage: "Cards/FirstEditionCollection/CardPictures/black_blackgris_01.png",
-        rarity: 50
+        rarity: 50,
+        isCustomCard: false
     },
     {
         identifier: 2,
@@ -247,7 +248,8 @@ let testCards: ICard[] = [
         elementIdentifier: 1,
         imageOverlayIdentifier: 1,
         cardImage: "Cards/FirstEditionCollection/CardPictures/black_blackgris_01.png",
-        rarity: 50
+        rarity: 50,
+        isCustomCard: false
     },
     {
         identifier: 3,
@@ -260,8 +262,9 @@ let testCards: ICard[] = [
         frameIdentifier: 1,
         elementIdentifier: 1,
         imageOverlayIdentifier: -1,
-        cardImage: "Cards/FirstEditionCollection/CardPictures/black_blackgris_01.png",        
-        rarity: 50
+        cardImage: "Cards/FirstEditionCollection/CustomCards/c_john_olsen_01.png",        
+        rarity: 50,
+        isCustomCard: true
     }
 ]
 

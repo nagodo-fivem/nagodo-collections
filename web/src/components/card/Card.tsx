@@ -15,6 +15,7 @@ interface CardProps {
     elementImage: string;
     imageOverlayImage: string;
     cardImage: string;
+    isCustomCard: boolean;
 
     size: number;
     fill?: boolean;
@@ -22,7 +23,7 @@ interface CardProps {
 
 
 
-export const FrontCard = ({name, health, info, attack, damage, cardNum, size, frameImage, elementImage, cardImage, imageOverlayImage, fill }: CardProps) => {
+export const FrontCard = ({name, health, info, attack, damage, cardNum, size, frameImage, elementImage, cardImage, imageOverlayImage, fill, isCustomCard }: CardProps) => {
     let scale = 0.025 * size;
     let width = 1024 * scale
     let height = 1420 * scale
@@ -40,6 +41,16 @@ export const FrontCard = ({name, health, info, attack, damage, cardNum, size, fr
         if (typeof cardNum === "string") return cardNum + " / XXX";
 
         return cardNum + " / 100";
+    }
+
+    if (isCustomCard) {
+        return (
+            <div className="card" style={getCardStyle() }>
+                <img src={getImagePath(cardImage)} alt="" className="custom-card"/>
+
+            </div>
+        )
+        
     }
 
     return (
@@ -98,7 +109,7 @@ export const BackCard = ({size, image}: {size: number, image: string}) => {
 
 
 function GetNameFontSize(scale: number, textLength: number) {
-    if (textLength < 19) return 70 * scale + "vh";
+    if (textLength < 16) return 70 * scale + "vh";
     if (textLength < 20) return 60 * scale + "vh";
     if (textLength < 22) return 50 * scale + "vh";
     if (textLength < 29) return 40 * scale + "vh";

@@ -12,4 +12,5 @@ export interface ICard {
     elementIdentifier: number;
     imageOverlayIdentifier: number;
     cardImage: string;
+    isCustomCard: boolean;
 }

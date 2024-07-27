@@ -10,4 +10,5 @@ export interface ICardToOpen {
     elementImage: string;
     imageOverlayImage: string;
     cardImage: string;
+    isCustomCard: boolean;
 }

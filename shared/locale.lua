@@ -14,6 +14,7 @@ Locale = {
         ['SELECT'] = "Select",
         ['ENTER'] = "Enter...",
         
+        ['IS_CUSTOM'] = "Fullart card",
         ['NEW_CARD'] = "New card",
         ['VISUALS'] = "Visuals",
         ['FRAME'] = "Frame",

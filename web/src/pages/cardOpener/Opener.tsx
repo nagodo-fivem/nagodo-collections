@@ -43,6 +43,7 @@ const Opener = () => {
                         elementImage={card.elementImage}
                         imageOverlayImage={card.imageOverlayImage}
                         cardImage={card.cardImage}
+                        isCustomCard={card.isCustomCard}
                         onCardFlipped={handleCardFlipped}
                     />
                 })}
@@ -65,6 +66,7 @@ let testCards: ICardToOpen[] = [
         elementImage : "Elements/FireElement.png",
         imageOverlayImage : "",
         cardImage : "Cards/FirstEditionCollection/CardPictures/g_holo_john_olsen_01.jpg",
+        isCustomCard: false,
     },
     {
         name: "Card 2",
@@ -77,6 +79,7 @@ let testCards: ICardToOpen[] = [
         elementImage : "Elements/FireElement.png",
         imageOverlayImage : "",
         cardImage : "Cards/FirstEditionCollection/CardPictures/g_holo_john_olsen_01.jpg",
+        isCustomCard: false,
     },
     {
         name: "Card 1",
@@ -89,6 +92,7 @@ let testCards: ICardToOpen[] = [
         elementImage : "Elements/FireElement.png",
         imageOverlayImage : "",
         cardImage : "Cards/FirstEditionCollection/CardPictures/g_holo_john_olsen_01.jpg",
+        isCustomCard: false,
     },
     {
         name: "Card 2",
@@ -101,6 +105,7 @@ let testCards: ICardToOpen[] = [
         elementImage : "Elements/FireElement.png",
         imageOverlayImage : "",
         cardImage : "Cards/FirstEditionCollection/CardPictures/g_holo_john_olsen_01.jpg",
+        isCustomCard: false,
     },
     {
         name: "Card 1",
@@ -113,6 +118,7 @@ let testCards: ICardToOpen[] = [
         elementImage : "Elements/FireElement.png",
         imageOverlayImage : "",
         cardImage : "Cards/FirstEditionCollection/CardPictures/g_holo_john_olsen_01.jpg",
+        isCustomCard: false,
     },
     {
         name: "Card 2",
@@ -125,6 +131,7 @@ let testCards: ICardToOpen[] = [
         elementImage : "Elements/FireElement.png",
         imageOverlayImage : "",
         cardImage : "Cards/FirstEditionCollection/CardPictures/g_holo_john_olsen_01.jpg",
+        isCustomCard: false,
     },
     {
         name: "Card 1",
@@ -137,6 +144,7 @@ let testCards: ICardToOpen[] = [
         elementImage : "Elements/FireElement.png",
         imageOverlayImage : "",
         cardImage : "Cards/FirstEditionCollection/CardPictures/g_holo_john_olsen_01.jpg",
+        isCustomCard: false,
     },
     {
         name: "Card 2",
@@ -149,6 +157,7 @@ let testCards: ICardToOpen[] = [
         elementImage : "Elements/FireElement.png",
         imageOverlayImage : "",
         cardImage : "Cards/FirstEditionCollection/CardPictures/g_holo_john_olsen_01.jpg",
+        isCustomCard: false,
     },
     {
         name: "Card 1",
@@ -161,6 +170,7 @@ let testCards: ICardToOpen[] = [
         elementImage : "Elements/FireElement.png",
         imageOverlayImage : "",
         cardImage : "Cards/FirstEditionCollection/CardPictures/g_holo_john_olsen_01.jpg",
+        isCustomCard: false,
     },
     {
         name: "Card 2",
@@ -173,5 +183,6 @@ let testCards: ICardToOpen[] = [
         elementImage : "Elements/FireElement.png",
         imageOverlayImage : "",
         cardImage : "Cards/FirstEditionCollection/CardPictures/g_holo_john_olsen_01.jpg",
+        isCustomCard: false,
     },
 ]

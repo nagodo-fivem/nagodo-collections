@@ -14,6 +14,7 @@ interface ShowCard {
     frameImage: string;
     elementImage: string;
     overlayImage: string;
+    isCustomCard: boolean;
 }
 
 const ShowCard = () => {
@@ -59,7 +60,7 @@ const SpinningCard = ({card, rotated}: SpinningCardProps) => {
     return (
         <div className="spinningCard">
             <div className="front" style={getFrontRotationStyle()}>
-                <FrontCard name = {card.name} health={card.health} info={card.info} attack={card.attack} damage={card.damage} cardNum={1} cardImage={card.cardImage} frameImage={card.frameImage} elementImage={card.elementImage} imageOverlayImage={card.overlayImage} size={1.5} fill = {true} />
+                <FrontCard name = {card.name} health={card.health} info={card.info} attack={card.attack} damage={card.damage} cardNum={1} cardImage={card.cardImage} frameImage={card.frameImage} elementImage={card.elementImage} imageOverlayImage={card.overlayImage} size={1.5} fill = {true} isCustomCard = {card.isCustomCard} />
             </div>
             <div className="back" style={getBackRotationStyle()}>
                 <img src={getImagePath("Backs/backOfCard01.png")}></img>
@@ -78,5 +79,6 @@ let testCard: ShowCard = {
     cardImage: "Cards/FirstEdition Collection/CardPictures/black_blackgris_01.png",
     frameImage: "Frames/normal.png",
     elementImage: "Elements/FireElement.png",
-    overlayImage: ""
+    overlayImage: "",
+    isCustomCard: false
 }

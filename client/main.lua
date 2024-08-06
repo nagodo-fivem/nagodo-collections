@@ -157,22 +157,30 @@ RegisterNUICallback('saveCard', function(data, cb)
     SendCards(allCards)
 end)
 
+RegisterNUICallback('deleteCard', function(data, cb)
+    local cardIdentifier = data.cardIdentifier
+    local collectionIdentifier = data.collectionIdentifier
+
+    local allCards = UTILS.TriggerCallbackSync('nagodo-collections:server:deleteCard', cardIdentifier, collectionIdentifier)
+    SendCards(allCards)
+end)
+
 RegisterNUICallback('getCardsForItemsExport', function(data, cb)
     local collectionIdentifier = data.collectionIdentifier
 
     local cardsInCollection = UTILS.TriggerCallbackSync('nagodo-collections:server:getCardsInCollection', collectionIdentifier)
-
-    local cards = {}
-
-    for k, v in pairs(cardsInCollection) do
-        table.insert(cards, {
-            cardIdentifier = v.identifier,
-            cardName = v.name
-        })
+    
+    local formattedCards = {}
+    if next(cardsInCollection) then
+        for k, v in pairs(cardsInCollection) do
+            table.insert(formattedCards, {
+                cardIdentifier = v.identifier,
+                cardName = v.name
+            })
+        end
     end
-
-
-    cb(cards)
+    
+    cb(formattedCards)
 end)
 
 RegisterNUICallback('getCardsForImageExport', function(data, cb)

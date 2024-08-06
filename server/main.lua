@@ -152,6 +152,15 @@ UTILS.CreateCallback('nagodo-collections:server:saveCard', function(source, cb, 
     cb(cards)
 end)
 
+UTILS.CreateCallback('nagodo-collections:server:deleteCard', function(source, cb, cardIdentifier, collectionIdentifier)
+    
+    DATABASE.DeleteCard(cardIdentifier)
+
+    local cards = DATABASE.GetAllCards(collectionIdentifier)
+
+    cb(cards)
+end)
+
 UTILS.CreateCallback('nagodo-collections:server:getCardsInCollection', function(source, cb, collectionIdentifier)
     print(collectionIdentifier)
     local cards = DATABASE.GetAllCards(collectionIdentifier)

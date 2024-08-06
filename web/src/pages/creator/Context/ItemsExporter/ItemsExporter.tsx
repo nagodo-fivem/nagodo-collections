@@ -33,7 +33,6 @@ const ItemsExporter = ({collectionIdentifier, collectionName, closeContext}: Ite
     }
 
     function handleExportTypeChange(type: string) {
-        console.log(type);
         setExportType(type);
     }
 
@@ -72,7 +71,7 @@ const ItemsExporter = ({collectionIdentifier, collectionName, closeContext}: Ite
             </div>
             
             <div className="settings">
-                <DropDown title="Export style" options={getExportTypes()} onChange={handleExportTypeChange} customNotSelected = {"Select export style"}/>
+                <DropDown title = {_T("EXPORT_STYLE")} options={getExportTypes()} onChange={handleExportTypeChange} customNotSelected = {"Select export style"}/>
     
             </div>
 

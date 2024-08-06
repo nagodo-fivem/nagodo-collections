@@ -280,6 +280,12 @@ function Database()
         return result
     end
 
+    self.DeleteCard = function(cardIdentifier)
+        local result = exports.oxmysql:executeSync('DELETE FROM nagodo_collections_cards WHERE id = ?', {cardIdentifier})   
+
+        return result
+    end
+
     return self
 end
 

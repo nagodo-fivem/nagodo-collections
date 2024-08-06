@@ -82,7 +82,6 @@ const ImageExporter = ({collectionIdentifier, closeContext}: ImageExporterProps)
 
         domtoimage.toBlob(domToExport.current)
             .then(async function (blob: any) {
-                console.log(blob);
 
                 let base: any = await base64(blob);
                 let splitChunks = [];
@@ -94,7 +93,7 @@ const ImageExporter = ({collectionIdentifier, closeContext}: ImageExporterProps)
 
                 for (let i = 0; i < splitChunks.length; i++) {
                     await fetchNui("saveImage", {
-                        cardName: collectionIdentifier + "_" + currentCard.identifier,
+                        cardName: "card_" + collectionIdentifier + "_" + currentCard.identifier,
                         payloadAmount: splitChunks.length,
                         payloadIndex: i,
                         blob: splitChunks[i],
@@ -191,7 +190,7 @@ const ImageExporter = ({collectionIdentifier, closeContext}: ImageExporterProps)
         let seconds = allCards / bytesPerSecond;
         seconds += cardAmountToExport * 0.2;
 
-        return (seconds).toFixed(1) + " seconds";
+        return (seconds).toFixed(1) + " " + _T("SECONDS");
     }
 
     function QualityToSize(quality: number) {

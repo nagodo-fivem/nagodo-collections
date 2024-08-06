@@ -18,9 +18,6 @@ interface SelectedPropertyProps{
 
 const SelectedProperty = ({show, cancelBtnCallback, selectedProperty, handlePropertySaved, changeCallback}: SelectedPropertyProps) => {
     const { openDeletePropertyContextMenu } = useParent();
-    
-    console.log(selectedProperty);
-    console.log(selectedProperty.identifier);
 
     function handleTypeChange(type: string) {
         changeCallback({...selectedProperty, type: type});

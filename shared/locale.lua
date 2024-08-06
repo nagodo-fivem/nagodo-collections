@@ -21,6 +21,13 @@ Locale = {
         ['ELEMENT'] = "Element",
         ['IMAGE_OVERLAY'] = "Image Overlay",
 
+        ['FRAMES'] = "Frames",
+        ['ELEMENTS'] = "Elements",
+        ['IMAGE_OVERLAYS'] = "Image overlays",
+        ['STICKERS'] = "Stickers",
+        ['BACKS'] = "Backs",
+        ['NEW_PROPERTY'] = "New property",
+
         -- Context Menu --
         ['DELETE_PROPERTY'] = "Delete Property",
 
@@ -34,6 +41,7 @@ Locale = {
         ['FOLDER_FOR_COLLECTION'] = "Folder for collection: ",
         ['CARD_FROM_COLLECTION'] = "Card from collection: ",
         ['PACK_FOR_COLLECTION'] = "Pack with cards from: ",
+        ['EXPORT_STYLE'] = "Export style",
 
         -- Image Export --
         ['NO_CARDS_TO_EXPORT'] = "No cards to export",
@@ -48,17 +56,18 @@ Locale = {
         ['MEDIUM'] = "Medium",
         ['HIGH'] = "High",
         ['ULTRA'] = "Ultra",
+        ['SECONDS'] = "seconds",
 
         -- Shared --
         ['BACK'] = "Back",
         ['STOP'] = "Stop",
         ['CANCEL'] = "Cancel",
-        ['CLOSE'] = "Close",
         
         ['DELETE'] = "Delete",
         ['SAVE'] = "Save",
         ['CONFIRM'] = "Confirm",
         ['NONE'] = "None",
+        ['CLOSE'] = "Close",
 
     }
 }

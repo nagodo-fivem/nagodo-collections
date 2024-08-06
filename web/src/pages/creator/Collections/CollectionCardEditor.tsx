@@ -59,6 +59,8 @@ const CollectionCardEditor = ({collectionIdentifier, _properties}: {collectionId
         setSelectingProperty(false);
     }
 
+    
+
     function handleSaveClick() {
 
         setEditingCard(false);
@@ -70,6 +72,16 @@ const CollectionCardEditor = ({collectionIdentifier, _properties}: {collectionId
         });
 
         setSelectedCard(defaultCard);
+    }
+    
+    function handleDeleteClick() {
+        setEditingCard(false);
+        setSelectingProperty(false);
+
+        fetchNui("deleteCard", {
+            collectionIdentifier: collectionIdentifier,
+            cardIdentifier: selectedCard.identifier
+        });
     }
 
     function handleCardDataChange(card: ICard) {
@@ -203,7 +215,7 @@ const CollectionCardEditor = ({collectionIdentifier, _properties}: {collectionId
                             {_T("CANCEL")}
                         </div>
                     </div>
-                    <div className="btn delete small">
+                    <div className="btn delete small" onClick={handleDeleteClick}>
                         <div className="text">
                             {_T("DELETE")}
                         </div>

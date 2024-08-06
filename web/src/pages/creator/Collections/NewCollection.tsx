@@ -14,7 +14,6 @@ const NewCollection = ({show, cancelBtnCallback, handleNewCollectionCreated} : N
 
 
     function handleCancelClick() {
-        console.log("cancel1");
         setLabel("");
         cancelBtnCallback();
     }

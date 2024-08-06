@@ -5,6 +5,7 @@ import NewProperty from "./NewProperty";
 import SelectedProperty from "./SelectedProperty";
 import IProperty from "./IProperty";
 import Action from "../Action/Action";
+import { _T } from "@utils/translation";
 
 interface PropertiesOverviewProps {
     properties: IProperty[];
@@ -79,11 +80,12 @@ const PropertiesOverview = ({properties}: PropertiesOverviewProps) => {
         <div className="properties">
 
             <div className="overview">
-                <Property title = {"Frames"} properties = {getFrameProperties()} onPropertyClick={handlePropertyClick}/>
-                <Property title = {"Elements"} properties={getElementProperties()} onPropertyClick={handlePropertyClick}/>
-                <Property title = {"Image overlays"} properties={getImageOverlayProperties()} onPropertyClick={handlePropertyClick}/>
+                <Property title = {_T('FRAMES')} properties = {getFrameProperties()} onPropertyClick={handlePropertyClick}/>
+                <Property title = {_T('ELEMENTS')} properties={getElementProperties()} onPropertyClick={handlePropertyClick}/>
+                <Property title = {_T('IMAGE_OVERLAYS')} properties={getImageOverlayProperties()} onPropertyClick={handlePropertyClick}/>
+                <Property title = {_T('STICKERS')} properties={getStickersProperties()} onPropertyClick={handlePropertyClick}/>
             
-                <Property title = {"Backs"} properties={getBackProperties()} onPropertyClick={handlePropertyClick}/>
+                <Property title = {_T('BACKS')} properties={getBackProperties()} onPropertyClick={handlePropertyClick}/>
             
             </div>
             <div className="actions">
@@ -91,7 +93,7 @@ const PropertiesOverview = ({properties}: PropertiesOverviewProps) => {
                 <NewProperty show = {addingProperty} cancelBtnCallback = {handleCancelClick} handleNewPropertyCreated = {handleNewPropertyCreated}/>
                 <SelectedProperty show = {editingProperty} cancelBtnCallback = {handleCancelClick} handlePropertySaved = {handlePropertySaved} selectedProperty={selectedProperty} changeCallback = {handlePropertyChange}/>
 
-                <Action label = "New property" onClick = {handleNewPropertyBtn}/>
+                <Action label = {_T("NEW_PROPERTY")} onClick = {handleNewPropertyBtn}/>
                 
             </div>
             
